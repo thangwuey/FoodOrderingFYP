@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">FoodOrderingFYP</string>
+    <string name="loginbtn">Log In</string>
+    <string name="registerbtn">Sign Up</string>
+    <string name="username">Name</string>
+    <string name="Phonenumber">Phone Number</string>
+    <string name="password">Password</string>
+    <string name="register">Register Now</string>
+    <string name="login">Log In</string>
+    <string name="loginAdmin">Login as admin</string>
+    <string name="loginUser">Login As User</string>
+</resources>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/loginpagepic"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/registerLogo"
+        android:layout_width="700dp"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/wujiak" />
+
+    <FrameLayout
+        android:id="@+id/accountframe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="300dp"
+        android:background="#FFFAFA"
+        android:backgroundTint="@color/frameColor">
+
+        <Button
+            android:id="@+id/registerLoginButton"
+            android:layout_width="125dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="210dp"
+            android:backgroundTint="@color/AllButton"
+            android:text="@string/loginbtn"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/registerRegisterButton"
+            android:layout_width="125dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="210dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="80dp"
+            android:backgroundTint="@color/AllButton"
+            android:text="@string/registerbtn"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/registerUsername"
+            android:layout_width="321dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginRight="60dp"
+            android:ems="10"
+            android:hint="@string/username"
+            android:inputType="text"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/registerPhoneNumber"
+            android:layout_width="321dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="170dp"
+            android:layout_marginRight="60dp"
+            android:ems="10"
+            android:hint="@string/Phonenumber"
+            android:inputType="phone"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/registerPassword"
+            android:layout_width="321dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="240dp"
+            android:layout_marginRight="60dp"
+            android:ems="10"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/register"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="300dp"
+            android:layout_marginRight="60dp"
+            android:backgroundTint="@color/AllButton"
+            android:text="@string/register"
+            android:textSize="20sp" />
+
+    </FrameLayout>
+
+</RelativeLayout>
