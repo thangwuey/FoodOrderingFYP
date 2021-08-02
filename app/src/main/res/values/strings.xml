@@ -9,4 +9,14 @@
     <string name="login">Log In</string>
     <string name="loginAdmin">Login as admin</string>
     <string name="loginUser">Login As User</string>
+    <string name="Menu">Menu</string>
+    <string name="Cart">Cart</string>
+    <string name="Wallet">E-Wallet</string>
+    <string name="Profile">Profile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="logoutButton">Logout</string>
+    <string name="language">Change Language</string>
+    <string name="trackingButton">Track Food</string>
+    <string name="profilename">Profile Name</string>
 </resources>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileFragment">
+
+
+
+    <TextView
+        android:id="@+id/profile_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginRight="60dp"
+        android:gravity="center"
+        android:text="@string/profilename"
+        android:textSize="20sp" />
+
+
+
+    <Button
+        android:id="@+id/trackingButton"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="360dp"
+        android:layout_marginRight="60dp"
+        android:backgroundTint="@color/AllButton"
+        android:text="@string/trackingButton"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/languageButton"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="460dp"
+        android:layout_marginRight="60dp"
+        android:backgroundTint="@color/AllButton"
+        android:text="@string/language"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="560dp"
+        android:layout_marginRight="60dp"
+        android:backgroundTint="@color/AllButton"
+        android:text="@string/logoutButton"
+        android:textSize="20sp" />
+</FrameLayout>
