@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.foodorderingfyp.ModelClass.Food;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -16,7 +18,7 @@ import ViewHolder.ProductViewHolder;
 
 public class HomeFragment extends Fragment {
 
-private DatabaseReference FoodRef;
+private DatabaseReference FoodRef; //create for firebase reference
 
     public HomeFragment() {
         // Required empty public constructor
@@ -34,8 +36,10 @@ private DatabaseReference FoodRef;
     @Override
     public void onStart() {
         super.onStart();
-
+        //add Class to retrive the food information
         //FirebaseRecyclerOptions<Food> options = new FirebaseRecyclerOptions.Builder<Food>().setQuery(FoodRef,Food.class).build();
+
+
     //CONTINUE VIDEO 16 19.40
     }
 }
