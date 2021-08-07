@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/loginpagepic"
+    tools:context=".Admin.AdminHome">
+
+
+    <ImageView
+        android:id="@+id/registerLogo"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/wujiak" />
+
+    <FrameLayout
+        android:id="@+id/accountframe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="300dp"
+        android:background="#FFFAFA"
+        android:backgroundTint="@color/frameColor">
+
+
+        // android:gravity="center" --> put all button or item in middle of layout
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <Button
+                android:id="@+id/manage_food_menu"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="60dp"
+                android:backgroundTint="@color/AllButton"
+                android:text="Manage Food Menu"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/view_order_record"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="60dp"
+                android:backgroundTint="@color/AllButton"
+                android:text="View Order Record"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/admin_logout"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="60dp"
+                android:backgroundTint="@color/AllButton"
+                android:text="Logout"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+
+</RelativeLayout>

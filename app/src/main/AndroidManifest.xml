@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodOrderingFYP">
-        <activity android:name=".MainActivity2"></activity>
+        <activity android:name=".Admin.AdminAddFood"></activity>
+        <activity android:name=".Admin.AdminManageFoodMenu" />
+        <activity android:name=".Admin.AdminHome" />
+        <activity android:name=".MainActivity2" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin.AdminManageFoodMenu">
+
+
+    // android:gravity="center" --> put all button or item in middle of layout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/add_food_item"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="60dp"
+            android:backgroundTint="@color/AllButton"
+            android:text="Add Food Item"
+            android:textSize="20sp" />
+
+
+        <Button
+            android:id="@+id/delete_food_item"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="60dp"
+            android:backgroundTint="@color/AllButton"
+            android:text="Delete Food Item"
+            android:textSize="20sp" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>
