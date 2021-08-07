@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.foodorderingfyp.Admin.AdminHome;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -139,8 +140,8 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "Logged in Successfully...", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
 
-                                //HERE MUST CHANGE THE ADMIN TO THE ADD PRODUCT PAGE (MainActivity2 change to add product page)
-                                Intent intent = new Intent(LoginActivity.this,MainActivity2.class);
+                                //HERE MUST CHANGE THE ADMIN TO THE ADD PRODUCT PAGE (MainActivity2 change to add adminHome page)
+                                Intent intent = new Intent(LoginActivity.this, AdminHome.class);
                                 startActivity(intent);
                             }
                             else if (parentDbName.equals("Users"))

@@ -76,28 +76,8 @@ public class AdminAddFood extends AppCompatActivity {
         btnChooseFoodImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // check runtime permission
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                    if(checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
-                    {
-                        // permission is not granted
-                        String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
 
-                        // show popup for runtime permission
-                        requestPermissions(permissions, PERMISSION_CODE);
-
-                    }
-                    else
-                    {
-                        // permission already granted
-                        pickImageFromGallery();
-                    }
-                }
-                else
-                {
-                    // system os is less than marshmallow
-                    pickImageFromGallery();
-                }
+                pickImageFromGallery();
             }
         });
 
@@ -111,7 +91,6 @@ public class AdminAddFood extends AppCompatActivity {
         });
     }
 
-
     private void pickImageFromGallery(){
 
         // select image from image, camera
@@ -120,7 +99,6 @@ public class AdminAddFood extends AppCompatActivity {
         galleryIntent.setType("image/*");
         startActivityForResult(galleryIntent, GalleryPick);
     }
-
 
     // handle result of runtime permission
     @Override
