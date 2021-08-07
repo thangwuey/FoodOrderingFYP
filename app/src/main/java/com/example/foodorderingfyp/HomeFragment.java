@@ -6,7 +6,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.support.annotation.NonNull;
+// import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +48,7 @@ RecyclerView.LayoutManager layoutManager;
 
     }
 
-    @Override
+    //@Override
     /*public void onStart() {
         super.onStart();
         //add Class to retrive the food information

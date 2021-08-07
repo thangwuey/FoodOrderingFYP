@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".Admin.AdminAddFood">
+
+
+    // scroll function
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp"
+            android:orientation="vertical">
+
+            // food image
+            <ImageView
+                android:id="@+id/food_image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_baseline_image_24"/>
+
+            // choose food image button
+            <Button
+                android:id="@+id/choose_food_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:padding="17dp"
+                android:textSize="20sp"
+                android:backgroundTint="@color/AllButton"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:text="Choose Image" />
+
+            // food name
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:text="Food Name"/>
+
+            <EditText
+                android:id="@+id/food_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="Enter Food Name"
+                android:inputType="textPersonName"
+                android:textSize="20sp" />
+
+            // food description
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:text="Food Description"/>
+
+            <EditText
+                android:id="@+id/food_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="Enter Description"
+                android:inputType="textPersonName"
+                android:textSize="20sp" />
+
+            // food price
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:text="Price (RM)"/>
+
+            <EditText
+                android:id="@+id/food_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="Enter Amount"
+                android:inputType="numberDecimal"
+                android:textSize="20sp" />
+
+            // add food button
+            <Button
+                android:id="@+id/add_new_food"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:padding="17dp"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/AllButton"
+                android:textAllCaps="false"
+                android:text="Add Food" />
+
+            <TextView
+                android:id="@+id/testing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:text=""/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>
