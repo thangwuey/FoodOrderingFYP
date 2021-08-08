@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
-    tools:context=".Admin.AdminAddFood"
-    android:background="@color/white">
+    tools:context=".Admin.AdminDeleteFoodItem">
 
 
     // scroll function
@@ -14,7 +13,8 @@
         android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="15dp"
+        app:cardElevation="15dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,23 +29,8 @@
                 android:layout_height="200dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_baseline_image_24"/>
+                android:layout_gravity="center"/>
 
-            // choose food image button
-            <Button
-                android:id="@+id/choose_food_image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
-                android:padding="17dp"
-                android:textSize="20sp"
-                android:backgroundTint="@color/AllButton"
-                android:textColor="@color/white"
-                android:textAllCaps="false"
-                android:text="Choose Image" />
 
             // food name
             <TextView
@@ -103,9 +88,9 @@
                 android:inputType="numberDecimal"
                 android:textSize="20sp" />
 
-            // add food button
+            // delete button
             <Button
-                android:id="@+id/add_new_food"
+                android:id="@+id/delete_food"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -115,7 +100,8 @@
                 android:textColor="@color/white"
                 android:backgroundTint="@color/AllButton"
                 android:textAllCaps="false"
-                android:text="Add Food" />
+                android:text="Delete This Food" />
+
 
         </LinearLayout>
 
