@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity2">
+    tools:context=".ProfileActivity">
 
-    <FrameLayout
-        android:id="@+id/fragment_layout"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/HomeProfile"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/bottom_navigation"/>
+        android:text="Profile"
+        tools:layout_editor_absoluteX="164dp"
+        tools:layout_editor_absoluteY="322dp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -21,10 +23,5 @@
         app:itemTextColor="@color/white"
         app:itemIconTint="@color/white"
         app:menu="@menu/bottom_navigation"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_menu"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
 </RelativeLayout>

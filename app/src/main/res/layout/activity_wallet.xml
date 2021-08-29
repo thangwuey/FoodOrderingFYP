@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WalletActivity">
+
+    <TextView
+        android:id="@+id/textViewBalance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BALANCE"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:textSize="40sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/textViewMoney"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0.00"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/textViewBalance"
+        android:layout_marginTop="30dp"
+        android:textSize="40sp"
+        android:textStyle="italic"/>
+
+    <TextView
+        android:id="@+id/textViewMYR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MYR"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/textViewMoney"
+        android:layout_marginTop="30dp"
+        android:textSize="25sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/textViewMethod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Reload Amount:"
+        android:layout_below="@+id/textViewMYR"
+        android:layout_marginTop="30dp"
+        android:textSize="20sp"
+        android:layout_marginStart="10dp"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/reload10MYR"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/textViewMethod"
+        android:text="10 MYR"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/reload20MYR"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/reload10MYR"
+        android:text="20 MYR"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/reload50MYR"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/reload20MYR"
+        android:text="50 MYR"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/reload100MYR"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/reload50MYR"
+        android:text="100 MYR"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/AllButton"
+        app:itemTextColor="@color/white"
+        app:itemIconTint="@color/white"
+        app:menu="@menu/bottom_navigation"/>
+
+</RelativeLayout>

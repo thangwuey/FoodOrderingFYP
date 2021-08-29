@@ -25,6 +25,8 @@ import org.w3c.dom.Text;
 
 import com.example.foodorderingfyp.ModelClass.Users;
 
+import Prevalent.Prevalent;
+
 public class LoginActivity extends AppCompatActivity {
 
     private Button registerButton;
@@ -151,6 +153,8 @@ public class LoginActivity extends AppCompatActivity {
 
                                 //HERE MUST PUT THE HOME ACTIVITY, Intent....
                                 Intent intent = new Intent(LoginActivity.this,MainActivity2.class);
+                                //This line is video 15 get user data after login because get the user data and store it for further use in cart database and profile name
+                                Prevalent.currentOnlineUser = usersData ;
                                 startActivity(intent);
                             }
 
