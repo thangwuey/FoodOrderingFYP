@@ -6,16 +6,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.DocumentsContract;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,11 +35,16 @@ public class MainActivity extends AppCompatActivity {
     private Button CreateAccountButton; // for user to create account
     private EditText InputName, InputPhoneNumber, InputPassword;// the text view naming
     private ProgressDialog loadingBar;
+    boolean shouldExit = false; // press back button to exit
+    Snackbar snackbar;
+    RelativeLayout relativeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        relativeLayout = findViewById(R.id.register_layout); //new
 
         //Navigation purpose
         loginButton = (Button) findViewById(R.id.registerLoginButton);
@@ -47,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
             {
                 Intent intent = new Intent(MainActivity.this,LoginActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
 
@@ -196,6 +205,28 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });*/
+    }
 
+    @Override
+    public void onBackPressed() {
+
+        // double press back button to exit app
+        if (shouldExit){
+            snackbar.dismiss();
+            moveTaskToBack(true);
+            android.os.Process.killProcess(android.os.Process.myPid());
+        }else{
+            snackbar = Snackbar.make(relativeLayout, "Please press BACK again to exit", Snackbar.LENGTH_SHORT);
+            snackbar.show();
+            shouldExit = true;
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    shouldExit = false;
+                }
+            }, 1500);
+        }
     }
 }

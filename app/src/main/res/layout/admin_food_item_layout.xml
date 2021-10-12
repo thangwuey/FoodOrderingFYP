@@ -4,33 +4,50 @@
     android:id="@+id/admin_fi_cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="15dp"
-    android:layout_marginEnd="15dp"
-    android:layout_marginTop="20dp"
+    android:layout_margin="5dp"
     app:cardCornerRadius="10dp"
-    app:cardElevation="15dp">
+    app:cardElevation="5dp"
+    app:cardBackgroundColor="@color/frameColor"
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackground">
 
+    // android:padding="20dp"
     <RelativeLayout
         android:id="@+id/rl_wrapper"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="20dp">
+        android:layout_height="match_parent">
 
-        // food image
+        // food image // android:layout_margin="10dp"
         <ImageView
             android:id="@+id/admin_food_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_centerVertical="true"
-            android:layout_margin="10dp"/>
+            android:layout_centerVertical="true"/>
 
-        // put food name, price in the right of food image
+
+        // food name
+
+        <TextView
+            android:id="@+id/admin_food_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/admin_food_image"
+            android:layout_alignBottom="@id/admin_food_image"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/admin_food_image"
+            android:gravity="center_vertical"
+            android:text="Food Name"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <!--// put food name, price in the right of food image
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignTop="@+id/admin_food_image"
             android:layout_alignBottom="@id/admin_food_image"
             android:layout_toEndOf="@id/admin_food_image"
+            android:gravity="center_vertical"
             android:orientation="vertical">
 
             // food name
@@ -43,7 +60,7 @@
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
-            // food price
+            &lt;!&ndash;// food price
             <TextView
                 android:id="@+id/admin_food_price"
                 android:layout_width="wrap_content"
@@ -52,9 +69,9 @@
                 android:layout_marginTop="10dp"
                 android:text="Price"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="20sp" />&ndash;&gt;
 
-        </LinearLayout>
+        </LinearLayout>-->
 
     </RelativeLayout>
 

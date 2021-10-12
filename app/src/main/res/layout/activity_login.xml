@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/loginpagepic"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    android:id="@+id/login_layout">
 
     <ImageView
         android:id="@+id/registerLogo"
@@ -15,7 +16,150 @@
         android:layout_marginTop="20dp"
         app:srcCompat="@drawable/wujiak" />
 
-    <FrameLayout
+    <LinearLayout
+        android:id="@+id/accountframe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        android:layout_below="@id/registerLogo"
+        android:background="@color/frameColor">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/loginLoginButton"
+                android:layout_width="125dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/bg_button_pressed"
+                android:clickable="false"
+                android:focusable="false"
+                android:textColor="@color/white"
+                android:text="@string/loginbtn"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/loginRegisterButton"
+                android:layout_width="125dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/bg_button_normal"
+                android:foreground="?attr/selectableItemBackground"
+                android:textColor="@color/AllButton"
+                android:text="@string/registerbtn"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="30dp"
+            android:padding="15dp"
+            android:textColorHint="@color/til_color"
+            app:boxStrokeColor="@color/til_color"
+            app:startIconDrawable="@drawable/ic_phone"
+            app:startIconTint="@color/til_color"
+            app:endIconMode="clear_text"
+            app:hintTextColor="@color/til_color">
+
+            <EditText
+                android:id="@+id/loginPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:ems="10"
+                android:hint="@string/Phonenumber"
+                android:inputType="phone"
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="30dp"
+            android:padding="15dp"
+            android:textColorHint="@color/til_color"
+            app:boxStrokeColor="@color/til_color"
+            app:startIconDrawable="@drawable/ic_password"
+            app:startIconTint="@color/til_color"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/til_color"
+            app:hintTextColor="@color/til_color">
+
+            <EditText
+                android:id="@+id/loginPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:ems="10"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="60dp"
+            android:backgroundTint="@color/AllButton"
+            android:textColor="@color/white"
+            android:text="@string/login"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/notLoginadmin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:textStyle="italic"
+                android:text="@string/loginUser"
+                android:visibility="invisible"
+                android:textSize="18sp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/loginadmin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="90dp"
+                android:textStyle="italic"
+                android:text="@string/loginAdmin"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!--<FrameLayout
         android:id="@+id/accountframe"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -108,6 +252,6 @@
             android:textSize="18sp"
             android:textColor="@color/black"/>
 
-    </FrameLayout>
+    </FrameLayout>-->
 
 </RelativeLayout>

@@ -14,10 +14,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.foodorderingfyp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,18 +31,17 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 public class AdminDeleteFoodItem extends AppCompatActivity {
-
-
     private static final int PERMISSION_CODE = 1001;
     private static final int GalleryPick = 1;
     private Button btnDelete;
-    private EditText editname, editprice, editdesc;
-    private ImageView editimageview;
+    private TextView tvName, tvPrice, tvDesc;
+    private ImageView ivFoodImage;
     private String foodimagename, downloadImageUrl;
     private String foodID = "";
     private DatabaseReference FoodsRef;
-    private StorageReference foodImageRef;
+    private FirebaseStorage foodImageStorage;
     private Uri imageUri;
+    private ImageView ivDeleteFoodBack; //new
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +50,15 @@ public class AdminDeleteFoodItem extends AppCompatActivity {
 
 
         btnDelete = (Button) findViewById((R.id.delete_food));
-        editname = (EditText) findViewById(R.id.food_name);
-        editprice = (EditText) findViewById(R.id.food_price);
-        editdesc = (EditText) findViewById(R.id.food_description);
-        editimageview = (ImageView) findViewById(R.id.food_image);
+        tvName = (TextView) findViewById(R.id.food_name);
+        tvPrice = (TextView) findViewById(R.id.food_price);
+        tvDesc = (TextView) findViewById(R.id.food_description);
+        ivFoodImage = (ImageView) findViewById(R.id.food_image);
+        ivDeleteFoodBack = (ImageView) findViewById(R.id.di_back);
 
         // Firebase Storage image save location
-        foodImageRef = FirebaseStorage.getInstance().getReference().child("Food Images");
+        //foodImageRef = FirebaseStorage.getInstance().getReference().child("Food Images");
+        foodImageStorage = FirebaseStorage.getInstance();
 
         foodID = getIntent().getStringExtra("foodName");
 
@@ -65,6 +68,17 @@ public class AdminDeleteFoodItem extends AppCompatActivity {
         // display food info
         displaySpecificFoodInfo();
 
+
+        //new
+        ivDeleteFoodBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(AdminDeleteFoodItem.this, AdminDeleteFoodMenu.class);
+                startActivity(intent);
+                //overridePendingTransition(R.anim.slide_in_left_back, R.anim.slide_out_right_back);
+            }
+        });
 
         // delete food
         btnDelete.setOnClickListener(new View.OnClickListener() {
@@ -87,11 +101,13 @@ public class AdminDeleteFoodItem extends AppCompatActivity {
                     String fprice = snapshot.child("foodPrice").getValue().toString();
                     String fimage = snapshot.child("foodImage").getValue().toString();
 
+                    downloadImageUrl = snapshot.child("foodImage").getValue().toString(); //new
+                    String priceInCompleteSentence = "RM " + fprice + ".00";
 
-                    editname.setText(fname);
-                    editdesc.setText(fdesc);
-                    editprice.setText(fprice);
-                    Picasso.get().load(fimage).into(editimageview);
+                    tvName.setText(fname);
+                    tvDesc.setText(fdesc);
+                    tvPrice.setText(priceInCompleteSentence);
+                    Picasso.get().load(fimage).into(ivFoodImage);
 
                 }
             }
@@ -106,7 +122,21 @@ public class AdminDeleteFoodItem extends AppCompatActivity {
 
     private void deleteThisFood() {
 
-        FoodsRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+        //new
+        StorageReference imageRef = foodImageStorage.getReferenceFromUrl(downloadImageUrl);
+        imageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                FoodsRef.removeValue();
+                Toast.makeText(AdminDeleteFoodItem.this, "Item deleted", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(AdminDeleteFoodItem.this, AdminDeleteFoodMenu.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        /*FoodsRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task)
             {
@@ -116,6 +146,6 @@ public class AdminDeleteFoodItem extends AppCompatActivity {
 
                 Toast.makeText(AdminDeleteFoodItem.this, "The Product Is deleted successfully.", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
     }
 }

@@ -10,11 +10,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.foodorderingfyp.ModelClass.Foods;
 import com.example.foodorderingfyp.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -26,6 +28,8 @@ public class AdminDeleteFoodMenu extends AppCompatActivity {
     private DatabaseReference FoodsRef;
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
+    private FloatingActionButton fabAddFood; //new
+    private ImageView ivBack; //new
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,31 @@ public class AdminDeleteFoodMenu extends AppCompatActivity {
         // put all item in same layout in recyclerView
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+
+        //new
+        fabAddFood = (FloatingActionButton) findViewById(R.id.fab_add_food);
+        ivBack = (ImageView) findViewById(R.id.fm_back);
+
+        fabAddFood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(AdminDeleteFoodMenu.this, AdminAddFood.class);
+                startActivity(intent);
+            }
+        });
+
+        //new
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(AdminDeleteFoodMenu.this, AdminHome.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left_back, R.anim.slide_out_right_back);
+            }
+        });
+
     }
 
 
@@ -65,7 +94,7 @@ public class AdminDeleteFoodMenu extends AppCompatActivity {
                     {
                         // holder from FoodViewHolder.java
                         holder.txtAdminFoodName.setText(model.getFoodName());
-                        holder.txtAdminFoodPrice.setText("RM " + model.getFoodPrice());
+                        //holder.txtAdminFoodPrice.setText("RM " + model.getFoodPrice());
 
                         // easy way to get Image from database
                         Picasso.get().load(model.getFoodImage()).into(holder.adminImageView);

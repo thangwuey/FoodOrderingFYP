@@ -11,6 +11,8 @@ import com.example.foodorderingfyp.R;
 
 public class AdminManageFoodMenu extends AppCompatActivity {
 
+    //This page is useless, no uses already
+
     Button btnAddFood, btnDeleteFood;//for navigation used
 
     @Override

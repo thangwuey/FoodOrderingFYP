@@ -3,9 +3,14 @@ package com.example.foodorderingfyp.Admin;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -13,6 +18,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -39,6 +45,10 @@ public class AdminAddFood extends AppCompatActivity {
     private Button btnChooseFoodImage, btnAddFood;
     private Uri imageUri;
     private String fname, fdesc, fprice, foodimagename, foodkey, downloadImageUrl;
+    private String tname, tdesc; //new, for validation
+    private int nPrice; //new
+    private ImageView ivAddFoodBack; //new
+
 
     private StorageReference foodImageRef;
     private DatabaseReference foodRef;
@@ -47,6 +57,8 @@ public class AdminAddFood extends AppCompatActivity {
     private static final int PERMISSION_CODE = 1001;
 
     private static final int GalleryPick = 1;
+
+    private static final int STORAGE_PERMISSION_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +73,7 @@ public class AdminAddFood extends AppCompatActivity {
         inputFoodDescription = (EditText) findViewById(R.id.food_description);
         inputFoodPrice = (EditText) findViewById(R.id.food_price);
         btnAddFood = (Button) findViewById(R.id.add_new_food);
+        ivAddFoodBack = (ImageView) findViewById(R.id.af_back); //new
 
         // Firebase Storage image save location
         foodImageRef = FirebaseStorage.getInstance().getReference().child("Food Images");
@@ -71,13 +84,23 @@ public class AdminAddFood extends AppCompatActivity {
         // progressing bar to let user know it is processing
         loadingBar = new ProgressDialog(this);
 
+        //new
+        ivAddFoodBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(AdminAddFood.this, AdminDeleteFoodMenu.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left_back, R.anim.slide_out_right_back);
+            }
+        });
 
         // Choose Image button
         btnChooseFoodImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                pickImageFromGallery();
+                requestStoragePermission();
             }
         });
 
@@ -89,6 +112,35 @@ public class AdminAddFood extends AppCompatActivity {
                 ValidateFoodData();
             }
         });
+    }
+
+    // new, tell user why need permission
+    private void requestStoragePermission() {
+
+        if (shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+
+            new AlertDialog.Builder(this)
+                    .setTitle("Permission needed")
+                    .setMessage("This permission is needed to access your phone photo gallery")
+                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ActivityCompat.requestPermissions(AdminAddFood.this,
+                                    new String[] {Manifest.permission.READ_EXTERNAL_STORAGE},
+                                    STORAGE_PERMISSION_CODE);
+                        }
+                    })
+                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .create().show();
+        } else {
+            ActivityCompat.requestPermissions(this, new
+                    String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+        }
     }
 
     private void pickImageFromGallery(){
@@ -105,7 +157,7 @@ public class AdminAddFood extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        switch (requestCode){
+        /*switch (requestCode){
             case PERMISSION_CODE: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                     // permission was granted
@@ -115,6 +167,19 @@ public class AdminAddFood extends AppCompatActivity {
                     // permission was denied
                     Toast.makeText(this, "Permission denied...!", Toast.LENGTH_SHORT).show();
                 }
+            }
+        }*/
+
+        //new
+        if (requestCode == STORAGE_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                // permission was GRANTED
+                pickImageFromGallery();
+            } else {
+
+                // permission was DENIED
+                Toast.makeText(this, "Permission DENIED", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -145,25 +210,42 @@ public class AdminAddFood extends AppCompatActivity {
         fdesc = inputFoodDescription.getText().toString();
         fprice = inputFoodPrice.getText().toString();
 
+        //new, for validation
+        tname = fname.trim();
+        tdesc = fdesc.trim();
+
+
         if (imageUri == null)
         {
-            Toast.makeText(this, "Food Image is mandatory...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please choose Food Image", Toast.LENGTH_SHORT).show();
         }
-        else if (TextUtils.isEmpty(fdesc))
+        else if (TextUtils.isEmpty(tname))
         {
-            Toast.makeText(this, "Please write food description...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter Name", Toast.LENGTH_SHORT).show();
+            showKeyboard(inputFoodName, this);
         }
-        else if (TextUtils.isEmpty(fname))
+        else if (TextUtils.isEmpty(tdesc))
         {
-            Toast.makeText(this, "Please write food name...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter Description", Toast.LENGTH_SHORT).show();
+            showKeyboard(inputFoodDescription, this);
         }
         else if (TextUtils.isEmpty(fprice))
         {
-            Toast.makeText(this, "Please write food price...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter Price", Toast.LENGTH_SHORT).show();
+            showKeyboard(inputFoodPrice, this);
         }
         else
         {
-            StorageFoodInformation();
+            nPrice = Integer.parseInt(fprice);
+
+            if (nPrice == 0 || nPrice < 1) {
+                Toast.makeText(this, "Price cannot be 0", Toast.LENGTH_SHORT).show();
+                showKeyboard(inputFoodPrice, this);
+            }
+            else {
+                fprice = String.valueOf(nPrice);
+                StorageFoodInformation();
+            }
         }
     }
 
@@ -268,5 +350,19 @@ public class AdminAddFood extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    //new
+    public static void showKeyboard(EditText mEtSearch, Context context) {
+        mEtSearch.requestFocus();
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+    }
+
+    public static void hideSoftKeyboard(EditText mEtSearch, Context context) {
+        mEtSearch.clearFocus();
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(mEtSearch.getWindowToken(), 0);
+
     }
 }

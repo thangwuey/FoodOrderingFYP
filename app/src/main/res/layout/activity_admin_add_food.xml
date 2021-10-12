@@ -4,9 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
-    tools:context=".Admin.AdminAddFood"
-    android:background="@color/white">
+    tools:context=".Admin.AdminAddFood">
+
+    <ImageView
+        android:id="@+id/af_back"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        app:tint="@color/admin_dominant"
+        android:src="@drawable/ic_back" />
 
 
     // scroll function
@@ -14,7 +20,7 @@
         android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="15dp">
+        android:layout_below="@id/af_back">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,7 +36,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_baseline_image_24"/>
+                android:src="@drawable/ic_image_preview"/>
 
             // choose food image button
             <Button
@@ -108,11 +114,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="15dp"
-                android:textColorHint="@color/black"
-                app:boxStrokeColor="@color/teal_700"
+                android:textColorHint="@color/til_color"
+                app:boxStrokeColor="@color/til_color"
                 app:endIconMode="clear_text"
-                app:endIconTint="@color/black"
-                app:hintTextColor="@color/black"
+                app:hintTextColor="@color/til_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -136,11 +141,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="15dp"
-                android:textColorHint="@color/black"
-                app:boxStrokeColor="@color/teal_700"
+                android:textColorHint="@color/til_color"
+                app:boxStrokeColor="@color/til_color"
                 app:endIconMode="clear_text"
-                app:endIconTint="@color/black"
-                app:hintTextColor="@color/black"
+                app:hintTextColor="@color/til_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -164,11 +168,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="15dp"
-                android:textColorHint="@color/black"
-                app:boxStrokeColor="@color/teal_700"
+                android:textColorHint="@color/til_color"
+                app:boxStrokeColor="@color/til_color"
                 app:endIconMode="clear_text"
-                app:endIconTint="@color/black"
-                app:hintTextColor="@color/black"
+                app:hintTextColor="@color/til_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

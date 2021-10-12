@@ -7,8 +7,8 @@
     <string name="password">Password</string>
     <string name="register">Register Now</string>
     <string name="login">Log In</string>
-    <string name="loginAdmin">Login as admin</string>
-    <string name="loginUser">Login As User</string>
+    <string name="loginAdmin"><u>Login As Admin</u></string>
+    <string name="loginUser"><u>Login As User</u></string>
     <string name="Menu">Menu</string>
     <string name="Cart">Cart</string>
     <string name="Wallet">E-Wallet</string>

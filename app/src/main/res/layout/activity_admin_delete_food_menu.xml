@@ -5,48 +5,70 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".MainActivity">
-
+    tools:context=".MainActivity"
+    android:background="@color/admin_dominant">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="15dp"
         android:orientation="vertical">
 
-
-        // Search bar
-        <EditText
-            android:id="@+id/food_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:hint="Type to Search..."
-            android:inputType="textPersonName"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+        <ImageView
+            android:id="@+id/fm_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_back"
+            app:tint="@color/white" />
 
         // Food Menu Title
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:text="Food Menu"
             android:textAlignment="center"
+            android:textColor="@color/frameColor"
             android:textSize="30sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:text="Food Menu"/>
+            android:textStyle="bold" />
 
-        // recycler view
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_recycleView"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical"/>
-        <!--tools:listitem="@layout/food_items_layout"-->
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingTop="25dp"
+            android:background="@drawable/bg_admin_food_menu">
+
+            // recycler view
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_recycleView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"/>
+            <!--tools:listitem="@layout/food_items_layout"-->
+        </RelativeLayout>
 
 
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_food"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:fabSize="normal"
+        android:backgroundTint="@color/frameColor"
+        app:backgroundTint="@color/admin_dominant"
+        app:borderWidth="1dp"
+        app:elevation="2dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_add_food"
+        android:background="@drawable/ripple_fab" />
+
 
 </RelativeLayout>

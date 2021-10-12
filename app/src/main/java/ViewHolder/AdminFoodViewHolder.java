@@ -23,7 +23,7 @@ public class AdminFoodViewHolder extends RecyclerView.ViewHolder implements View
 
         adminImageView = (ImageView) itemView.findViewById(R.id.admin_food_image);
         txtAdminFoodName = (TextView) itemView.findViewById(R.id.admin_food_name);
-        txtAdminFoodPrice = (TextView) itemView.findViewById(R.id.admin_food_price);
+        //txtAdminFoodPrice = (TextView) itemView.findViewById(R.id.admin_food_price);
     }
 
     public void setItemClickListener(foodItemClickListener listener)

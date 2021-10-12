@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="AllButton">#EB6C71</color>
     <color name="frameColor">#FFFAFA</color>
-</resources>
+    <color name="admin_dominant">#5071BD</color>
+    <color name="til_color">#00AD6B</color></resources>

@@ -4,8 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
-    tools:context=".Admin.AdminDeleteFoodItem">
+    tools:context=".Admin.AdminDeleteFoodItem"
+    android:background="@drawable/bg_admin">
+
+    <ImageView
+        android:id="@+id/di_back"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        app:tint="@color/admin_dominant"
+        android:src="@drawable/ic_back" />
 
 
     // scroll function
@@ -13,8 +21,8 @@
         android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="15dp"
-        app:cardElevation="15dp">
+        app:cardElevation="15dp"
+        android:layout_below="@id/di_back">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,74 +41,69 @@
 
 
             // food name
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textSize="20sp"
-                android:textColor="@color/black"
-                android:text="Food Name"/>
 
-            <EditText
+            <TextView
                 android:id="@+id/food_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:hint="Enter Food Name"
-                android:inputType="textPersonName"
-                android:textSize="20sp" />
+                android:text="Food Name"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
-            // food description
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:textSize="20sp"
-                android:textColor="@color/black"
-                android:text="Food Description"/>
-
-            <EditText
-                android:id="@+id/food_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:hint="Enter Description"
-                android:inputType="textPersonName"
-                android:textSize="20sp" />
 
             // food price
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:textSize="20sp"
-                android:textColor="@color/black"
-                android:text="Price (RM)"/>
 
-            <EditText
+            <TextView
                 android:id="@+id/food_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:hint="Enter Amount"
-                android:inputType="numberDecimal"
+                android:layout_marginTop="20dp"
+                android:text="Price (RM)"
+                android:textColor="#F9F871"
+                android:textSize="25sp" />
+
+
+            // food description
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:text="Food Description: "
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/food_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:text="Food Description"
+                android:textColor="@color/white"
                 android:textSize="20sp" />
 
+
             // delete button
+
             <Button
                 android:id="@+id/delete_food"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:padding="17dp"
-                android:textSize="20sp"
-                android:textColor="@color/white"
+                android:layout_marginTop="50dp"
                 android:backgroundTint="@color/AllButton"
+                android:padding="17dp"
+                android:text="Delete This Food"
                 android:textAllCaps="false"
-                android:text="Delete This Food" />
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
 
         </LinearLayout>
