@@ -7,12 +7,53 @@
     tools:context=".ProfileActivity">
 
     <TextView
-        android:id="@+id/HomeProfile"
-        android:layout_width="wrap_content"
+        android:id="@+id/languages"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Profile"
-        tools:layout_editor_absoluteX="164dp"
-        tools:layout_editor_absoluteY="322dp" />
+        android:gravity="center"
+        android:text=" Application Languages"
+        android:layout_marginTop="200dp"
+        android:textSize="20sp"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below=""
+        android:gravity="center"
+        android:text=" Application Languages"
+        android:layout_marginTop="200dp"
+        android:textSize="20sp"
+        android:textStyle="bold|italic" />
+
+    <Button
+        android:id="@+id/trackDelivery"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="60dp"
+        android:backgroundTint="@color/AllButton"
+        android:text="@string/trackDelivery"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@id/trackDelivery"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="60dp"
+        android:backgroundTint="@color/AllButton"
+        android:text="@string/logoutButton"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

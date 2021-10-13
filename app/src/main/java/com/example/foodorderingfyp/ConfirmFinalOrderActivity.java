@@ -208,6 +208,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         final DatabaseReference ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(Prevalent.currentOnlineUser.getPhone());
         //maybe can use for user to create e-wallet amount
         HashMap<String,Object> ordersMap = new HashMap<>();
+        ordersMap.put("Order ID",ordersRef.push().getKey());
         ordersMap.put("totalAmount",totalAmount);
         ordersMap.put("name",nameEditText.getText().toString());
         ordersMap.put("phone",phoneEditText.getText().toString());
@@ -218,7 +219,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         //for admin to change the status
         ordersMap.put("state","Not Delivered");
 
-        ordersRef.updateChildren(ordersMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+        ordersRef.child(ordersRef.push().getKey()).updateChildren(ordersMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull @NotNull Task<Void> task)
             {//if user confirm order need to clear the cart item
