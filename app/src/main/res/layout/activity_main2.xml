@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity2">
+    tools:context=".MainActivity2"
+    android:id="@+id/user_menu_layout">
 
     <FrameLayout
         android:id="@+id/fragment_layout"
@@ -25,6 +26,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_menu"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:paddingBottom="80dp"/>
 
 </RelativeLayout>

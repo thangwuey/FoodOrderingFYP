@@ -37,6 +37,8 @@ public class FoodDetailsActivity extends AppCompatActivity {
     private ElegantNumberButton numberButton;
     private TextView foodPrice,foodDescription,foodName;
     private  String foodID = "";
+    private ImageView ivfoodDetailsBack; // BACK icon
+    private String cartfdPrice = ""; // for cartMap
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class FoodDetailsActivity extends AppCompatActivity {
         foodName = (TextView) findViewById(R.id.food_name_details);
         foodDescription = (TextView) findViewById(R.id.food_description_details);
         foodPrice = (TextView) findViewById(R.id.food_price_details);
+        ivfoodDetailsBack = (ImageView) findViewById(R.id.ufd_back); // new
 
         getFoodDetails(foodID);
 
@@ -58,6 +61,17 @@ public class FoodDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addingToCartList();
+            }
+        });
+
+        // BACK icon
+        ivfoodDetailsBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(FoodDetailsActivity.this, MainActivity2.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left_back, R.anim.slide_out_right_back);
             }
         });
     }
@@ -79,6 +93,7 @@ public class FoodDetailsActivity extends AppCompatActivity {
         cartMap.put("foodName",foodID);
         cartMap.put("foodName",foodName.getText().toString());
         cartMap.put("foodPrice",foodPrice.getText().toString());
+        cartMap.put("foodPrice",cartfdPrice);
         cartMap.put("date",saveCurrentDate);
         cartMap.put("time",saveCurrentTime);
         cartMap.put("quantity",numberButton.getNumber());
@@ -89,7 +104,9 @@ public class FoodDetailsActivity extends AppCompatActivity {
             {
                 if (task.isSuccessful())
                 {
-                    cartListRef.child("Admin View").child(Prevalent.currentOnlineUser.getPhone()).child("Foods").child(foodID).updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    // NOT GOOD in here, cannot use ORDER ID
+                    // move to CONFIRM FINAL FOOD ORDER
+                    /*cartListRef.child("Admin View").child(Prevalent.currentOnlineUser.getPhone()).child("Foods").child(foodID).updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull @NotNull Task<Void> task)
                         {
@@ -101,7 +118,12 @@ public class FoodDetailsActivity extends AppCompatActivity {
                                 startActivity(intent);
                             }
                         }
-                    });
+                    });*/
+
+                    Toast.makeText(FoodDetailsActivity.this,"Added to Cart List", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(FoodDetailsActivity.this, MainActivity2.class);
+                    startActivity(intent);
                 }
             }
         });
@@ -117,9 +139,11 @@ public class FoodDetailsActivity extends AppCompatActivity {
                 if(snapshot.exists())
                 {
                     Foods foods = snapshot.getValue(Foods.class);
+                    String strPrice = foods.getFoodPrice() + ".00 MYR"; // price FORMAT
                     foodName.setText(foods.getFoodName());
                     foodDescription.setText(foods.getFoodDescription());
-                    foodPrice.setText(foods.getFoodPrice());
+                    foodPrice.setText(strPrice);
+                    cartfdPrice = foods.getFoodPrice();
                     Picasso.get().load(foods.getFoodImage()).into(foodImageDetails);
                 }
             }

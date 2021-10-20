@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WalletActivity">
+    tools:context=".WalletActivity"
+    android:id="@+id/user_wallet_layout">
 
     <TextView
         android:id="@+id/textViewBalance"
@@ -54,7 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_below="@id/textViewMethod"
-        android:text="10 MYR"
+        android:text="10.00 MYR"
         android:textStyle="bold"
         android:textSize="20dp"
         android:layout_marginStart="30dp"
@@ -66,7 +67,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_below="@id/reload10MYR"
-        android:text="20 MYR"
+        android:text="20.00 MYR"
         android:textStyle="bold"
         android:textSize="20dp"
         android:layout_marginStart="30dp"
@@ -78,7 +79,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_below="@id/reload20MYR"
-        android:text="50 MYR"
+        android:text="50.00 MYR"
         android:textStyle="bold"
         android:textSize="20dp"
         android:layout_marginStart="30dp"
@@ -90,7 +91,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_below="@id/reload50MYR"
-        android:text="100 MYR"
+        android:text="100.00 MYR"
         android:textStyle="bold"
         android:textSize="20dp"
         android:layout_marginStart="30dp"

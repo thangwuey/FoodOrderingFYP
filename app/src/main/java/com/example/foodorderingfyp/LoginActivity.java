@@ -3,12 +3,15 @@ package com.example.foodorderingfyp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -107,13 +110,16 @@ public class LoginActivity extends AppCompatActivity {
         String phone = InputPhoneNumber.getText().toString();
         String password = InputPassword.getText().toString();
 
-        if(TextUtils.isEmpty(phone))
+        // Validation
+        if(TextUtils.isEmpty(phone.trim()))
         {
             Toast.makeText(this, "Please write your phone number", Toast.LENGTH_SHORT).show();
+            showKeyboard(InputPhoneNumber, this);
         }
-        else if(TextUtils.isEmpty(password))
+        else if(TextUtils.isEmpty(password.trim()))
         {
             Toast.makeText(this, "Please write your password!", Toast.LENGTH_SHORT).show();
+            showKeyboard(InputPassword, this);
         }
         else
         {
@@ -124,8 +130,6 @@ public class LoginActivity extends AppCompatActivity {
 
             AllowAcceddToAccount(phone,password);
         }
-
-
 
     }
 
@@ -214,4 +218,16 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    public static void showKeyboard(EditText mEtSearch, Context context) {
+        mEtSearch.requestFocus();
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+    }
+
+    public static void hideSoftKeyboard(EditText mEtSearch, Context context) {
+        mEtSearch.clearFocus();
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(mEtSearch.getWindowToken(), 0);
+
+    }
 }

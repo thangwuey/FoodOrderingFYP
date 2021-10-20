@@ -9,11 +9,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +25,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -37,6 +40,9 @@ public class CartActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private Button placeOrderButton;
     private TextView txtTotalAmount;
+    boolean shouldExit = false; // press back button to EXIT
+    Snackbar snackbar;
+    RelativeLayout relativeLayout; // Snack Bar purpose
 
     private int overallTotalPrice = 0;
 
@@ -44,6 +50,9 @@ public class CartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+
+        // for Snack Bar
+        relativeLayout = findViewById(R.id.user_cart_layout); //new
 
         //bottom nav
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
@@ -65,12 +74,22 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                txtTotalAmount.setText( "Total Price = MYR" + String.valueOf(overallTotalPrice));
+                txtTotalAmount.setText( "Total Price = " + String.valueOf(overallTotalPrice) + " .00 MYR");
 
-                Intent intent = new Intent(CartActivity.this,ConfirmFinalOrderActivity.class);
+                /*Intent intent = new Intent(CartActivity.this,ConfirmFinalOrderActivity.class);
                 intent.putExtra("Total Price", String.valueOf(overallTotalPrice));
                 startActivity(intent);
-                finish();
+                finish();*/
+
+                // Validation, Cart cannot be EMPTY before proceed to CONFIRM ORDER
+                if (overallTotalPrice <= 0) {
+                    Toast.makeText(CartActivity.this, "Please add food before place order", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(CartActivity.this,ConfirmFinalOrderActivity.class);
+                    intent.putExtra("Total Price", String.valueOf(overallTotalPrice));
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 
@@ -87,7 +106,7 @@ public class CartActivity extends AppCompatActivity {
                     //selectedFragment = new HomeFragment();
                     //break;
                     startActivity(new Intent(getApplicationContext(),MainActivity2.class));
-                    overridePendingTransition(0,0);
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                     return true;
                 case R.id.cart:
                     //selectedFragment = new CartFragment();
@@ -99,13 +118,13 @@ public class CartActivity extends AppCompatActivity {
                     //selectedFragment = new WalletFragment();
                     //break;
                     startActivity(new Intent(getApplicationContext(), WalletActivity.class));
-                    overridePendingTransition(0,0);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     return true;
                 case R.id.profile:
                     //selectedFragment = new ProfileFragment();
                     //break;
                     startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-                    overridePendingTransition(0,0);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     return true;}
             return false;
             //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout,selectedFragment).commit();
@@ -134,6 +153,9 @@ public class CartActivity extends AppCompatActivity {
                 //video 26 show to total price of the all food item in the cart
                 int oneTypeFoodTotalPrice = ((Integer.valueOf(cart.getFoodPrice()))) * Integer.valueOf(cart.getQuantity());
                 overallTotalPrice = overallTotalPrice + oneTypeFoodTotalPrice;
+
+                // new, show TOTAL in TOP
+                txtTotalAmount.setText( "Total Price = " + String.valueOf(overallTotalPrice) + " .00 MYR");
 
                 //Click to perform other function VIDEO 25
                 cartViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -173,7 +195,7 @@ public class CartActivity extends AppCompatActivity {
                                         }
                                     });
 
-                                    cartListRef.child("Admin View").child(Prevalent.currentOnlineUser.getPhone()).child("Foods").child(cart.getFoodName()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    /*cartListRef.child("Admin View").child(Prevalent.currentOnlineUser.getPhone()).child("Foods").child(cart.getFoodName()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull @NotNull Task<Void> task)
                                         {
@@ -184,7 +206,7 @@ public class CartActivity extends AppCompatActivity {
                                                 //startActivity(intent);
                                             }
                                         }
-                                    });
+                                    });*/
                                 }
                             }
                         });
@@ -206,5 +228,36 @@ public class CartActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
         adapter.startListening();
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        // double press back button to exit app
+        if (shouldExit){
+            snackbar.dismiss();
+
+            // EXIT app, have BUG
+            /*moveTaskToBack(true);
+            android.os.Process.killProcess(android.os.Process.myPid());*/
+
+            // EXIT app, COMPLETE
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("EXIT_TAG", "SINGLETASK");
+            startActivity(intent);
+        }else{
+            snackbar = Snackbar.make(relativeLayout, "Please press BACK again to exit", Snackbar.LENGTH_SHORT);
+            snackbar.show();
+            shouldExit = true;
+
+            // if NO press again in a PERIOD, will NOT EXIT
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    shouldExit = false;
+                }
+            }, 1500);
+        }
     }
 }

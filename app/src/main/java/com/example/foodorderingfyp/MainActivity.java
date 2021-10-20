@@ -3,13 +3,16 @@ package com.example.foodorderingfyp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.DocumentsContract;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -84,17 +87,21 @@ public class MainActivity extends AppCompatActivity {
         String phone = InputPhoneNumber.getText().toString();
         String password = InputPassword.getText().toString();
 
-        if(TextUtils.isEmpty(name))
+        // Validation
+        if(TextUtils.isEmpty(name.trim()))
         {
             Toast.makeText(this, "Please write your name!", Toast.LENGTH_SHORT).show();
+            showKeyboard(InputName, this);
         }
-        else if(TextUtils.isEmpty(phone))
+        else if(TextUtils.isEmpty(phone.trim()))
         {
             Toast.makeText(this, "Please write your phone number!", Toast.LENGTH_SHORT).show();
+            showKeyboard(InputPhoneNumber, this);
         }
-        else if(TextUtils.isEmpty(password))
+        else if(TextUtils.isEmpty(password.trim()))
         {
-             Toast.makeText(this, "Please write your password!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please write your password!", Toast.LENGTH_SHORT).show();
+            showKeyboard(InputPassword, this);
         }
         else
         {
@@ -229,4 +236,30 @@ public class MainActivity extends AppCompatActivity {
             }, 1500);
         }
     }
+
+    // EXIT applications
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        String tag = intent.getStringExtra("EXIT_TAG");
+        if (tag != null && !TextUtils.isEmpty(tag)) {
+            if ("SINGLETASK".equals(tag)) {
+                finish();
+            }
+        }
+    }
+
+    public static void showKeyboard(EditText mEtSearch, Context context) {
+        mEtSearch.requestFocus();
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+    }
+
+    public static void hideSoftKeyboard(EditText mEtSearch, Context context) {
+        mEtSearch.clearFocus();
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(mEtSearch.getWindowToken(), 0);
+
+    }
+
 }

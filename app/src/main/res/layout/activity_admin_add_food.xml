@@ -131,7 +131,10 @@
                     android:hint="Food Name"
                     android:inputType="textPersonName"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:maxLength="35"
+                    android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                    android:singleLine="true"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -158,7 +161,10 @@
                     android:hint="Food Description"
                     android:inputType="textPersonName"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:maxLength="70"
+                    android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ,. "
+                    android:singleLine="true"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -186,7 +192,9 @@
                     android:hint="Food Amount"
                     android:inputType="numberDecimal"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:digits="0123456789"
+                    android:singleLine="true"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             // add food button

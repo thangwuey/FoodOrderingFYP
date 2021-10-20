@@ -8,15 +8,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.example.foodorderingfyp.ModelClass.Foods;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -30,11 +33,18 @@ public class MainActivity2 extends AppCompatActivity {
     private DatabaseReference FoodRef;
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
+    boolean shouldExit = false; // press back button to exit
+    Snackbar snackbar;
+    RelativeLayout relativeLayout; // Snack Bar purpose
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
+        // for Snack Bar
+        relativeLayout = findViewById(R.id.user_menu_layout); //new
 
         //bottom nav
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
@@ -70,19 +80,19 @@ public class MainActivity2 extends AppCompatActivity {
                     //selectedFragment = new CartFragment();
                     //break;
                     startActivity(new Intent(getApplicationContext(), CartActivity.class));
-                    overridePendingTransition(0,0);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     return true;
                 case R.id.wallet:
                     //selectedFragment = new WalletFragment();
                     //break;
                     startActivity(new Intent(getApplicationContext(), WalletActivity.class));
-                    overridePendingTransition(0,0);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     return true;
                 case R.id.profile:
                     //selectedFragment = new ProfileFragment();
                     //break;
                     startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-                    overridePendingTransition(0,0);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     return true;}
             return false;
             //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout,selectedFragment).commit();
@@ -99,9 +109,11 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull @NotNull ProductViewHolder productViewHolder, int i, @NonNull @NotNull Foods foods) {
 
+                String strPrice = foods.getFoodPrice() + ".00 MYR"; // price FORMAT
+
                 productViewHolder.txtProductName.setText(foods.getFoodName());
                 productViewHolder.txtProductDescription.setText(foods.getFoodDescription());
-                productViewHolder.txtProductPrice.setText(foods.getFoodPrice());
+                productViewHolder.txtProductPrice.setText(strPrice);
                 Picasso.get().load(foods.getFoodImage()).into(productViewHolder.imageView);
 
                 productViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -128,5 +140,36 @@ public class MainActivity2 extends AppCompatActivity {
         };
         recyclerView.setAdapter(adapter);
         adapter.startListening();
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        // DOUBLE PRESS back button to exit app
+        if (shouldExit){
+            snackbar.dismiss();
+
+            // EXIT app, have BUG
+            /*moveTaskToBack(true);
+            android.os.Process.killProcess(android.os.Process.myPid());*/
+
+            // EXIT app, COMPLETE
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("EXIT_TAG", "SINGLETASK");
+            startActivity(intent);
+        }else{
+            snackbar = Snackbar.make(relativeLayout, "Please press BACK again to exit", Snackbar.LENGTH_SHORT);
+            snackbar.show();
+            shouldExit = true;
+
+            // if NO press again in a PERIOD, will NOT EXIT
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    shouldExit = false;
+                }
+            }, 1500);
+        }
     }
 }

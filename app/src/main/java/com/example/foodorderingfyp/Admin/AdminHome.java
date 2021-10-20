@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.foodorderingfyp.LoginActivity;
+import com.example.foodorderingfyp.MainActivity;
 import com.example.foodorderingfyp.R;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -57,6 +58,7 @@ public class AdminHome extends AppCompatActivity {
             {
                 Intent intent = new Intent(AdminHome.this, LoginActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left_back, R.anim.slide_out_right_back); // BACK effect
             }
         });
 
@@ -83,7 +85,35 @@ public class AdminHome extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        // double press back button to exit app
+        // DOUBLE PRESS back button to exit app
+        if (shouldExit){
+            snackbar.dismiss();
+
+            // EXIT app, have BUG
+            /*moveTaskToBack(true);
+            android.os.Process.killProcess(android.os.Process.myPid());*/
+
+            // EXIT app, COMPLETE
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("EXIT_TAG", "SINGLETASK");
+            startActivity(intent);
+        }else{
+            snackbar = Snackbar.make(relativeLayout, "Please press BACK again to exit", Snackbar.LENGTH_SHORT);
+            snackbar.show();
+            shouldExit = true;
+
+            // if NO press again in a PERIOD, will NOT EXIT
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    shouldExit = false;
+                }
+            }, 1500);
+        }
+
+        // EXIT app, have BUG
+        /*// double press back button to exit app
         if (shouldExit){
             snackbar.dismiss();
             moveTaskToBack(true);
@@ -92,8 +122,8 @@ public class AdminHome extends AppCompatActivity {
             //finish();
             //super.onBackPressed();
         }else{
-            /*toast = Toast.makeText(this, "Please press BACK again to exit", Toast.LENGTH_SHORT);
-            toast.show();*/
+            *//*toast = Toast.makeText(this, "Please press BACK again to exit", Toast.LENGTH_SHORT);
+            toast.show();*//*
             snackbar = Snackbar.make(relativeLayout, "Please press BACK again to exit", Snackbar.LENGTH_SHORT);
             snackbar.show();
             shouldExit = true;
@@ -105,6 +135,7 @@ public class AdminHome extends AppCompatActivity {
                     shouldExit = false;
                 }
             }, 1500);
-        }
+        }*/
+
     }
 }

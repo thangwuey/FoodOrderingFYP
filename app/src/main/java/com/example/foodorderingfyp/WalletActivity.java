@@ -5,15 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,11 +33,17 @@ public class WalletActivity extends AppCompatActivity {
 
     private Button reload10,reload20,reload50,reload100;
     private TextView showBalance;
+    boolean shouldExit = false; // press back button to EXIT
+    Snackbar snackbar;
+    RelativeLayout relativeLayout; // Snack Bar purpose
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wallet);
+
+        // for Snack Bar
+        relativeLayout = findViewById(R.id.user_wallet_layout); //new
 
         //bottom nav
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
@@ -61,7 +70,7 @@ public class WalletActivity extends AppCompatActivity {
                     ///Retrieve from database
                     String amount = snapshot.child("E-Wallet").child(Prevalent.currentOnlineUser.getPhone()).child("walletAmount").getValue().toString();
                     //amount = snapshot.child("E-Wallet").child(Prevalent.currentOnlineUser.getPhone()).child("walletAmount").getValue().toString();
-                    showBalance.setText(amount);
+                    showBalance.setText(amount + ".00"); // price FORMAT
                 }/*else{
                         Toast.makeText(WalletActivity.this,"Error!!!!!!!!!!!!!",Toast.LENGTH_SHORT).show();
                     }*/
@@ -373,7 +382,8 @@ public class WalletActivity extends AppCompatActivity {
                     ///Retrieve from database
                     String amount = snapshot.child("E-Wallet").child(Prevalent.currentOnlineUser.getPhone()).child("walletAmount").getValue().toString();
                     //amount = snapshot.child("E-Wallet").child(Prevalent.currentOnlineUser.getPhone()).child("walletAmount").getValue().toString();
-                    showBalance.setText(amount);
+                    //showBalance.setText(amount);
+                    showBalance.setText(amount + ".00"); // price FORMAT
                 }else{
                     Toast.makeText(WalletActivity.this,"Error!!!!!!!!!!!!!",Toast.LENGTH_SHORT).show();
                 }
@@ -396,13 +406,13 @@ public class WalletActivity extends AppCompatActivity {
                     //selectedFragment = new HomeFragment();
                     //break;
                     startActivity(new Intent(getApplicationContext(),MainActivity2.class));
-                    overridePendingTransition(0,0);
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                     return true;
                 case R.id.cart:
                     //selectedFragment = new CartFragment();
                     //break;
                     startActivity(new Intent(getApplicationContext(), CartActivity.class));
-                    overridePendingTransition(0,0);
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                     return true;
                 case R.id.wallet:
                     //selectedFragment = new WalletFragment();
@@ -414,11 +424,42 @@ public class WalletActivity extends AppCompatActivity {
                     //selectedFragment = new ProfileFragment();
                     //break;
                     startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-                    overridePendingTransition(0,0);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     return true;}
             return false;
             //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout,selectedFragment).commit();
             //return true;
         }
     };
+
+    @Override
+    public void onBackPressed() {
+
+        // DOUBLE PRESS back button to exit app
+        if (shouldExit){
+            snackbar.dismiss();
+
+            // EXIT app, have BUG
+            /*moveTaskToBack(true);
+            android.os.Process.killProcess(android.os.Process.myPid());*/
+
+            // EXIT app, COMPLETE
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("EXIT_TAG", "SINGLETASK");
+            startActivity(intent);
+        }else{
+            snackbar = Snackbar.make(relativeLayout, "Please press BACK again to exit", Snackbar.LENGTH_SHORT);
+            snackbar.show();
+            shouldExit = true;
+
+            // if NO press again in a PERIOD, will NOT EXIT
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    shouldExit = false;
+                }
+            }, 1500);
+        }
+    }
 }
