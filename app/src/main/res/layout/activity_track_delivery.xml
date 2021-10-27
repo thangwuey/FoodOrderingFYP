@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TrackDelivery">
+
+    // BACK icon
+    <ImageView
+        android:id="@+id/td_back"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        app:tint="@color/AllButton"
+        android:src="@drawable/ic_back" />
+
+    // Header
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Track Delivery"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:textAlignment="center"
+        android:textColor="#eb6c71"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+
+    // scroll function
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/td_back">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            // Current Orders Header
+            <TextView
+                android:id="@+id/td_current_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:text="Current Orders"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            // current order recycler view
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/td_current_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:scrollbars="vertical"
+                android:layout_below="@id/td_current_order"/>
+
+            // Past Orders Header
+            <TextView
+                android:id="@+id/td_past_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="25dp"
+                android:text="Past Orders"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_below="@id/td_current_rv" />
+
+            // pass order recycler view
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/td_pass_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:scrollbars="vertical"
+                android:layout_below="@id/td_past_order"/>
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

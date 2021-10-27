@@ -89,25 +89,30 @@
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
-
-            // delete button
-
-            <Button
-                android:id="@+id/delete_food"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="50dp"
-                android:backgroundTint="@color/AllButton"
-                android:padding="17dp"
-                android:text="Delete This Food"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
-
-
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    // Button Fixed in Bottom
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_alignParentBottom="true">
+
+        // delete button
+        <Button
+            android:id="@+id/delete_food"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/AllButton"
+            android:padding="17dp"
+            android:text="Delete This Food"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

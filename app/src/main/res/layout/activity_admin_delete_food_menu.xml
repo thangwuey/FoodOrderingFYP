@@ -67,6 +67,7 @@
         android:layout_alignParentBottom="true"
         android:clickable="true"
         android:focusable="true"
+        app:rippleColor="#5071BD"
         android:src="@drawable/ic_add_food"
         android:background="@drawable/ripple_fab" />
 

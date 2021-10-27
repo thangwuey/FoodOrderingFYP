@@ -68,24 +68,26 @@ public class FoodDetailsActivity extends AppCompatActivity {
         ivfoodDetailsBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intent = new Intent(FoodDetailsActivity.this, MainActivity2.class);
+                // Got Bug, it can GO BACK if user click PHONE BACK BUTTON
+                /*Intent intent = new Intent(FoodDetailsActivity.this, MainActivity2.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_left_back, R.anim.slide_out_right_back);
+                overridePendingTransition(R.anim.slide_in_left_back, R.anim.slide_out_right_back);*/
+
+                onBackPressed();
             }
         });
     }
 
     private void addingToCartList()
     {
-        String saveCurrentTime, saveCurrentDate;
+        /*String saveCurrentTime, saveCurrentDate;
 
         Calendar calForDate = Calendar.getInstance();
         SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
         saveCurrentDate = currentDate.format(calForDate.getTime());
 
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
-        saveCurrentTime = currentTime.format(calForDate.getTime());
+        saveCurrentTime = currentTime.format(calForDate.getTime());*/
 
         final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
         //Video 22
@@ -94,8 +96,8 @@ public class FoodDetailsActivity extends AppCompatActivity {
         cartMap.put("foodName",foodName.getText().toString());
         cartMap.put("foodPrice",foodPrice.getText().toString());
         cartMap.put("foodPrice",cartfdPrice);
-        cartMap.put("date",saveCurrentDate);
-        cartMap.put("time",saveCurrentTime);
+        //cartMap.put("date",saveCurrentDate);
+        //cartMap.put("time",saveCurrentTime);
         cartMap.put("quantity",numberButton.getNumber());
 
         cartListRef.child("User View").child(Prevalent.currentOnlineUser.getPhone()).child("Foods").child(foodID).updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {

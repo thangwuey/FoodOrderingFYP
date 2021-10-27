@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/td_card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    app:cardElevation="0dp"
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackground">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/AllButton"
+        android:padding="10dp">
+
+        // Order ID
+        <TextView
+            android:id="@+id/td_order_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="Order ID"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/white" />
+
+        // Arrow Button
+        <Button
+            android:id="@+id/td_arrow_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:backgroundTint="@color/white"
+            android:background="@drawable/ic_show_less"
+            android:layout_alignParentEnd="true"/>
+
+        // Expandable Relative Layout
+        <RelativeLayout
+            android:id="@+id/td_expandable_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/td_arrow_button"
+            android:visibility="visible">
+
+            // Order Time
+            <TextView
+                android:id="@+id/td_order_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Time"
+                android:textSize="15sp"
+                android:textColor="@color/white" />
+
+            // Order Amount
+            <TextView
+                android:id="@+id/td_order_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="0.00 MYR"
+                android:textSize="15sp"
+                android:textColor="@color/white"
+                android:layout_below="@id/td_order_time" />
+
+            <Button
+                android:id="@+id/td_order_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="17dp"
+                android:layout_marginStart="17dp"
+                android:layout_marginEnd="17dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="Track Order"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

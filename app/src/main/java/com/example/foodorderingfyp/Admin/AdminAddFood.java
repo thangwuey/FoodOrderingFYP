@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,8 +31,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -48,13 +52,14 @@ public class AdminAddFood extends AppCompatActivity {
     private String tname, tdesc; //new, for validation
     private int nPrice; //new
     private ImageView ivAddFoodBack; //new
+    private String tempFoodName = ""; // check existing food
 
 
     private StorageReference foodImageRef;
     private DatabaseReference foodRef;
     private ProgressDialog loadingBar;
 
-    private static final int PERMISSION_CODE = 1001;
+    //private static final int PERMISSION_CODE = 1001;
 
     private static final int GalleryPick = 1;
 
@@ -89,9 +94,12 @@ public class AdminAddFood extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(AdminAddFood.this, AdminDeleteFoodMenu.class);
+                // Got Bug, it can GO BACK if user click PHONE BACK BUTTON
+                /*Intent intent = new Intent(AdminAddFood.this, AdminDeleteFoodMenu.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_left_back, R.anim.slide_out_right_back);
+                overridePendingTransition(R.anim.slide_in_left_back, R.anim.slide_out_right_back);*/
+
+                onBackPressed();
             }
         });
 
@@ -244,18 +252,38 @@ public class AdminAddFood extends AppCompatActivity {
             }
             else {
                 fprice = String.valueOf(nPrice);
-                StorageFoodInformation();
+                checkExistFood();
+                //StorageFoodInformation();
             }
         }
+    }
+
+    // Validation check existing food name
+    private void checkExistFood() {
+        foodRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if(snapshot.child(fname.toLowerCase()).exists())
+                    Toast.makeText(AdminAddFood.this, "Food Name already existed, Please change food name", Toast.LENGTH_SHORT).show();
+                else
+                    StorageFoodInformation();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 
     private void StorageFoodInformation() {
         // loading when processing to add food to database
-        /*loadingBar.setTitle("Add New Product");
+        loadingBar.setTitle("Add New Product");
         loadingBar.setMessage("Dear Admin, please wait while we are adding the new product.");
         loadingBar.setCanceledOnTouchOutside(false);
-        loadingBar.show();*/
+        loadingBar.show();
 
 
         // food primary key, unique id
@@ -279,14 +307,14 @@ public class AdminAddFood extends AppCompatActivity {
             {
                 String message = e.toString();
                 Toast.makeText(AdminAddFood.this, "Error: " + message, Toast.LENGTH_SHORT).show();
-                //loadingBar.dismiss();
+                loadingBar.dismiss();
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>()
         {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
             {
-                Toast.makeText(AdminAddFood.this, "Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(AdminAddFood.this, "Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
 
                 Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>()
                 {
@@ -310,7 +338,7 @@ public class AdminAddFood extends AppCompatActivity {
                         {
                             downloadImageUrl = task.getResult().toString();
 
-                            Toast.makeText(AdminAddFood.this, "got the Food image Url Successfully...", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(AdminAddFood.this, "got the Food image Url Successfully...", Toast.LENGTH_SHORT).show();
 
                             SaveFoodInfoToDatabase();
                         }
@@ -327,27 +355,27 @@ public class AdminAddFood extends AppCompatActivity {
 
 
 
-        foodMap.put("foodName", fname);
+        foodMap.put("foodName", fname.toLowerCase());
         foodMap.put("foodDescription", fdesc);
         foodMap.put("foodPrice", fprice);
         foodMap.put("foodImage", downloadImageUrl);
 
-        foodRef.child(foodkey).updateChildren(foodMap)
+        foodRef.child(foodkey.toLowerCase()).updateChildren(foodMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task)
                     {
                         if (task.isSuccessful())
                         {
-                            //loadingBar.dismiss();
-                            Toast.makeText(AdminAddFood.this, "Food is added successfully...", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminAddFood.this, "Food Added", Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
-                            //loadingBar.dismiss();
                             String message = task.getException().toString();
                             Toast.makeText(AdminAddFood.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                         }
+                        loadingBar.dismiss();
+                        finish();
                     }
                 });
     }

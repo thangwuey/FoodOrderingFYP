@@ -5,11 +5,20 @@
       <map>
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/drawable-v24/ic_city.xml" value="0.1" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/drawable/bg_admin.xml" value="0.1" />
+        <entry key="..\:/FoodOrderingFYP/app/src/main/res/drawable/bg_button_admin_send_order.xml" value="0.125" />
+        <entry key="..\:/FoodOrderingFYP/app/src/main/res/drawable/bg_button_normal.xml" value="0.1" />
+        <entry key="..\:/FoodOrderingFYP/app/src/main/res/drawable/bg_order_no.xml" value="0.1" />
+        <entry key="..\:/FoodOrderingFYP/app/src/main/res/drawable/bg_order_state_prepare.xml" value="0.1" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/drawable/ic_baseline_image_24.xml" value="0.12314814814814815" />
+        <entry key="..\:/FoodOrderingFYP/app/src/main/res/drawable/ic_history.xml" value="0.1" />
+        <entry key="..\:/FoodOrderingFYP/app/src/main/res/drawable/ic_show_less.xml" value="0.1" />
+        <entry key="..\:/FoodOrderingFYP/app/src/main/res/drawable/ripple_fab.xml" value="0.10462962962962963" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_admin_add_food.xml" value="0.1" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_admin_delete_food_item.xml" value="0.15489130434782608" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_admin_delete_food_menu.xml" value="0.12771739130434784" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_admin_home.xml" value="0.13632246376811594" />
+        <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_admin_send_order.xml" value="0.1" />
+        <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_admin_send_order_details.xml" value="0.14010416666666667" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_cart.xml" value="0.1" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_confirm_final_order.xml" value="0.18206521739130435" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_food_details.xml" value="0.1" />
@@ -17,10 +26,14 @@
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_main2.xml" value="0.11448834853090173" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_profile.xml" value="0.1" />
+        <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_track_delivery.xml" value="0.264" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_wallet.xml" value="0.1" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/admin_food_item_layout.xml" value="0.1" />
+        <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/admin_order_food_item.xml" value="0.25416666666666665" />
+        <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/admin_order_item_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/cart_items_layout.xml" value="0.1" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/food_menu_layout.xml" value="0.1" />
+        <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/track_delivery_item_layout.xml" value="0.264" />
       </map>
     </option>
   </component>

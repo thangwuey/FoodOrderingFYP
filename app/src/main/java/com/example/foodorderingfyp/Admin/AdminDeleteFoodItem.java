@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -42,7 +43,7 @@ public class AdminDeleteFoodItem extends AppCompatActivity {
     private FirebaseStorage foodImageStorage;
     private Uri imageUri;
     private ImageView ivDeleteFoodBack; //new
-
+    private ProgressDialog loadingBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +64,8 @@ public class AdminDeleteFoodItem extends AppCompatActivity {
         foodID = getIntent().getStringExtra("foodName");
 
         FoodsRef = FirebaseDatabase.getInstance().getReference().child("Foods").child(foodID);
-
+// progressing bar to let user know it is processing
+        loadingBar = new ProgressDialog(this);
 
         // display food info
         displaySpecificFoodInfo();
@@ -73,10 +75,12 @@ public class AdminDeleteFoodItem extends AppCompatActivity {
         ivDeleteFoodBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intent = new Intent(AdminDeleteFoodItem.this, AdminDeleteFoodMenu.class);
-                startActivity(intent);
+                // Got Bug, it can GO BACK if user click PHONE BACK BUTTON
+                /*Intent intent = new Intent(AdminDeleteFoodItem.this, AdminDeleteFoodMenu.class);
+                startActivity(intent);*/
                 //overridePendingTransition(R.anim.slide_in_left_back, R.anim.slide_out_right_back);
+
+                onBackPressed();
             }
         });
 
@@ -96,7 +100,16 @@ public class AdminDeleteFoodItem extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    String fname = snapshot.child("foodName").getValue().toString();
+                    // First letter of each word to UPPERCASE in FOOD NAME
+                    String str = snapshot.child("foodName").getValue().toString();
+                    String[] strArray = str.split(" ");
+                    StringBuilder builder = new StringBuilder();
+                    for (String s : strArray) {
+                        String cap = s.substring(0, 1).toUpperCase() + s.substring(1);
+                        builder.append(cap).append(" ");
+                    }
+
+                    String fname = builder.toString();
                     String fdesc = snapshot.child("foodDescription").getValue().toString();
                     String fprice = snapshot.child("foodPrice").getValue().toString();
                     String fimage = snapshot.child("foodImage").getValue().toString();
@@ -121,6 +134,11 @@ public class AdminDeleteFoodItem extends AppCompatActivity {
 
 
     private void deleteThisFood() {
+        // loading when processing to DELETE food in database
+        loadingBar.setTitle("Delete Current Product");
+        loadingBar.setMessage("Dear Admin, please wait while we are deleting this product.");
+        loadingBar.setCanceledOnTouchOutside(false);
+        loadingBar.show();
 
         //new
         StorageReference imageRef = foodImageStorage.getReferenceFromUrl(downloadImageUrl);
@@ -129,6 +147,7 @@ public class AdminDeleteFoodItem extends AppCompatActivity {
             public void onSuccess(Void aVoid) {
                 FoodsRef.removeValue();
                 Toast.makeText(AdminDeleteFoodItem.this, "Item deleted", Toast.LENGTH_SHORT).show();
+                loadingBar.dismiss();
 
                 Intent intent = new Intent(AdminDeleteFoodItem.this, AdminDeleteFoodMenu.class);
                 startActivity(intent);

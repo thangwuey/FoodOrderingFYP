@@ -65,9 +65,12 @@ public class AdminDeleteFoodMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(AdminDeleteFoodMenu.this, AdminHome.class);
+                // Got Bug, it can GO BACK if user click PHONE BACK BUTTON
+                /*Intent intent = new Intent(AdminDeleteFoodMenu.this, AdminHome.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_left_back, R.anim.slide_out_right_back);
+                overridePendingTransition(R.anim.slide_in_left_back, R.anim.slide_out_right_back);*/
+
+                onBackPressed();
             }
         });
 
@@ -93,7 +96,15 @@ public class AdminDeleteFoodMenu extends AppCompatActivity {
                     protected void onBindViewHolder(@NonNull AdminFoodViewHolder holder, int position, @NonNull Foods model)
                     {
                         // holder from FoodViewHolder.java
-                        holder.txtAdminFoodName.setText(model.getFoodName());
+                        // First letter of each word to UPPERCASE in FOOD NAME
+                        String str = model.getFoodName();
+                        String[] strArray = str.split(" ");
+                        StringBuilder builder = new StringBuilder();
+                        for (String s : strArray) {
+                            String cap = s.substring(0, 1).toUpperCase() + s.substring(1);
+                            builder.append(cap).append(" ");
+                        }
+                        holder.txtAdminFoodName.setText(builder.toString());
                         //holder.txtAdminFoodPrice.setText("RM " + model.getFoodPrice());
 
                         // easy way to get Image from database
