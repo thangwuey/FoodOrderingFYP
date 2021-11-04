@@ -28,8 +28,6 @@ public class AdminDeleteFoodMenu extends AppCompatActivity {
     private DatabaseReference FoodsRef;
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-    private FloatingActionButton fabAddFood; //new
-    private ImageView ivBack; //new
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,33 +45,18 @@ public class AdminDeleteFoodMenu extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        //new
-        fabAddFood = (FloatingActionButton) findViewById(R.id.fab_add_food);
-        ivBack = (ImageView) findViewById(R.id.fm_back);
+        FloatingActionButton fabAddFood = (FloatingActionButton) findViewById(R.id.fab_add_food);
+        ImageView ivBack = (ImageView) findViewById(R.id.fm_back);
 
-        fabAddFood.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        // Add Food Button
+        fabAddFood.setOnClickListener(v -> {
 
-                Intent intent = new Intent(AdminDeleteFoodMenu.this, AdminAddFood.class);
-                startActivity(intent);
-            }
+            Intent intent = new Intent(AdminDeleteFoodMenu.this, AdminAddFood.class);
+            startActivity(intent);
         });
 
-        //new
-        ivBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // Got Bug, it can GO BACK if user click PHONE BACK BUTTON
-                /*Intent intent = new Intent(AdminDeleteFoodMenu.this, AdminHome.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_left_back, R.anim.slide_out_right_back);*/
-
-                onBackPressed();
-            }
-        });
-
+        // Back Button
+        ivBack.setOnClickListener(v -> onBackPressed());
     }
 
 
@@ -81,13 +64,11 @@ public class AdminDeleteFoodMenu extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-
         // to configure adapter
         FirebaseRecyclerOptions<Foods> options =
                 new FirebaseRecyclerOptions.Builder<Foods>()
                         .setQuery(FoodsRef, Foods.class)
                         .build();
-
 
         // <T, ViewHolder>
         FirebaseRecyclerAdapter<Foods, AdminFoodViewHolder> adapter =
@@ -105,11 +86,9 @@ public class AdminDeleteFoodMenu extends AppCompatActivity {
                             builder.append(cap).append(" ");
                         }
                         holder.txtAdminFoodName.setText(builder.toString());
-                        //holder.txtAdminFoodPrice.setText("RM " + model.getFoodPrice());
 
                         // easy way to get Image from database
                         Picasso.get().load(model.getFoodImage()).into(holder.adminImageView);
-
 
                         // get Food ID
                         holder.itemView.setOnClickListener((view) -> {
@@ -124,8 +103,7 @@ public class AdminDeleteFoodMenu extends AppCompatActivity {
                     public AdminFoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
                     {
                         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.admin_food_item_layout, parent, false);
-                        AdminFoodViewHolder holder = new AdminFoodViewHolder(view);
-                        return holder;
+                        return new AdminFoodViewHolder(view);
                     }
                 };
         recyclerView.setAdapter(adapter);
