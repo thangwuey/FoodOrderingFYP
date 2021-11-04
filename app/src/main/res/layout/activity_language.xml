@@ -4,60 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivity"
-    android:id="@+id/user_profile_layout">
+    tools:context=".LanguageActivity">
 
-    <Button
-        android:id="@+id/languagechanger"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_centerVertical="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="60dp"
-        android:layout_marginRight="60dp"
-        android:backgroundTint="@color/AllButton"
-        android:text="@string/changelanguage"
-        android:textColor="@color/white"
-        android:textSize="20sp" />
-
-    <Button
-        android:id="@+id/trackDelivery"
-        android:layout_below="@id/languagechanger"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_centerVertical="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="60dp"
-        android:backgroundTint="@color/AllButton"
-        android:text="@string/trackDelivery"
-        android:textColor="@color/white"
-        android:textSize="20sp" />
-
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_below="@id/trackDelivery"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="60dp"
-        android:backgroundTint="@color/AllButton"
-        android:text="@string/logoutButton"
-        android:textColor="@color/white"
-        android:textSize="20sp" />
-
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
+    <TextView
+        android:id="@+id/applicationLanguage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/AllButton"
-        app:itemTextColor="@color/white"
-        app:itemIconTint="@color/white"
-        app:menu="@menu/bottom_navigation"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:text="Select Application Language"/>
+
+    <Button
+        android:id="@+id/englishword"
+        android:layout_below="@id/applicationLanguage"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginRight="30dp"
+        android:backgroundTint="@color/AllButton"
+        android:text="english"
+        android:textColor="@color/white"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/chineseword"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_below="@id/englishword"
+        android:backgroundTint="@color/AllButton"
+        android:textSize="25sp"
+        android:textColor="@color/white"
+        android:text="Chinese"/>
+
+    <Button
+        android:id="@+id/backbutton"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@id/chineseword"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginRight="60dp"
+        android:backgroundTint="@color/AllButton"
+        android:text="Back"
+        android:textColor="@color/white"
+        android:textSize="25sp" />
 
 </RelativeLayout>

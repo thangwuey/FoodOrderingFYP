@@ -24,4 +24,5 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="trackDelivery">Track Delivery</string>
+    <string name="changelanguage">Change Language</string>
 </resources>
