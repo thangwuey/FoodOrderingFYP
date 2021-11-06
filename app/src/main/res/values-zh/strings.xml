@@ -33,9 +33,9 @@
     <string name="englishword">英文</string>
     <string name="chineseword">华文</string>
     <string name="back">退后</string>
-    <string name="trackdelivery">Track Delivery</string>
-    <string name="currentorder">Current Order</string>
-    <string name="pastorder">Past Order</string>
-    <string name="balance">BALANCE</string>
-    <string name="selectreloadamount">Select Reload Amount:</string>
+    <string name="trackdelivery">跟踪订单</string>
+    <string name="currentorder">当前订单</string>
+    <string name="pastorder">历史订单</string>
+    <string name="balance">结余</string>
+    <string name="selectreloadamount">选择充值数目:</string>
 </resources>
