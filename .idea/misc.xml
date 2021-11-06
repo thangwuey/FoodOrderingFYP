@@ -24,7 +24,7 @@
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_admin_send_order_details.xml" value="0.14010416666666667" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_cart.xml" value="0.1" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_confirm_final_order.xml" value="0.18206521739130435" />
-        <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_food_details.xml" value="0.1" />
+        <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_food_details.xml" value="0.264" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_introductory.xml" value="0.12310030395136778" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_language.xml" value="0.12310030395136778" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_login.xml" value="0.1" />
@@ -36,7 +36,7 @@
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/admin_food_item_layout.xml" value="0.1" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/admin_order_food_item.xml" value="0.25416666666666665" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/admin_order_item_layout.xml" value="0.25416666666666665" />
-        <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/cart_items_layout.xml" value="0.1" />
+        <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/cart_items_layout.xml" value="0.2" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/food_menu_layout.xml" value="0.1" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/track_delivery_item_layout.xml" value="0.264" />
       </map>

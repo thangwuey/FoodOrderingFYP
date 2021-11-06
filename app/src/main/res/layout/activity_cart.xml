@@ -38,14 +38,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/AllButton"
-        android:layout_marginBottom="80dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
-        android:text="Place Order"
-        android:textSize="20sp"
+        android:layout_marginBottom="80dp"
+        android:background="@color/AllButton"
+        android:text="@string/placeorder"
+        android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textAllCaps="false" />
+        android:textSize="20sp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

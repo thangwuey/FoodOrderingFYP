@@ -70,17 +70,19 @@
         android:gravity="center"/>
 
     // No ALL CAPS, text color to WHITE
+
     <Button
         android:id="@+id/addToCartButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/foodNumber_button"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="80dp"
         android:layout_marginTop="80dp"
-        android:layout_centerHorizontal="true"
         android:background="@color/AllButton"
-        android:textColor="@color/white"
+        android:text="@string/addtocart"
         android:textAllCaps="false"
-        android:text="Add To Cart"/>
+        android:textSize="20sp"
+        android:textColor="@color/white" />
 
 </RelativeLayout>

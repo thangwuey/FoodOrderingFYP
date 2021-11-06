@@ -36,7 +36,7 @@ public class LanguageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 lang.updateResource("zh");
-                Toast.makeText(LanguageActivity.this,"Successfully Change Apps Language.",Toast.LENGTH_LONG).show();
+                Toast.makeText(LanguageActivity.this,"成功换语言",Toast.LENGTH_LONG).show();
             }
         });
 
