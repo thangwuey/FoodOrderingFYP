@@ -12,9 +12,9 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
+        android:text="@string/selectlanguageheader"
         android:textAlignment="center"
-        android:textSize="30sp"
-        android:text="Select Application Language"/>
+        android:textSize="30sp" />
 
     <Button
         android:id="@+id/englishword"

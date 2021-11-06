@@ -37,4 +37,5 @@
     <string name="pastorder">Past Order</string>
     <string name="balance">BALANCE</string>
     <string name="selectreloadamount">Select Reload Amount:</string>
+    <string name="selectlanguageheader">Select Application Language</string>
 </resources>
