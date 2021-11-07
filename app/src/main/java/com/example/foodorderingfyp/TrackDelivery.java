@@ -1,12 +1,16 @@
 package com.example.foodorderingfyp;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -190,10 +194,47 @@ public class TrackDelivery extends AppCompatActivity {
                                 //holder.btnTrack.setBackgroundColor(ContextCompat.getColor(TrackDelivery.this, R.color.gray));
                                 //holder.btnTrack.setBackgroundResource(R.drawable.bg_order_state_prepare);
                                 holder.btnTrack.setTextColor(Color.parseColor("#FFFFFF"));
+                                holder.btnTrack.setEnabled(false);
                             } else {
                                 holder.btnTrack.setBackgroundColor(Color.parseColor("#00AD6B"));
                             }
 
+                            // Track GPS Location
+                            holder.btnTrack.setOnClickListener((view) -> {
+                                // check Phone GPS state
+                                LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE );
+                                boolean statusOfGPS = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+                                if (statusOfGPS) {
+                                    //Intent intent = new Intent(TrackDelivery.this, TrackMapsActivity.class);
+                                    Intent intent = new Intent(TrackDelivery.this, TrackGPSMapActivity.class);
+                                    intent.putExtra("orderID", currentOrdersFilter.get(position).getOrderID());
+                                    intent.putExtra("latitude", currentOrdersFilter.get(position).getLatitude());
+                                    intent.putExtra("longitude", currentOrdersFilter.get(position).getLongitude());
+                                    intent.putExtra("address", currentOrdersFilter.get(position).getAddress());
+                                    startActivity(intent);
+                                }
+                                else
+                                    Toast.makeText(TrackDelivery.this, "GPS is Required, Please Turn On", Toast.LENGTH_SHORT).show();
+                                /*if (holder.btnTrack.isEnabled()) {
+                                    // check Phone GPS state
+                                    LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE );
+                                    boolean statusOfGPS = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+                                    if (statusOfGPS) {
+                                        //Intent intent = new Intent(TrackDelivery.this, TrackMapsActivity.class);
+                                        Intent intent = new Intent(TrackDelivery.this, TrackGPSMapActivity.class);
+                                        intent.putExtra("orderID", currentOrdersFilter.get(position).getOrderID());
+                                        startActivity(intent);
+                                    }
+                                    else
+                                        Toast.makeText(TrackDelivery.this, "GPS is Required, Please Turn On", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(TrackDelivery.this, "The order is still preparing. Please wait for awhile.",
+                                            Toast.LENGTH_SHORT).show();
+                                }*/
+
+                            });
 
                         } catch (ParseException e) {
                             e.printStackTrace();

@@ -2,14 +2,17 @@ package com.example.foodorderingfyp.ModelClass;
 
 public class Orders {
     private String address,city,date,name,orderID,phone,state,time,totalAmount;
+    private double latitude, longitude;
 
     public Orders() {
     }
 
-    public Orders(String address, String city, String date, String name, String orderID, String phone, String state, String time, String totalAmount) {
+    public Orders(String address, String city, String date, double latitude, double longitude, String name, String orderID, String phone, String state, String time, String totalAmount) {
         this.address = address;
         this.city = city;
         this.date = date;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.name = name;
         this.orderID = orderID;
         this.phone = phone;
@@ -88,5 +91,21 @@ public class Orders {
 
     public void setTotalAmount(String totalAmount) {
         this.totalAmount = totalAmount;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }

@@ -2,10 +2,15 @@ package com.example.foodorderingfyp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -16,6 +21,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.foodorderingfyp.Admin.AdminHome;
+import com.example.foodorderingfyp.Admin.AdminSendOrder;
+import com.example.foodorderingfyp.Admin.AdminSendOrderDetails;
 import com.example.foodorderingfyp.ModelClass.Cart;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -44,6 +52,9 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
     private String totalAmount = "";
     private String orderID = ""; // new, for Cart List Admin View and Order
     private ImageView ivConfirmOrderBack; // BACK icon
+    private static final int LOCATION_PERMISSION_CODE = 1;
+    private int deniedCount = 0;
+    private EditText etLatitude, etLongitude; // STORE address latitude & longitude
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +73,18 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         addressEdittext = (EditText) findViewById(R.id.delivery_address);
         cityEditText = (EditText) findViewById(R.id.delivery_city);
         ivConfirmOrderBack = (ImageView) findViewById(R.id.cfo_back); // BACK icon
+        etLatitude = (EditText) findViewById(R.id.delivery_latitude);
+        etLongitude = (EditText) findViewById(R.id.delivery_longitude);
+        Button btnSelectAddress = findViewById(R.id.acfo_select_address_button);
+
+        btnSelectAddress.setOnClickListener(v -> {
+            checkGPSState();
+
+
+            /*Intent i = new Intent(this, SelectAddressActivity.class);
+            startActivityForResult(i, LOCATION_PERMISSION_CODE);*/
+
+        });
 
         // BACK icon
         ivConfirmOrderBack.setOnClickListener(new View.OnClickListener() {
@@ -282,11 +305,14 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
                                 final String saveCurrentDate, saveCurrentTime;
 
                                 Calendar calForDate = Calendar.getInstance();
-                                SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+                                SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
                                 saveCurrentDate = currentDate.format(calForDate.getTime());
 
-                                SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
+                                SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss");
                                 saveCurrentTime = currentTime.format(calForDate.getTime());
+
+                                double doubleLat = Double.parseDouble(etLatitude.getText().toString());
+                                double doubleLong = Double.parseDouble(etLongitude.getText().toString());
 
                                 //Create new child for the firebase and get the specific users phone name
                                 final DatabaseReference ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(Prevalent.currentOnlineUser.getPhone());
@@ -301,7 +327,9 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
                                 ordersMap.put("date",saveCurrentDate);
                                 ordersMap.put("time",saveCurrentTime);
                                 //for admin to change the status
-                                ordersMap.put("state","Not Delivered");
+                                ordersMap.put("state","P");
+                                ordersMap.put("latitude",doubleLat);
+                                ordersMap.put("longitude",doubleLong);
 
                                 ordersRef.child(orderID).updateChildren(ordersMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
@@ -388,6 +416,96 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
             }
         });*/
 
+    }
+
+    private void checkGPSState() {
+
+        // check Phone GPS state
+        LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE );
+        boolean statusOfGPS = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+        if (statusOfGPS)
+        {
+            // Request Location Permissions
+            requestLocationPermission();
+        }
+        else
+            Toast.makeText(this, "GPS is Required, Please Turn On", Toast.LENGTH_SHORT).show();
+
+    }
+
+    private void requestLocationPermission() {
+        if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+            new AlertDialog.Builder(this)
+                    .setTitle("Permission Required")
+                    .setMessage("This app needs access to your GPS")
+                    .setPositiveButton("ok", (dialog, which) ->
+                            ActivityCompat.requestPermissions(ConfirmFinalOrderActivity.this,
+                                    new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
+                                    LOCATION_PERMISSION_CODE))
+                    .setNegativeButton("cancel", (dialog, which) -> dialog.dismiss())
+                    .create().show();
+        } else { // first time ask permission
+            ActivityCompat.requestPermissions(this, new
+                    String[] {Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_CODE);
+        }
+    }
+
+    // handle result of runtime permission
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == LOCATION_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // permission was GRANTED
+
+                /*Intent intent = new Intent(ConfirmFinalOrderActivity.this, SelectAddressActivity.class);
+                startActivity(intent);*/
+                Intent i = new Intent(this, SelectAddressActivity.class);
+                startActivityForResult(i, LOCATION_PERMISSION_CODE);
+
+            } else if (deniedCount > 1) { // If denied permanently
+                new AlertDialog.Builder(this)
+                        .setTitle("Permission Required")
+                        .setMessage("This app may not work correctly without the requested permissions. " +
+                                "Open the app settings screen to modify app permissions.")
+                        .setPositiveButton("ok", (dialog, which) -> dialog.dismiss())
+                        .create().show();
+            } else {
+                // permission was DENIED
+                Toast.makeText(this, "Permission DENIED", Toast.LENGTH_SHORT).show();
+                deniedCount++;
+            }
+        }
+    }
+
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == LOCATION_PERMISSION_CODE) {
+
+            if (resultCode == Activity.RESULT_OK) {
+                super.onActivityResult(requestCode, resultCode, data);
+
+                String address = data.getStringExtra("address");
+                double latitude = data.getDoubleExtra("latitude", 0.00);
+                double longitude = data.getDoubleExtra("longitude", 0.00);
+                String locality = data.getStringExtra("locality");
+
+
+                Log.d("Location123latCheck", String.valueOf(latitude));
+                Log.d("Location123longCheck", String.valueOf(longitude));
+                Log.d("Location123addCheck", address);
+                Log.d("Location123localCheck", locality);
+
+                addressEdittext.setText(address);
+                cityEditText.setText(locality);
+                etLatitude.setText(String.valueOf(latitude));
+                etLongitude.setText(String.valueOf(longitude));
+
+            }
+        }
     }
 
     public static void showKeyboard(EditText mEtSearch, Context context) {

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TrackGPSMapActivity">
+
+    <RelativeLayout
+        android:id="@+id/track_gps_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/frameColor">
+
+        // BACK icon
+        <ImageView
+            android:id="@+id/track_gps_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            app:tint="@color/AllButton"
+            android:src="@drawable/ic_back" />
+
+        // Header
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="25dp"
+            android:text="@string/maptracking"
+            android:textAlignment="center"
+            android:textColor="#eb6c71"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <fragment
+        android:id="@+id/track_gps_map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/track_gps_rl"
+        android:name="com.google.android.gms.maps.SupportMapFragment" />
+
+    // Fixed in Bottom
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:padding="15dp"
+        android:background="@color/frameColor"
+        android:layout_alignParentBottom="true">
+
+        // Address Header
+
+        <TextView
+            android:id="@+id/track_gps_address_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pickupaddress"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        // Address
+        <TextView
+            android:id="@+id/track_gps_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="XXXXXXXXXXXXXXX"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:layout_below="@id/track_gps_address_header" />
+
+    </RelativeLayout>
+</RelativeLayout>

@@ -39,4 +39,6 @@
     <string name="balance">结余</string>
     <string name="selectreloadamount">选择充值数目:</string>
     <string name="selectlanguageheader">选择语言</string>
+    <string name="maptracking">Map Tracking</string>
+    <string name="pickupaddress">Pick Up Address</string>
 </resources>

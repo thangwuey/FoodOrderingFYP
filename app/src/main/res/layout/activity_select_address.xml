@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SelectAddressActivity">
+
+    <RelativeLayout
+        android:id="@+id/select_address_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/frameColor">
+
+        // BACK icon
+        <ImageView
+            android:id="@+id/select_address_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            app:tint="@color/AllButton"
+            android:src="@drawable/ic_back" />
+
+        <SearchView
+            android:id="@+id/select_address_sv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:queryHint="Search Address..."
+            android:iconifiedByDefault="false"
+            android:elevation="5dp"
+            android:background="@drawable/bg_search_view"
+            android:layout_toEndOf="@+id/select_address_back" />
+
+    </RelativeLayout>
+
+    <fragment
+        android:id="@+id/select_address_map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/select_address_rl"
+        android:name="com.google.android.gms.maps.SupportMapFragment" />
+
+
+
+    // Fixed in Bottom
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/frameColor">
+
+        // Select Address Button
+        <Button
+            android:id="@+id/select_address_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/bg_button_admin_send_order"
+            android:foreground="?attr/selectableItemBackground"
+            android:padding="17dp"
+            android:text="Select Address"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+</RelativeLayout>
