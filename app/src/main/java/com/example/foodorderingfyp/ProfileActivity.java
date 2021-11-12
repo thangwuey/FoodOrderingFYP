@@ -34,7 +34,7 @@ public class ProfileActivity extends AppCompatActivity {
     boolean shouldExit = false; // press back button to EXIT
     Snackbar snackbar;
     RelativeLayout relativeLayout; // Snack Bar purpose
-    public static final String[] languages = {"English","Chinese"};
+    public static final String[] languages = {"English","Malay","Chinese"};
     private Button language1;
 
     @Override
@@ -76,15 +76,6 @@ public class ProfileActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-        trackDeliveryBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ProfileActivity.this, TrackDelivery.class);
-                startActivity(intent);
-            }
-        });
-
 
     }
 

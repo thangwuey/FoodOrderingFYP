@@ -29,7 +29,7 @@ public class LanguageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 lang.updateResource("en");
                 Toast.makeText(LanguageActivity.this,"Successfully Change Apps Language.",Toast.LENGTH_LONG).show();
-                finish();
+
             }
         });
 
@@ -38,7 +38,7 @@ public class LanguageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 lang.updateResource("zh");
                 Toast.makeText(LanguageActivity.this,"成功换语言",Toast.LENGTH_LONG).show();
-                finish();
+
             }
         });
 
@@ -47,7 +47,6 @@ public class LanguageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LanguageActivity.this,ProfileActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
 

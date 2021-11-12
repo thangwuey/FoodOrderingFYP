@@ -45,6 +45,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".LanguageActivity"
+            android:exported="true" />
+        <activity
             android:name=".SelectAddressActivity"
             android:screenOrientation="portrait" />
         <activity
