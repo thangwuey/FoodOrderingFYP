@@ -33,7 +33,7 @@ import com.example.foodorderingfyp.ModelClass.Users;
 
 import Prevalent.Prevalent;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompat {
 
     private Button registerButton;
     private EditText InputPhoneNumber,InputPassword;

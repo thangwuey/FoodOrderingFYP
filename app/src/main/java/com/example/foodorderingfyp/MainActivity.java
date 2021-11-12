@@ -32,7 +32,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompat {
 
     private Button loginButton;//for navigation used
     private Button CreateAccountButton; // for user to create account

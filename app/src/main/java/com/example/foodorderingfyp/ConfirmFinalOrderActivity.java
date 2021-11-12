@@ -43,7 +43,7 @@ import java.util.List;
 
 import Prevalent.Prevalent;
 
-public class ConfirmFinalOrderActivity extends AppCompatActivity {
+public class ConfirmFinalOrderActivity extends AppCompat {
 //Video 26
 
     private EditText nameEditText, phoneEditText,addressEdittext,cityEditText;

@@ -16,6 +16,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -71,21 +72,21 @@ public class SelectAddressActivity extends FragmentActivity implements OnMapRead
                 if (location != null || location.equals("")) {
                     try {
                         addressList = geocoder.getFromLocationName(location,1);
+
+                        Address address = addressList.get(0);
+                        LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                        marker = map.addMarker(new MarkerOptions()
+                                .position(latLng)
+                                .title(location));
+                        map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,17));
+                        Log.d("Location123lat", String.valueOf(address.getLatitude()));
+                        Log.d("Location123long", String.valueOf(address.getLongitude()));
+                        Log.d("Location123country", address.getCountryName());
+                        Log.d("Location123locality", address.getLocality());
+                        Log.d("Location123addressLine", address.getAddressLine(0));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    Address address = addressList.get(0);
-                    LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-                    marker = map.addMarker(new MarkerOptions()
-                            .position(latLng)
-                            .title(location));
-                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,17));
-                    Log.d("Location123lat", String.valueOf(address.getLatitude()));
-                    Log.d("Location123long", String.valueOf(address.getLongitude()));
-                    Log.d("Location123country", address.getCountryName());
-                    Log.d("Location123locality", address.getLocality());
-                    Log.d("Location123addressLine", address.getAddressLine(0));
-
                 }
 
                 return false;

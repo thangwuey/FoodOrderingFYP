@@ -34,7 +34,7 @@ import org.jetbrains.annotations.NotNull;
 import Prevalent.Prevalent;
 import ViewHolder.CartViewHolder;
 
-public class CartActivity extends AppCompatActivity {
+public class CartActivity extends AppCompat {
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
@@ -74,7 +74,7 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                txtTotalAmount.setText( "Total Price = " + String.valueOf(overallTotalPrice) + " .00 MYR");
+                txtTotalAmount.setText(String.valueOf(overallTotalPrice) + " .00 MYR");
 
                 /*Intent intent = new Intent(CartActivity.this,ConfirmFinalOrderActivity.class);
                 intent.putExtra("Total Price", String.valueOf(overallTotalPrice));

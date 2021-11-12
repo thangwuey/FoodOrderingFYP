@@ -40,4 +40,10 @@
     <string name="selectlanguageheader">Select Application Language</string>
     <string name="maptracking">Map Tracking</string>
     <string name="pickupaddress">Pick Up Address</string>
+    <string name="totalprice">Total Price =</string>
+    <string name="trackorderbutton">Track Order</string>
+    <string name="registerloginbtn">Log In</string>
+    <string name="registersignupbutton">Sign Up</string>
+    <string name="registerregisterbutton">Register Now</string>
+    <string name="selectaddress">Select Address</string>
 </resources>

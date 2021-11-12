@@ -30,7 +30,7 @@ import java.util.HashMap;
 
 import Prevalent.Prevalent;
 
-public class FoodDetailsActivity extends AppCompatActivity {
+public class FoodDetailsActivity extends AppCompat {
 
     private Button addToCartButton;
     private ImageView foodImageDetails;
@@ -141,8 +141,18 @@ public class FoodDetailsActivity extends AppCompatActivity {
                 if(snapshot.exists())
                 {
                     Foods foods = snapshot.getValue(Foods.class);
+
+                    // First letter of each word to UPPERCASE in FOOD NAME
+                    String str = foods.getFoodName();
+                    String[] strArray = str.split(" ");
+                    StringBuilder builder = new StringBuilder();
+                    for (String s : strArray) {
+                        String cap = s.substring(0, 1).toUpperCase() + s.substring(1);
+                        builder.append(cap).append(" ");
+                    }
+
                     String strPrice = foods.getFoodPrice() + ".00 MYR"; // price FORMAT
-                    foodName.setText(foods.getFoodName());
+                    foodName.setText(builder.toString());
                     foodDescription.setText(foods.getFoodDescription());
                     foodPrice.setText(strPrice);
                     cartfdPrice = foods.getFoodPrice();

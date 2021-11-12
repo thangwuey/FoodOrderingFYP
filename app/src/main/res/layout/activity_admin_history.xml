@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin.AdminHistory"
+    android:background="@color/admin_dominant">
+
+    // BACK icon
+    <ImageView
+        android:id="@+id/ah_back"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        app:tint="@color/frameColor"
+        android:src="@drawable/ic_back" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Order History"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:textAlignment="center"
+        android:textColor="@color/frameColor"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+
+    <HorizontalScrollView
+        android:id="@+id/ah_hsv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ah_back">
+
+        <RadioGroup
+            android:id="@+id/ah_radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:orientation="horizontal"
+            android:layout_below="@+id/ah_back">
+
+            <RadioButton
+                android:id="@+id/ah_radio_overview"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:checked="true"
+                android:button="@android:color/transparent"
+                android:background="@drawable/bg_radio_jt_selector"
+                android:textColor="@drawable/bg_radio_jt_text_color"
+                android:elevation="4dp"
+                android:text="Overview"
+                android:textAlignment="center"
+                android:textSize="20sp" />
+
+
+            <RadioButton
+                android:id="@+id/ah_radio_date"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:button="@android:color/transparent"
+                android:background="@drawable/bg_radio_jt_selector"
+                android:textColor="@drawable/bg_radio_jt_text_color"
+                android:elevation="4dp"
+                android:text="By Date"
+                android:textAlignment="center"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/ah_radio_month"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:button="@android:color/transparent"
+                android:background="@drawable/bg_radio_jt_selector"
+                android:textColor="@drawable/bg_radio_jt_text_color"
+                android:elevation="4dp"
+                android:text="By Month"
+                android:textAlignment="center"
+                android:textSize="20sp" />
+
+        </RadioGroup>
+
+    </HorizontalScrollView>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingTop="25dp"
+        android:background="@drawable/bg_admin_food_menu"
+        android:layout_below="@id/ah_hsv">
+
+        <TextView
+            android:id="@+id/ah_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Search"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:visibility="gone"
+            android:textStyle="bold" />
+
+        // recycler view overview
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_ah_overview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:scrollbars="vertical"/>
+
+        // recycler view date
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_ah_date"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:visibility="gone"
+            android:scrollbars="vertical"/>
+
+        // recycler view month
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_ah_month"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:visibility="gone"
+            android:scrollbars="vertical"/>
+    </RelativeLayout>
+
+</RelativeLayout>

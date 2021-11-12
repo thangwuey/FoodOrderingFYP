@@ -194,9 +194,6 @@ public class AdminSendOrderDetails extends AppCompatActivity {
         if (requestCode == LOCATION_PERMISSION_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // permission was GRANTED
-                // get LAST LOCATION
-                //getLastLocation();
-
                 // Location KEEP UPDATES
                 checkSettingAndStartLocationUpdates();
 
@@ -256,29 +253,6 @@ public class AdminSendOrderDetails extends AppCompatActivity {
         }
     }
 
-    // TESTING to get location
-    private void getLastLocation() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
-                PackageManager.PERMISSION_GRANTED) {
-            Task<Location> locationTask = fusedLocationProviderClient.getLastLocation();
-
-            locationTask.addOnSuccessListener(location -> {
-                // we have a location
-                if (location != null) {
-                    Log.d("Location123", location.toString());
-                    Log.d("Location123", String.valueOf(location.getLatitude()));
-                    Log.d("Location123", String.valueOf(location.getLongitude()));
-
-                    // change order state
-                    changeState();
-                } else // no location
-                    Log.d("Location123", "Location was null...");
-            }).addOnFailureListener(e -> Log.d("Location123", e.getLocalizedMessage()));
-
-        }
-
-    }
-
     // Change Order State
     private void changeState() {
         // loading bar declaration
@@ -318,8 +292,15 @@ public class AdminSendOrderDetails extends AppCompatActivity {
 
                                             if (postSnapshot.child("state").getValue().equals("P")) {
 
+                                                new AlertDialog.Builder(AdminSendOrderDetails.this)
+                                                        .setTitle("Sending Order")
+                                                        .setMessage("The order is sending. " +
+                                                                "This app will keep track your current location.")
+                                                        .setPositiveButton("ok", (dialog, which) -> dialog.dismiss())
+                                                        .create().show();
+
                                                 OrdersRef.child(snapshot.getKey()).child(orderID).child("state").setValue("S");
-                                                Toast.makeText(AdminSendOrderDetails.this, "Order Sent", Toast.LENGTH_SHORT).show();
+                                                //Toast.makeText(AdminSendOrderDetails.this, "Order Sent", Toast.LENGTH_SHORT).show();
                                                 btnSendOrder.setText(strDone);
 
                                                 tvOrderState.setText(strSend);
@@ -428,6 +409,9 @@ public class AdminSendOrderDetails extends AppCompatActivity {
                                                 tvOrderState.setBackgroundResource(R.drawable.bg_order_state_sending);
                                                 tvOrderState.setTextColor(Color.parseColor("#007c33"));
                                                 btnSendOrder.setText(strDone);
+                                            } else { // Done State
+                                                tvOrderState.setVisibility(View.INVISIBLE);
+                                                btnSendOrder.setVisibility(View.GONE);
                                             }
 
                                         }

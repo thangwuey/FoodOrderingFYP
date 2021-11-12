@@ -27,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompat {
 
     private Button logoutBtn;
     private Button trackDeliveryBtn;
@@ -60,6 +60,14 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProfileActivity.this, LanguageActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        trackDeliveryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, TrackDelivery.class);
                 startActivity(intent);
             }
         });

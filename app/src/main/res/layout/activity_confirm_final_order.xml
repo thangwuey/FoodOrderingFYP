@@ -163,21 +163,22 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     // Select Address Button
+
     <Button
         android:id="@+id/acfo_select_address_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/til_delivery_phone"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
         android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="50dp"
         android:background="@color/AllButton"
         android:foreground="?attr/selectableItemBackground"
-        android:text="Select Address"
+        android:text="@string/selectaddress"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="20sp"
-        android:layout_below="@+id/til_delivery_phone" />
+        android:textSize="20sp" />
 
 
     // FIRST TIME design, NOT GOOD

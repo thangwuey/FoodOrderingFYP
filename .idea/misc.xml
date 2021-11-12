@@ -10,6 +10,7 @@
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/drawable/bg_button_normal.xml" value="0.1" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/drawable/bg_order_no.xml" value="0.1" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/drawable/bg_order_state_prepare.xml" value="0.1" />
+        <entry key="..\:/FoodOrderingFYP/app/src/main/res/drawable/bg_radio_jt_normal.xml" value="0.1" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/drawable/ic_baseline_image_24.xml" value="0.12314814814814815" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/drawable/ic_history.xml" value="0.1" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1" />
@@ -20,16 +21,18 @@
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_admin_add_food.xml" value="0.1" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_admin_delete_food_item.xml" value="0.15489130434782608" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_admin_delete_food_menu.xml" value="0.12771739130434784" />
+        <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_admin_history.xml" value="0.1" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_admin_home.xml" value="0.13632246376811594" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_admin_send_order.xml" value="0.1" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_admin_send_order_details.xml" value="0.14010416666666667" />
-        <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_cart.xml" value="0.1" />
+        <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_cart.xml" value="0.264" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_confirm_final_order.xml" value="0.1" />
+        <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_credit_card.xml" value="0.1" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_food_details.xml" value="0.264" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_introductory.xml" value="0.12310030395136778" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_language.xml" value="0.12310030395136778" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_login.xml" value="0.1" />
-        <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_main2.xml" value="0.11448834853090173" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_profile.xml" value="0.21052631578947367" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_select_address.xml" value="0.176" />

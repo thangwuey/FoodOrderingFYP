@@ -50,8 +50,8 @@
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/bg_button_normal"
                     android:foreground="?attr/selectableItemBackground"
+                    android:text="@string/registerloginbtn"
                     android:textColor="@color/AllButton"
-                    android:text="@string/loginbtn"
                     android:textSize="20sp" />
 
                 <Button
@@ -64,8 +64,8 @@
                     android:background="@drawable/bg_button_pressed"
                     android:clickable="false"
                     android:focusable="false"
+                    android:text="@string/registersignupbutton"
                     android:textColor="@color/white"
-                    android:text="@string/registerbtn"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -175,8 +175,8 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="60dp"
                 android:backgroundTint="@color/AllButton"
+                android:text="@string/registerregisterbutton"
                 android:textColor="@color/white"
-                android:text="@string/register"
                 android:textSize="20sp" />
 
         </LinearLayout>

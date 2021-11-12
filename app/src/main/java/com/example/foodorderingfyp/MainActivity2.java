@@ -2,40 +2,54 @@ package com.example.foodorderingfyp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
+import com.example.foodorderingfyp.Admin.AdminDeleteFoodItem;
+import com.example.foodorderingfyp.Admin.AdminDeleteFoodMenu;
 import com.example.foodorderingfyp.ModelClass.Foods;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import ViewHolder.AdminFoodViewHolder;
 import ViewHolder.ProductViewHolder;
 
 public class MainActivity2 extends AppCompatActivity {
 
     private DatabaseReference FoodRef;
-    private RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
+    private RecyclerView recyclerViewFood, recyclerViewDrink;
+    RecyclerView.LayoutManager layoutManagerFood, layoutManagerDrink;
     boolean shouldExit = false; // press back button to exit
     Snackbar snackbar;
     RelativeLayout relativeLayout; // Snack Bar purpose
+    RadioGroup radioGroup;
+    RadioButton radioFood;
+    RadioButton radioDrink;
 
 
     @Override
@@ -58,10 +72,35 @@ public class MainActivity2 extends AppCompatActivity {
         //define first page
         //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout, new HomeFragment()).commit();
 
-        recyclerView = findViewById(R.id.recycler_menu);
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+        // Food List
+        recyclerViewFood = findViewById(R.id.recycler_menu_food);
+        recyclerViewFood.setHasFixedSize(true);
+        layoutManagerFood = new LinearLayoutManager(this);
+        recyclerViewFood.setLayoutManager(layoutManagerFood);
+
+
+        // Drink List
+        recyclerViewDrink = findViewById(R.id.recycler_menu_drink);
+        recyclerViewDrink.setHasFixedSize(true);
+        layoutManagerDrink = new LinearLayoutManager(this);
+        recyclerViewDrink.setLayoutManager(layoutManagerDrink);
+
+        radioGroup = findViewById(R.id.ufm_radio_group);
+        radioFood = findViewById(R.id.ufm_radio_food);
+        radioDrink = findViewById(R.id.ufm_radio_drink);
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (radioGroup.getCheckedRadioButtonId()==radioFood.getId()) {
+                    recyclerViewFood.setVisibility(View.VISIBLE);
+                    recyclerViewDrink.setVisibility(View.GONE);
+                } else {
+                    recyclerViewFood.setVisibility(View.GONE);
+                    recyclerViewDrink.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -104,7 +143,7 @@ public class MainActivity2 extends AppCompatActivity {
     protected void onStart()
     {
         super.onStart();
-        FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Foods>().setQuery(FoodRef,Foods.class).build();
+        /*FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Foods>().setQuery(FoodRef,Foods.class).build();
         FirebaseRecyclerAdapter<Foods, ProductViewHolder> adapter = new FirebaseRecyclerAdapter<Foods, ProductViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull @NotNull ProductViewHolder productViewHolder, int i, @NonNull @NotNull Foods foods) {
@@ -138,8 +177,134 @@ public class MainActivity2 extends AppCompatActivity {
                 return holder;
             }
         };
-        recyclerView.setAdapter(adapter);
-        adapter.startListening();
+        recyclerViewFood.setAdapter(adapter);
+        adapter.startListening();*/
+
+        // use LIST instead of Firebase
+        List<Foods> foodsFilter = new ArrayList<>();
+        List<Foods> drinksFilter = new ArrayList<>();
+
+        // User
+        FoodRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot)
+            {
+                if(snapshot.exists()) {
+                    for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                        Foods foodsData = postSnapshot.getValue(Foods.class);
+
+                        // Add to list, if State is P
+                        if (foodsData.getFoodCategory().equals("Food"))
+                            foodsFilter.add(foodsData);
+                        else
+                            drinksFilter.add(foodsData);
+                    }
+
+                    // Food List
+                    // Adapter instead of Firebase Adapter (different declaration)
+                    RecyclerView.Adapter<ProductViewHolder> foodsAdapter = new RecyclerView.Adapter<ProductViewHolder>() {
+                        @NonNull
+                        @Override
+                        public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                            View view = LayoutInflater.from(parent.getContext())
+                                    .inflate(R.layout.food_menu_layout, parent, false);
+                            return new ProductViewHolder(view);
+                        }
+
+                        @Override
+                        public void onBindViewHolder(@NonNull ProductViewHolder productViewHolder, int position) {
+                            // First letter of each word to UPPERCASE in FOOD NAME
+                            String str = foodsFilter.get(position).getFoodName();
+                            String[] strArray = str.split(" ");
+                            StringBuilder builder = new StringBuilder();
+                            for (String s : strArray) {
+                                String cap = s.substring(0, 1).toUpperCase() + s.substring(1);
+                                builder.append(cap).append(" ");
+                            }
+
+                            String strPrice = foodsFilter.get(position).getFoodPrice() + ".00 MYR"; // price FORMAT
+
+                            productViewHolder.txtProductName.setText(builder.toString());
+                            productViewHolder.txtProductDescription.setText(foodsFilter.get(position).getFoodDescription());
+                            productViewHolder.txtProductPrice.setText(strPrice);
+                            Picasso.get().load(foodsFilter.get(position).getFoodImage()).into(productViewHolder.imageView);
+
+                            productViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v)
+                                {
+                                    Intent intent = new Intent(MainActivity2.this,FoodDetailsActivity.class);
+                                    intent.putExtra("foodName",foodsFilter.get(position).getFoodName());
+                                    startActivity(intent);
+                                }
+                            });
+                        }
+
+                        @Override
+                        public int getItemCount() {
+                            return foodsFilter.size();
+                        }
+                    };
+
+                    // Drink List
+                    // Adapter instead of Firebase Adapter (different declaration)
+                    RecyclerView.Adapter<ProductViewHolder> drinksAdapter = new RecyclerView.Adapter<ProductViewHolder>() {
+                        @NonNull
+                        @Override
+                        public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                            View view = LayoutInflater.from(parent.getContext())
+                                    .inflate(R.layout.food_menu_layout, parent, false);
+                            return new ProductViewHolder(view);
+                        }
+
+                        @Override
+                        public void onBindViewHolder(@NonNull ProductViewHolder productViewHolder, int position) {
+                            // First letter of each word to UPPERCASE in FOOD NAME
+                            String str = drinksFilter.get(position).getFoodName();
+                            String[] strArray = str.split(" ");
+                            StringBuilder builder = new StringBuilder();
+                            for (String s : strArray) {
+                                String cap = s.substring(0, 1).toUpperCase() + s.substring(1);
+                                builder.append(cap).append(" ");
+                            }
+
+                            String strPrice = drinksFilter.get(position).getFoodPrice() + ".00 MYR"; // price FORMAT
+
+                            productViewHolder.txtProductName.setText(builder.toString());
+                            productViewHolder.txtProductDescription.setText(drinksFilter.get(position).getFoodDescription());
+                            productViewHolder.txtProductPrice.setText(strPrice);
+                            Picasso.get().load(drinksFilter.get(position).getFoodImage()).into(productViewHolder.imageView);
+
+                            productViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v)
+                                {
+                                    Intent intent = new Intent(MainActivity2.this,FoodDetailsActivity.class);
+                                    intent.putExtra("foodName",drinksFilter.get(position).getFoodName());
+                                    startActivity(intent);
+                                }
+                            });
+                        }
+
+                        @Override
+                        public int getItemCount() {
+                            return drinksFilter.size();
+                        }
+                    };
+
+                    recyclerViewFood.setAdapter(foodsAdapter);
+                    recyclerViewDrink.setAdapter(drinksAdapter);
+
+                }
+            }
+
+
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override

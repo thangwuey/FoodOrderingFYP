@@ -19,7 +19,7 @@ public class AdminHome extends AppCompatActivity {
     Snackbar snackbar;
     RelativeLayout relativeLayout;
 
-    CardView cvFoodMenu, cvOrder, cvLogout;
+    CardView cvFoodMenu, cvOrder,cvHistory , cvLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +28,7 @@ public class AdminHome extends AppCompatActivity {
 
         cvFoodMenu = findViewById(R.id.cv_food_menu);
         cvOrder = findViewById(R.id.cv_order);
+        cvHistory = findViewById(R.id.cv_history);
         cvLogout = findViewById(R.id.cv_logout);
         relativeLayout = findViewById(R.id.admin_home_layout);
 
@@ -38,6 +39,11 @@ public class AdminHome extends AppCompatActivity {
 
         cvOrder.setOnClickListener(v -> {
             Intent intent = new Intent(AdminHome.this, AdminSendOrder.class);
+            startActivity(intent);
+        });
+
+        cvHistory.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminHome.this, AdminHistory.class);
             startActivity(intent);
         });
 

@@ -41,13 +41,67 @@
             android:paddingTop="25dp"
             android:background="@drawable/bg_admin_food_menu">
 
-            // recycler view
+            <RadioGroup
+                android:id="@+id/adfm_radio_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/adfm_radio_food"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:checked="true"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/bg_radio_jt_selector"
+                    android:textColor="@drawable/bg_radio_jt_text_color"
+                    android:elevation="4dp"
+                    android:text="Food"
+                    android:textSize="20sp" />
+
+
+                <RadioButton
+                    android:id="@+id/adfm_radio_drink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/bg_radio_jt_selector"
+                    android:textColor="@drawable/bg_radio_jt_text_color"
+                    android:elevation="4dp"
+                    android:text="Drink"
+                    android:textSize="20sp" />
+
+
+            </RadioGroup>
+
+            // recycler view food
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_recycleView"
+                android:id="@+id/rv_recycleView_food"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="80dp"
                 android:scrollbars="vertical"/>
             <!--tools:listitem="@layout/food_items_layout"-->
+
+            // recycler view drink
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_recycleView_drink"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="80dp"
+                android:visibility="gone"
+                android:scrollbars="vertical"/>
         </RelativeLayout>
 
 

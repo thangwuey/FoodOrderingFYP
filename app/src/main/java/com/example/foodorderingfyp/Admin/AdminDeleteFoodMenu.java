@@ -7,27 +7,39 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.example.foodorderingfyp.ModelClass.Foods;
 import com.example.foodorderingfyp.R;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import ViewHolder.AdminFoodViewHolder;
 
 public class AdminDeleteFoodMenu extends AppCompatActivity {
 
     private DatabaseReference FoodsRef;
-    private RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
+    private RecyclerView recyclerViewFood, recyclerViewDrink;
+    RecyclerView.LayoutManager layoutManagerFood, layoutManagerDrink;
+    RadioGroup radioGroup;
+    RadioButton radioFood;
+    RadioButton radioDrink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,15 +50,40 @@ public class AdminDeleteFoodMenu extends AppCompatActivity {
         // to get Database Foods table Reference
         FoodsRef = FirebaseDatabase.getInstance().getReference().child("Foods");
 
-        recyclerView = findViewById(R.id.rv_recycleView);
-        recyclerView.setHasFixedSize(true);
+        // Food List
+        recyclerViewFood = findViewById(R.id.rv_recycleView_food);
+        recyclerViewFood.setHasFixedSize(true);
 
         // put all item in same layout in recyclerView
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+        layoutManagerFood = new LinearLayoutManager(this);
+        recyclerViewFood.setLayoutManager(layoutManagerFood);
 
-        FloatingActionButton fabAddFood = (FloatingActionButton) findViewById(R.id.fab_add_food);
-        ImageView ivBack = (ImageView) findViewById(R.id.fm_back);
+        // Drink List
+        recyclerViewDrink = findViewById(R.id.rv_recycleView_drink);
+        recyclerViewDrink.setHasFixedSize(true);
+
+        // put all item in same layout in recyclerView
+        layoutManagerDrink = new LinearLayoutManager(this);
+        recyclerViewDrink.setLayoutManager(layoutManagerDrink);
+
+        FloatingActionButton fabAddFood = findViewById(R.id.fab_add_food);
+        ImageView ivBack = findViewById(R.id.fm_back);
+        radioGroup = findViewById(R.id.adfm_radio_group);
+        radioFood = findViewById(R.id.adfm_radio_food);
+        radioDrink = findViewById(R.id.adfm_radio_drink);
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (radioGroup.getCheckedRadioButtonId()==radioFood.getId()) {
+                    recyclerViewFood.setVisibility(View.VISIBLE);
+                    recyclerViewDrink.setVisibility(View.GONE);
+                } else {
+                    recyclerViewFood.setVisibility(View.GONE);
+                    recyclerViewDrink.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         // Add Food Button
         fabAddFood.setOnClickListener(v -> {
@@ -64,7 +101,7 @@ public class AdminDeleteFoodMenu extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        // to configure adapter
+        /*// to configure adapter
         FirebaseRecyclerOptions<Foods> options =
                 new FirebaseRecyclerOptions.Builder<Foods>()
                         .setQuery(FoodsRef, Foods.class)
@@ -107,6 +144,124 @@ public class AdminDeleteFoodMenu extends AppCompatActivity {
                     }
                 };
         recyclerView.setAdapter(adapter);
-        adapter.startListening();
+        adapter.startListening();*/
+
+        // use LIST instead of Firebase
+        List<Foods> foodsFilter = new ArrayList<>();
+        List<Foods> drinksFilter = new ArrayList<>();
+
+        // User
+        FoodsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot)
+            {
+                if(snapshot.exists()) {
+                    for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                        Foods foodsData = postSnapshot.getValue(Foods.class);
+
+                        // Add to list, if State is P
+                        if (foodsData.getFoodCategory().equals("Food"))
+                            foodsFilter.add(foodsData);
+                        else
+                            drinksFilter.add(foodsData);
+                    }
+
+                    // Food List
+                    // Adapter instead of Firebase Adapter (different declaration)
+                    RecyclerView.Adapter<AdminFoodViewHolder> foodsAdapter = new RecyclerView.Adapter<AdminFoodViewHolder>() {
+                        @NonNull
+                        @Override
+                        public AdminFoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                            View view = LayoutInflater.from(parent.getContext())
+                                    .inflate(R.layout.admin_food_item_layout, parent, false);
+                            return new AdminFoodViewHolder(view);
+                        }
+
+                        @Override
+                        public void onBindViewHolder(@NonNull AdminFoodViewHolder holder, int position) {
+
+                            // holder from FoodViewHolder.java
+                            // First letter of each word to UPPERCASE in FOOD NAME
+                            String str = foodsFilter.get(position).getFoodName();
+                            String[] strArray = str.split(" ");
+                            StringBuilder builder = new StringBuilder();
+                            for (String s : strArray) {
+                                String cap = s.substring(0, 1).toUpperCase() + s.substring(1);
+                                builder.append(cap).append(" ");
+                            }
+                            holder.txtAdminFoodName.setText(builder.toString());
+
+                            // easy way to get Image from database
+                            Picasso.get().load(foodsFilter.get(position).getFoodImage()).into(holder.adminImageView);
+
+                            // get Food ID
+                            holder.itemView.setOnClickListener((view) -> {
+                                Intent intent = new Intent(AdminDeleteFoodMenu.this,AdminDeleteFoodItem.class);
+                                intent.putExtra("foodName", foodsFilter.get(position).getFoodName());
+                                startActivity(intent);
+                            });
+                        }
+
+                        @Override
+                        public int getItemCount() {
+                            return foodsFilter.size();
+                        }
+                    };
+
+                    // Drink List
+                    // Adapter instead of Firebase Adapter (different declaration)
+                    RecyclerView.Adapter<AdminFoodViewHolder> drinksAdapter = new RecyclerView.Adapter<AdminFoodViewHolder>() {
+                        @NonNull
+                        @Override
+                        public AdminFoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                            View view = LayoutInflater.from(parent.getContext())
+                                    .inflate(R.layout.admin_food_item_layout, parent, false);
+                            return new AdminFoodViewHolder(view);
+                        }
+
+                        @Override
+                        public void onBindViewHolder(@NonNull AdminFoodViewHolder holder, int position) {
+
+                            // holder from FoodViewHolder.java
+                            // First letter of each word to UPPERCASE in FOOD NAME
+                            String str = drinksFilter.get(position).getFoodName();
+                            String[] strArray = str.split(" ");
+                            StringBuilder builder = new StringBuilder();
+                            for (String s : strArray) {
+                                String cap = s.substring(0, 1).toUpperCase() + s.substring(1);
+                                builder.append(cap).append(" ");
+                            }
+                            holder.txtAdminFoodName.setText(builder.toString());
+
+                            // easy way to get Image from database
+                            Picasso.get().load(drinksFilter.get(position).getFoodImage()).into(holder.adminImageView);
+
+                            // get Food ID
+                            holder.itemView.setOnClickListener((view) -> {
+                                Intent intent = new Intent(AdminDeleteFoodMenu.this,AdminDeleteFoodItem.class);
+                                intent.putExtra("foodName", drinksFilter.get(position).getFoodName());
+                                startActivity(intent);
+                            });
+                        }
+
+                        @Override
+                        public int getItemCount() {
+                            return drinksFilter.size();
+                        }
+                    };
+
+                    recyclerViewFood.setAdapter(foodsAdapter);
+                    recyclerViewDrink.setAdapter(drinksAdapter);
+
+                }
+            }
+
+
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
     }
 }

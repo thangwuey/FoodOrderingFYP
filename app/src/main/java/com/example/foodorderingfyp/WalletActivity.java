@@ -29,7 +29,7 @@ import java.util.HashMap;
 
 import Prevalent.Prevalent;
 
-public class WalletActivity extends AppCompatActivity {
+public class WalletActivity extends AppCompat {
 
     private Button reload10,reload20,reload50,reload100;
     private TextView showBalance;
@@ -87,6 +87,13 @@ public class WalletActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 Integer walletAmount = 10;
+
+                Intent intent = new Intent(WalletActivity.this, CreditCardActivity.class);
+                intent.putExtra("Wallet", walletAmount);
+                startActivity(intent);
+
+
+                /*Integer walletAmount = 10;
                 //Integer price = 0;
                 //final DatabaseReference WalletRef = FirebaseDatabase.getInstance().getReference().child("E-Wallet").child(Prevalent.currentOnlineUser.getPhone());
                 final DatabaseReference WalletRef;
@@ -149,7 +156,7 @@ public class WalletActivity extends AppCompatActivity {
                     public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
                     }
-                });
+                });*/
             }
         });
 
@@ -158,6 +165,12 @@ public class WalletActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 Integer walletAmount = 20;
+
+                Intent intent = new Intent(WalletActivity.this, CreditCardActivity.class);
+                intent.putExtra("Wallet", walletAmount);
+                startActivity(intent);
+
+                /*Integer walletAmount = 20;
                 //Integer price = 0;
                 //final DatabaseReference WalletRef = FirebaseDatabase.getInstance().getReference().child("E-Wallet").child(Prevalent.currentOnlineUser.getPhone());
                 final DatabaseReference WalletRef;
@@ -220,7 +233,7 @@ public class WalletActivity extends AppCompatActivity {
                     public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
                     }
-                });
+                });*/
             }
         });
 
@@ -228,7 +241,14 @@ public class WalletActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
+
                 Integer walletAmount = 50;
+
+                Intent intent = new Intent(WalletActivity.this, CreditCardActivity.class);
+                intent.putExtra("Wallet", walletAmount);
+                startActivity(intent);
+
+                /*Integer walletAmount = 50;
                 //Integer price = 0;
                 //final DatabaseReference WalletRef = FirebaseDatabase.getInstance().getReference().child("E-Wallet").child(Prevalent.currentOnlineUser.getPhone());
                 final DatabaseReference WalletRef;
@@ -291,7 +311,7 @@ public class WalletActivity extends AppCompatActivity {
                     public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
                     }
-                });
+                });*/
             }
         });
 
@@ -300,6 +320,12 @@ public class WalletActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 Integer walletAmount = 100;
+
+                Intent intent = new Intent(WalletActivity.this, CreditCardActivity.class);
+                intent.putExtra("Wallet", walletAmount);
+                startActivity(intent);
+
+                /*Integer walletAmount = 100;
                 //Integer price = 0;
                 //final DatabaseReference WalletRef = FirebaseDatabase.getInstance().getReference().child("E-Wallet").child(Prevalent.currentOnlineUser.getPhone());
                 final DatabaseReference WalletRef;
@@ -362,7 +388,7 @@ public class WalletActivity extends AppCompatActivity {
                     public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
                     }
-                });
+                });*/
             }
         });
 

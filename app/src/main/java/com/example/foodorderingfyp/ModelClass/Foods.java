@@ -3,18 +3,19 @@ package com.example.foodorderingfyp.ModelClass;
 public class Foods {
 
     //follow firebase name that u want to retrieve all the information
-   private String foodName,foodDescription,foodPrice,foodImage;
+    private String foodName,foodDescription,foodPrice,foodImage,foodCategory;
 
     public Foods()
     {
         //OPEN CONSTRUCTOR
     }
 
-    public Foods(String foodName, String foodDescription, String foodPrice, String foodImage) {
+    public Foods(String foodName, String foodDescription, String foodPrice, String foodImage, String foodCategory) {
         this.foodName = foodName;
         this.foodDescription = foodDescription;
         this.foodPrice = foodPrice;
         this.foodImage = foodImage;
+        this.foodCategory = foodCategory;
     }
 
     public String getFoodName() {
@@ -47,5 +48,13 @@ public class Foods {
 
     public void setFoodImage(String foodImage) {
         this.foodImage = foodImage;
+    }
+
+    public String getFoodCategory() {
+        return foodCategory;
+    }
+
+    public void setFoodCategory(String foodCategory) {
+        this.foodCategory = foodCategory;
     }
 }

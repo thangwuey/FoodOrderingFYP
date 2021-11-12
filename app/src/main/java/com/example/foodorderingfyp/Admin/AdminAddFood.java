@@ -19,6 +19,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.foodorderingfyp.R;
@@ -46,6 +48,7 @@ public class AdminAddFood extends AppCompatActivity {
     private ProgressDialog loadingBar;
     private static final int GalleryPick = 1;
     private static final int STORAGE_PERMISSION_CODE = 1;
+    private String foodCat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,9 @@ public class AdminAddFood extends AppCompatActivity {
         inputFoodPrice = findViewById(R.id.food_price);
         Button btnAddFood = findViewById(R.id.add_new_food);
         ImageView ivAddFoodBack = findViewById(R.id.af_back);
+        RadioGroup radioGroup = findViewById(R.id.aaf_radio_group);
+        RadioButton radioFood = findViewById(R.id.aaf_radio_food);
+        RadioButton radioDrink = findViewById(R.id.aaf_radio_drink);
 
         // Firebase Storage image save location
         foodImageRef = FirebaseStorage.getInstance().getReference().child("Food Images");
@@ -78,7 +84,14 @@ public class AdminAddFood extends AppCompatActivity {
         btnChooseFoodImage.setOnClickListener(v -> requestStoragePermission());
 
         // Add Food Button
-        btnAddFood.setOnClickListener(v -> ValidateFoodData());
+        btnAddFood.setOnClickListener(v -> {
+            if (radioGroup.getCheckedRadioButtonId()==radioFood.getId())
+                foodCat = radioFood.getText().toString();
+            else
+                foodCat = radioDrink.getText().toString();
+
+            ValidateFoodData();
+        });
     }
 
     // Tell user why need permission
@@ -261,6 +274,7 @@ public class AdminAddFood extends AppCompatActivity {
         foodMap.put("foodDescription", fdesc);
         foodMap.put("foodPrice", fprice);
         foodMap.put("foodImage", downloadImageUrl);
+        foodMap.put("foodCategory", foodCat);
 
         foodRef.child(foodkey.toLowerCase()).updateChildren(foodMap)
                 .addOnCompleteListener(task -> {
