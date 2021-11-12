@@ -35,11 +35,12 @@ import ViewHolder.AdminFoodViewHolder;
 public class AdminDeleteFoodMenu extends AppCompatActivity {
 
     private DatabaseReference FoodsRef;
-    private RecyclerView recyclerViewFood, recyclerViewDrink;
-    RecyclerView.LayoutManager layoutManagerFood, layoutManagerDrink;
+    private RecyclerView recyclerViewFood, recyclerViewDrink,recyclerViewPopular;
+    RecyclerView.LayoutManager layoutManagerFood, layoutManagerDrink, layoutManagerPopular;
     RadioGroup radioGroup;
     RadioButton radioFood;
     RadioButton radioDrink;
+    RadioButton radioPopular;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,21 +67,38 @@ public class AdminDeleteFoodMenu extends AppCompatActivity {
         layoutManagerDrink = new LinearLayoutManager(this);
         recyclerViewDrink.setLayoutManager(layoutManagerDrink);
 
+        // Popular List
+        recyclerViewDrink = findViewById(R.id.rv_recycleView_drink);
+        recyclerViewDrink.setHasFixedSize(true);
+
+        // put all item in same layout in recyclerView
+        layoutManagerPopular = new LinearLayoutManager(this);
+        recyclerViewPopular.setLayoutManager(layoutManagerPopular);
+
         FloatingActionButton fabAddFood = findViewById(R.id.fab_add_food);
         ImageView ivBack = findViewById(R.id.fm_back);
         radioGroup = findViewById(R.id.adfm_radio_group);
         radioFood = findViewById(R.id.adfm_radio_food);
         radioDrink = findViewById(R.id.adfm_radio_drink);
+        radioPopular = findViewById(R.id.adfm_radio_recommend);
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (radioGroup.getCheckedRadioButtonId()==radioFood.getId()) {
+                    recyclerViewPopular.setVisibility(View.GONE);
                     recyclerViewFood.setVisibility(View.VISIBLE);
                     recyclerViewDrink.setVisibility(View.GONE);
-                } else {
+                } else if (radioGroup.getCheckedRadioButtonId()==radioPopular.getId())
+                {
+                    recyclerViewFood.setVisibility(View.GONE);
+                    recyclerViewDrink.setVisibility(View.GONE);
+                    recyclerViewPopular.setVisibility(View.VISIBLE);
+                }
+                else {
                     recyclerViewFood.setVisibility(View.GONE);
                     recyclerViewDrink.setVisibility(View.VISIBLE);
+                    recyclerViewPopular.setVisibility(View.GONE);
                 }
             }
         });
@@ -149,6 +167,7 @@ public class AdminDeleteFoodMenu extends AppCompatActivity {
         // use LIST instead of Firebase
         List<Foods> foodsFilter = new ArrayList<>();
         List<Foods> drinksFilter = new ArrayList<>();
+        List<Foods> popularFilter = new ArrayList<>();
 
         // User
         FoodsRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -164,7 +183,53 @@ public class AdminDeleteFoodMenu extends AppCompatActivity {
                             foodsFilter.add(foodsData);
                         else
                             drinksFilter.add(foodsData);
+
+                        if(foodsData.getFoodPopular().equals("Y"))
+                            popularFilter.add(foodsData);
                     }
+
+                    // Popular List
+                    // Adapter instead of Firebase Adapter (different declaration)
+                    RecyclerView.Adapter<AdminFoodViewHolder> popularAdapter = new RecyclerView.Adapter<AdminFoodViewHolder>() {
+                        @NonNull
+                        @Override
+                        public AdminFoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                            View view = LayoutInflater.from(parent.getContext())
+                                    .inflate(R.layout.admin_food_item_layout, parent, false);
+                            return new AdminFoodViewHolder(view);
+                        }
+
+                        @Override
+                        public void onBindViewHolder(@NonNull AdminFoodViewHolder holder, int position) {
+
+                            // holder from FoodViewHolder.java
+                            // First letter of each word to UPPERCASE in FOOD NAME
+                            String str = popularFilter.get(position).getFoodName();
+                            String[] strArray = str.split(" ");
+                            StringBuilder builder = new StringBuilder();
+                            for (String s : strArray) {
+                                String cap = s.substring(0, 1).toUpperCase() + s.substring(1);
+                                builder.append(cap).append(" ");
+                            }
+                            holder.txtAdminFoodName.setText(builder.toString());
+
+                            // easy way to get Image from database
+                            Picasso.get().load(popularFilter.get(position).getFoodImage()).into(holder.adminImageView);
+
+                            // get Food ID
+                            holder.itemView.setOnClickListener((view) -> {
+                                Intent intent = new Intent(AdminDeleteFoodMenu.this,AdminDeleteFoodItem.class);
+                                intent.putExtra("foodName", popularFilter.get(position).getFoodName());
+                                startActivity(intent);
+                            });
+                        }
+
+                        @Override
+                        public int getItemCount() {
+                            return popularFilter.size();
+                        }
+                    };
+
 
                     // Food List
                     // Adapter instead of Firebase Adapter (different declaration)
@@ -252,6 +317,7 @@ public class AdminDeleteFoodMenu extends AppCompatActivity {
 
                     recyclerViewFood.setAdapter(foodsAdapter);
                     recyclerViewDrink.setAdapter(drinksAdapter);
+                    recyclerViewPopular.setAdapter(popularAdapter);
 
                 }
             }

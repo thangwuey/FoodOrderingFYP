@@ -49,6 +49,8 @@ public class AdminAddFood extends AppCompatActivity {
     private static final int GalleryPick = 1;
     private static final int STORAGE_PERMISSION_CODE = 1;
     private String foodCat;
+    private String foodPopularYesNo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +69,9 @@ public class AdminAddFood extends AppCompatActivity {
         RadioGroup radioGroup = findViewById(R.id.aaf_radio_group);
         RadioButton radioFood = findViewById(R.id.aaf_radio_food);
         RadioButton radioDrink = findViewById(R.id.aaf_radio_drink);
+        RadioGroup radioGroup1 = findViewById(R.id.aaf_radio_group1);
+        RadioButton radioYes = findViewById(R.id.aaf_radio_yes);
+        RadioButton radioNo = findViewById(R.id.aaf_radio_no);
 
         // Firebase Storage image save location
         foodImageRef = FirebaseStorage.getInstance().getReference().child("Food Images");
@@ -89,6 +94,11 @@ public class AdminAddFood extends AppCompatActivity {
                 foodCat = radioFood.getText().toString();
             else
                 foodCat = radioDrink.getText().toString();
+
+            if (radioGroup1.getCheckedRadioButtonId()==radioYes.getId())
+                foodPopularYesNo = "Y";
+            else
+                foodPopularYesNo = "N";
 
             ValidateFoodData();
         });
@@ -275,6 +285,7 @@ public class AdminAddFood extends AppCompatActivity {
         foodMap.put("foodPrice", fprice);
         foodMap.put("foodImage", downloadImageUrl);
         foodMap.put("foodCategory", foodCat);
+        foodMap.put("foodPopular", foodPopularYesNo);
 
         foodRef.child(foodkey.toLowerCase()).updateChildren(foodMap)
                 .addOnCompleteListener(task -> {

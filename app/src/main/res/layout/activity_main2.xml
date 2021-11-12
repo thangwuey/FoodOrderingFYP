@@ -24,60 +24,90 @@
         app:menu="@menu/bottom_navigation"/>
 
     // Food Menu Title
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="Food Menu"
+        android:text="@string/foodmenuheader"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold" />
 
-    <RadioGroup
-        android:id="@+id/ufm_radio_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="50dp"
-        android:orientation="horizontal">
+    <HorizontalScrollView
+        android:id="@+id/ufm_hsv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <RadioButton
-            android:id="@+id/ufm_radio_food"
+        <RadioGroup
+            android:id="@+id/ufm_radio_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:checked="true"
-            android:button="@android:color/transparent"
-            android:background="@drawable/bg_radio_jt_selector"
-            android:textColor="@drawable/bg_radio_jt_text_color"
-            android:elevation="4dp"
-            android:text="Food"
-            android:textSize="20sp" />
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/ufm_radio_popular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/bg_radio_jt_selector"
+                android:button="@android:color/transparent"
+                android:checked="true"
+                android:elevation="4dp"
+                android:paddingStart="16dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="10dp"
+                android:text="Popular F/B"
+                android:textColor="@drawable/bg_radio_jt_text_color"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/ufm_radio_food"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/bg_radio_jt_selector"
+                android:button="@android:color/transparent"
+                android:elevation="4dp"
+                android:paddingStart="16dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="10dp"
+                android:text="Food"
+                android:textColor="@drawable/bg_radio_jt_text_color"
+                android:textSize="20sp" />
 
 
-        <RadioButton
-            android:id="@+id/ufm_radio_drink"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:button="@android:color/transparent"
-            android:background="@drawable/bg_radio_jt_selector"
-            android:textColor="@drawable/bg_radio_jt_text_color"
-            android:elevation="4dp"
-            android:text="Drink"
-            android:textSize="20sp" />
+            <RadioButton
+                android:id="@+id/ufm_radio_drink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/bg_radio_jt_selector"
+                android:button="@android:color/transparent"
+                android:elevation="4dp"
+                android:paddingStart="16dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="10dp"
+                android:text="Drink"
+                android:textColor="@drawable/bg_radio_jt_text_color"
+                android:textSize="20sp" />
 
+        </RadioGroup>
+    </HorizontalScrollView>
 
-    </RadioGroup>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_menu_popular"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="120dp"
+        android:paddingBottom="80dp"
+        android:visibility="gone"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_menu_food"

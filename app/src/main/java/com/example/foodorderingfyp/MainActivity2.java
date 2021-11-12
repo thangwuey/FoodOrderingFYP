@@ -42,14 +42,15 @@ import ViewHolder.ProductViewHolder;
 public class MainActivity2 extends AppCompatActivity {
 
     private DatabaseReference FoodRef;
-    private RecyclerView recyclerViewFood, recyclerViewDrink;
-    RecyclerView.LayoutManager layoutManagerFood, layoutManagerDrink;
+    private RecyclerView recyclerViewFood, recyclerViewDrink,recyclerViewPopular;
+    RecyclerView.LayoutManager layoutManagerFood, layoutManagerDrink,layoutManagerPopular;
     boolean shouldExit = false; // press back button to exit
     Snackbar snackbar;
     RelativeLayout relativeLayout; // Snack Bar purpose
     RadioGroup radioGroup;
     RadioButton radioFood;
     RadioButton radioDrink;
+    RadioButton radioPopular;
 
 
     @Override
@@ -72,6 +73,12 @@ public class MainActivity2 extends AppCompatActivity {
         //define first page
         //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout, new HomeFragment()).commit();
 
+        // Popular List
+        recyclerViewPopular = findViewById(R.id.recycler_menu_popular);
+        recyclerViewPopular.setHasFixedSize(true);
+        layoutManagerPopular = new LinearLayoutManager(this);
+        recyclerViewPopular.setLayoutManager(layoutManagerPopular);
+
         // Food List
         recyclerViewFood = findViewById(R.id.recycler_menu_food);
         recyclerViewFood.setHasFixedSize(true);
@@ -88,14 +95,23 @@ public class MainActivity2 extends AppCompatActivity {
         radioGroup = findViewById(R.id.ufm_radio_group);
         radioFood = findViewById(R.id.ufm_radio_food);
         radioDrink = findViewById(R.id.ufm_radio_drink);
+        radioPopular = findViewById(R.id.ufm_radio_popular);
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (radioGroup.getCheckedRadioButtonId()==radioFood.getId()) {
+                    recyclerViewPopular.setVisibility(View.GONE);
                     recyclerViewFood.setVisibility(View.VISIBLE);
                     recyclerViewDrink.setVisibility(View.GONE);
-                } else {
+
+                } else if(radioGroup.getCheckedRadioButtonId()==radioPopular.getId()){
+                    recyclerViewPopular.setVisibility(View.VISIBLE);
+                    recyclerViewFood.setVisibility(View.GONE);
+                    recyclerViewDrink.setVisibility(View.GONE);
+                }
+                else {
+                    recyclerViewPopular.setVisibility(View.GONE);
                     recyclerViewFood.setVisibility(View.GONE);
                     recyclerViewDrink.setVisibility(View.VISIBLE);
                 }
@@ -183,6 +199,7 @@ public class MainActivity2 extends AppCompatActivity {
         // use LIST instead of Firebase
         List<Foods> foodsFilter = new ArrayList<>();
         List<Foods> drinksFilter = new ArrayList<>();
+        List<Foods> popularFilter = new ArrayList<>();
 
         // User
         FoodRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -198,7 +215,57 @@ public class MainActivity2 extends AppCompatActivity {
                             foodsFilter.add(foodsData);
                         else
                             drinksFilter.add(foodsData);
+
+                        if(foodsData.getFoodPopular().equals("Y"))
+                            popularFilter.add(foodsData);
                     }
+
+                    // Popular List
+                    // Adapter instead of Firebase Adapter (different declaration)
+                    RecyclerView.Adapter<ProductViewHolder> popularAdapter = new RecyclerView.Adapter<ProductViewHolder>() {
+                        @NonNull
+                        @Override
+                        public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                            View view = LayoutInflater.from(parent.getContext())
+                                    .inflate(R.layout.food_menu_layout, parent, false);
+                            return new ProductViewHolder(view);
+                        }
+
+                        @Override
+                        public void onBindViewHolder(@NonNull ProductViewHolder productViewHolder,int position) {
+                            // First letter of each word to UPPERCASE in FOOD NAME
+                            String str = popularFilter.get(position).getFoodName();
+                            String[] strArray = str.split(" ");
+                            StringBuilder builder = new StringBuilder();
+                            for (String s : strArray) {
+                                String cap = s.substring(0, 1).toUpperCase() + s.substring(1);
+                                builder.append(cap).append(" ");
+                            }
+
+                            String strPrice = popularFilter.get(position).getFoodPrice() + ".00 MYR"; // price FORMAT
+
+                            productViewHolder.txtProductName.setText(builder.toString());
+                            productViewHolder.txtProductDescription.setText(popularFilter.get(position).getFoodDescription());
+                            productViewHolder.txtProductPrice.setText(strPrice);
+                            Picasso.get().load(popularFilter.get(position).getFoodImage()).into(productViewHolder.imageView);
+
+                            productViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v)
+                                {
+                                    Intent intent = new Intent(MainActivity2.this,FoodDetailsActivity.class);
+                                    intent.putExtra("foodName",popularFilter.get(position).getFoodName());
+                                    startActivity(intent);
+                                }
+                            });
+                        }
+
+                        @Override
+                        public int getItemCount() {
+                            return popularFilter.size();
+                        }
+                    };
+
 
                     // Food List
                     // Adapter instead of Firebase Adapter (different declaration)
@@ -294,6 +361,7 @@ public class MainActivity2 extends AppCompatActivity {
 
                     recyclerViewFood.setAdapter(foodsAdapter);
                     recyclerViewDrink.setAdapter(drinksAdapter);
+                    recyclerViewPopular.setAdapter(popularAdapter);
 
                 }
             }

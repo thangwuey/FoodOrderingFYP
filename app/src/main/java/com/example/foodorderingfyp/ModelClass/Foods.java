@@ -3,7 +3,7 @@ package com.example.foodorderingfyp.ModelClass;
 public class Foods {
 
     //follow firebase name that u want to retrieve all the information
-    private String foodName,foodDescription,foodPrice,foodImage,foodCategory;
+    private String foodName,foodDescription,foodPrice,foodImage,foodCategory,foodPopular;
 
     public Foods()
     {
@@ -16,6 +16,7 @@ public class Foods {
         this.foodPrice = foodPrice;
         this.foodImage = foodImage;
         this.foodCategory = foodCategory;
+        this.foodPopular = foodPopular;
     }
 
     public String getFoodName() {
@@ -56,5 +57,13 @@ public class Foods {
 
     public void setFoodCategory(String foodCategory) {
         this.foodCategory = foodCategory;
+    }
+
+    public String getFoodPopular() {
+        return foodPopular;
+    }
+
+    public void setFoodPopular(String foodPopular) {
+        this.foodPopular = foodPopular;
     }
 }
