@@ -93,7 +93,8 @@ public class FoodDetailsActivity extends AppCompat {
         //Video 22
         final HashMap<String,Object> cartMap = new HashMap<>();
         cartMap.put("foodName",foodID);
-        cartMap.put("foodName",foodName.getText().toString());
+        //cartMap.put("foodName",foodName.getText().toString());
+        cartMap.put("foodName",foodID);
         cartMap.put("foodPrice",foodPrice.getText().toString());
         cartMap.put("foodPrice",cartfdPrice);
         //cartMap.put("date",saveCurrentDate);
@@ -153,6 +154,7 @@ public class FoodDetailsActivity extends AppCompat {
 
                     String strPrice = foods.getFoodPrice() + ".00 MYR"; // price FORMAT
                     foodName.setText(builder.toString());
+                    //foodName.setText(foods.getFoodName());
                     foodDescription.setText(foods.getFoodDescription());
                     foodPrice.setText(strPrice);
                     cartfdPrice = foods.getFoodPrice();
