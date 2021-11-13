@@ -16,7 +16,7 @@ import Interface.foodItemClickListener;
 public class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
 {
 
-    public TextView txtProductName,txtProductDescription,txtProductPrice;
+    public TextView txtProductName,txtProductDescription,txtProductPrice,userMenuPopular;
     public ImageView imageView;
     public foodItemClickListener listener;
 
@@ -29,6 +29,7 @@ public class ProductViewHolder extends RecyclerView.ViewHolder implements View.O
         txtProductName = (TextView) itemView.findViewById(R.id.product_name);
         txtProductDescription = (TextView) itemView.findViewById(R.id.product_description);
         txtProductPrice = (TextView) itemView.findViewById(R.id.product_price);
+        userMenuPopular = (TextView) itemView.findViewById(R.id.user_food_popular);
     }
 
     public void setItemClickListener(foodItemClickListener listener)

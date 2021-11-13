@@ -21,7 +21,7 @@
             android:id="@+id/td_order_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:text="Order ID"
             android:textColor="@color/white"
             android:textSize="15sp"
@@ -50,7 +50,7 @@
                 android:id="@+id/td_order_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:text="Time"
                 android:textColor="@color/white"
                 android:textSize="15sp" />
@@ -60,14 +60,14 @@
                 android:id="@+id/td_order_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:text="0.00 MYR"
                 android:textSize="15sp"
                 android:textColor="@color/white"
                 android:layout_below="@id/td_order_time" />
 
             <Button
-                android:id="@+id/td_order_button"
+                android:id="@+id/td_track_order_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -76,7 +76,25 @@
                 android:layout_marginEnd="17dp"
                 android:layout_marginBottom="17dp"
                 android:foreground="?attr/selectableItemBackground"
+                android:background="#00AD6B"
                 android:text="@string/trackorderbutton"
+                android:textAllCaps="false"
+                android:visibility="gone"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/td_cannot_track_order_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="17dp"
+                android:layout_marginBottom="17dp"
+                android:background="#CCCCCC"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="@string/preparingbutton"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="20sp" />

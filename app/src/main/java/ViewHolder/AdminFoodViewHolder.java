@@ -12,7 +12,7 @@ import Interface.foodItemClickListener;
 
 public class AdminFoodViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    public TextView txtAdminFoodName, txtAdminFoodPrice;
+    public TextView txtAdminFoodName, txtAdminFoodPopular;
     public ImageView adminImageView;
     public foodItemClickListener listener;
 
@@ -21,9 +21,9 @@ public class AdminFoodViewHolder extends RecyclerView.ViewHolder implements View
         super(itemView);
 
 
-        adminImageView = (ImageView) itemView.findViewById(R.id.admin_food_image);
-        txtAdminFoodName = (TextView) itemView.findViewById(R.id.admin_food_name);
-        //txtAdminFoodPrice = (TextView) itemView.findViewById(R.id.admin_food_price);
+        adminImageView = itemView.findViewById(R.id.admin_food_image);
+        txtAdminFoodName = itemView.findViewById(R.id.admin_food_name);
+        txtAdminFoodPopular = itemView.findViewById(R.id.admin_food_popular);
     }
 
     public void setItemClickListener(foodItemClickListener listener)

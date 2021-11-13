@@ -68,8 +68,8 @@ public class AdminDeleteFoodMenu extends AppCompatActivity {
         recyclerViewDrink.setLayoutManager(layoutManagerDrink);
 
         // Popular List
-        recyclerViewDrink = findViewById(R.id.rv_recycleView_drink);
-        recyclerViewDrink.setHasFixedSize(true);
+        recyclerViewPopular = findViewById(R.id.rv_recycleView_popular);
+        recyclerViewPopular.setHasFixedSize(true);
 
         // put all item in same layout in recyclerView
         layoutManagerPopular = new LinearLayoutManager(this);
@@ -259,6 +259,9 @@ public class AdminDeleteFoodMenu extends AppCompatActivity {
                             // easy way to get Image from database
                             Picasso.get().load(foodsFilter.get(position).getFoodImage()).into(holder.adminImageView);
 
+                            if (foodsFilter.get(position).getFoodPopular().equals("N"))
+                                holder.txtAdminFoodPopular.setVisibility(View.GONE);
+
                             // get Food ID
                             holder.itemView.setOnClickListener((view) -> {
                                 Intent intent = new Intent(AdminDeleteFoodMenu.this,AdminDeleteFoodItem.class);
@@ -300,6 +303,9 @@ public class AdminDeleteFoodMenu extends AppCompatActivity {
 
                             // easy way to get Image from database
                             Picasso.get().load(drinksFilter.get(position).getFoodImage()).into(holder.adminImageView);
+
+                            if (drinksFilter.get(position).getFoodPopular().equals("N"))
+                                holder.txtAdminFoodPopular.setVisibility(View.GONE);
 
                             // get Food ID
                             holder.itemView.setOnClickListener((view) -> {

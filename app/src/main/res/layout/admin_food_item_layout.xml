@@ -31,14 +31,32 @@
             android:id="@+id/admin_food_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/admin_food_image"
-            android:layout_alignBottom="@id/admin_food_image"
+            android:layout_marginTop="20dp"
             android:layout_marginStart="10dp"
             android:layout_toEndOf="@id/admin_food_image"
             android:gravity="center_vertical"
             android:text="Food Name"
             android:textColor="@color/black"
             android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/admin_food_popular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:paddingStart="6dp"
+            android:paddingEnd="6dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:layout_toEndOf="@id/admin_food_image"
+            android:layout_below="@+id/admin_food_name"
+            android:background="@drawable/bg_food_popular"
+            android:gravity="center_vertical"
+            android:text="Popular"
+            android:textColor="@color/AllButton"
+            android:textSize="15sp"
+            app:drawableLeftCompat="@drawable/ic_popular" />
 
         <!--// put food name, price in the right of food image
         <LinearLayout

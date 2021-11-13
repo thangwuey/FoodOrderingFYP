@@ -1,16 +1,26 @@
 package com.example.foodorderingfyp.Admin;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -44,6 +54,9 @@ public class AdminHistory extends AppCompatActivity {
     RadioGroup radioGroup;
     RadioButton radioOverview, radioDate, radioMonth;
     TextView tvSearch;
+    private DatePickerDialog datePickerDialog;
+    DatePickerDialog.OnDateSetListener setListener;
+    Button btnDatePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,8 +91,10 @@ public class AdminHistory extends AppCompatActivity {
         radioGroup = findViewById(R.id.ah_radio_group);
         radioOverview = findViewById(R.id.ah_radio_overview);
         radioDate = findViewById(R.id.ah_radio_date);
-        radioDate = findViewById(R.id.ah_radio_month);
+        radioMonth = findViewById(R.id.ah_radio_month);
         tvSearch = findViewById(R.id.ah_search);
+        btnDatePicker = findViewById(R.id.ah_date_picker);
+        btnDatePicker.setText(getTodaysDate());
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -88,23 +103,93 @@ public class AdminHistory extends AppCompatActivity {
                     recyclerViewOverview.setVisibility(View.VISIBLE);
                     recyclerViewDate.setVisibility(View.GONE);
                     recyclerViewMonth.setVisibility(View.GONE);
-                    tvSearch.setVisibility(View.GONE);
+                    btnDatePicker.setVisibility(View.GONE);
                 } else if (radioGroup.getCheckedRadioButtonId()==radioDate.getId()){
                     recyclerViewOverview.setVisibility(View.GONE);
                     recyclerViewDate.setVisibility(View.VISIBLE);
                     recyclerViewMonth.setVisibility(View.GONE);
-                    tvSearch.setVisibility(View.VISIBLE);
+                    btnDatePicker.setVisibility(View.VISIBLE);
                 } else {
                     recyclerViewOverview.setVisibility(View.GONE);
                     recyclerViewDate.setVisibility(View.GONE);
                     recyclerViewMonth.setVisibility(View.VISIBLE);
-                    tvSearch.setVisibility(View.VISIBLE);
+                    btnDatePicker.setVisibility(View.VISIBLE);
                 }
             }
         });
 
+        btnDatePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener()
+                {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day)
+                    {
+                        month = month+1;
+                        String date = day + "/" + month + "/" + year;
+                        tvSearch.setText(date);
+                    }
+                };
+
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                int style = AlertDialog.THEME_HOLO_LIGHT;
+
+                datePickerDialog = new DatePickerDialog(AdminHistory.this, style,
+                        dateSetListener, year, month, day);
+                datePickerDialog.show();
+            }
+        });
+
+        /*setListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                month = month+1;
+                String date = day + "/" + month + "/" + year;
+                tvSearch.setText(date);
+            }
+        };*/
+
+        /*Calendar calendar = Calendar.getInstance();
+        final int year = calendar.get(Calendar.YEAR);
+        final int month = calendar.get(Calendar.MONTH);
+        final int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        tvSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(AdminHistory.this,
+                        R.style.Theme_AppCompat_Dialog_MinWidth, setListener, year, month, day);
+                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                datePickerDialog.show();
+            }
+        });
+
+        setListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                month = month+1;
+                String date = day + "/" + month + "/" + year;
+                tvSearch.setText(date);
+            }
+        };*/
+
         // Back button
         ivHistoryBack.setOnClickListener(v -> onBackPressed());
+    }
+
+    private String getTodaysDate()
+    {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        month = month + 1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        return day + "/" + month + "/" + year;
     }
 
     // combine Date and Time

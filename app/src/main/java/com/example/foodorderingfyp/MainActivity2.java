@@ -296,6 +296,9 @@ public class MainActivity2 extends AppCompatActivity {
                             productViewHolder.txtProductPrice.setText(strPrice);
                             Picasso.get().load(foodsFilter.get(position).getFoodImage()).into(productViewHolder.imageView);
 
+                            if (drinksFilter.get(position).getFoodPopular().equals("N"))
+                                productViewHolder.userMenuPopular.setVisibility(View.GONE);
+
                             productViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v)
@@ -341,6 +344,9 @@ public class MainActivity2 extends AppCompatActivity {
                             productViewHolder.txtProductDescription.setText(drinksFilter.get(position).getFoodDescription());
                             productViewHolder.txtProductPrice.setText(strPrice);
                             Picasso.get().load(drinksFilter.get(position).getFoodImage()).into(productViewHolder.imageView);
+
+                            if (drinksFilter.get(position).getFoodPopular().equals("N"))
+                                productViewHolder.userMenuPopular.setVisibility(View.GONE);
 
                             productViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                                 @Override

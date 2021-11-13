@@ -47,4 +47,5 @@
     <string name="registerregisterbutton">Register Now</string>
     <string name="selectaddress">Select Address</string>
     <string name="foodmenuheader">Food Menu</string>
+    <string name="preparingbutton">Preparing</string>
 </resources>

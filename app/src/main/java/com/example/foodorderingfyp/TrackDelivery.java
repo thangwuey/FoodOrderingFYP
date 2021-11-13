@@ -33,6 +33,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import Prevalent.Prevalent;
 import ViewHolder.TrackDeliveryViewHolder;
@@ -102,15 +103,6 @@ public class TrackDelivery extends AppCompatActivity {
         return result;
     }
 
-    /*// combine Date and Time
-    private Date getHourMinute(Date time)
-    {
-        int hour = time.get(Calendar.HOUR_OF_DAY);
-
-        Date result = calendarA.getTime();
-        return result;
-    }*/
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -134,8 +126,6 @@ public class TrackDelivery extends AppCompatActivity {
                         if (ordersData.getState().equals("P") || ordersData.getState().equals("S"))
                             currentOrdersFilter.add(ordersData);
 
-                        // Add all to list
-                        //currentOrdersFilter.add(ordersData);
                     }
 
                 }
@@ -145,10 +135,10 @@ public class TrackDelivery extends AppCompatActivity {
                 Collections.sort(currentOrdersFilter, (o1, o2) -> {
                     try {
                         // String to Date
-                        Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(o1.getDate());
-                        Date time1 = new SimpleDateFormat("HH:mm:ss").parse(o1.getTime());
-                        Date date2 = new SimpleDateFormat("dd/MM/yyyy").parse(o2.getDate());
-                        Date time2 = new SimpleDateFormat("HH:mm:ss").parse(o2.getTime());
+                        Date date1 = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse(o1.getDate());
+                        Date time1 = new SimpleDateFormat("HH:mm:ss", Locale.ENGLISH).parse(o1.getTime());
+                        Date date2 = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse(o2.getDate());
+                        Date time2 = new SimpleDateFormat("HH:mm:ss", Locale.ENGLISH).parse(o2.getTime());
 
                         //Combine Date and Time to DateTime
                         Date dt1 = combineDateTime(date1, time1);
@@ -175,8 +165,8 @@ public class TrackDelivery extends AppCompatActivity {
 
                         try {
                             // String time only HOUR, MINUTE
-                            Date hourMinute = new SimpleDateFormat("HH:mm:ss").parse(currentOrdersFilter.get(position).getTime());
-                            SimpleDateFormat formatter_to = new SimpleDateFormat("HH:mm");
+                            Date hourMinute = new SimpleDateFormat("HH:mm:ss", Locale.ENGLISH).parse(currentOrdersFilter.get(position).getTime());
+                            SimpleDateFormat formatter_to = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
 
                             String strOrderID = "Order No : " + currentOrdersFilter.get(position).getOrderID();
                             String strTime = "Time : " + currentOrdersFilter.get(position).getDate() + ", " + formatter_to.format(hourMinute);
@@ -188,16 +178,26 @@ public class TrackDelivery extends AppCompatActivity {
                             holder.txtTrackOrderAmount.setText(strAmount);
 
                             if (currentOrdersFilter.get(position).getState().equals("P")) {
-                                holder.btnTrack.setText("Cannot Track");
+                                /*holder.btnTrack.setText("Cannot Track");
                                 holder.btnTrack.setBackgroundColor(Color.parseColor("#B6B7B5"));
                                 //ContextCompat.getColor(TrackDelivery.this, R.color.gray);
                                 //holder.btnTrack.setBackgroundColor(ContextCompat.getColor(TrackDelivery.this, R.color.gray));
                                 //holder.btnTrack.setBackgroundResource(R.drawable.bg_order_state_prepare);
                                 holder.btnTrack.setTextColor(Color.parseColor("#FFFFFF"));
-                                holder.btnTrack.setEnabled(false);
+                                holder.btnTrack.setEnabled(false);*/
+
+                                holder.btnTrack.setVisibility(View.GONE);
+                                holder.btnCannotTrack.setVisibility(View.VISIBLE);
                             } else {
-                                holder.btnTrack.setBackgroundColor(Color.parseColor("#00AD6B"));
+                                //holder.btnTrack.setBackgroundColor(Color.parseColor("#00AD6B"));
+                                holder.btnTrack.setVisibility(View.VISIBLE);
+                                holder.btnCannotTrack.setVisibility(View.GONE);
                             }
+
+                            // Track GPS Location
+                            holder.btnCannotTrack.setOnClickListener((view) -> {
+                                Toast.makeText(TrackDelivery.this, "Order is preparing. Please wait for awhile", Toast.LENGTH_SHORT).show();
+                            });
 
                             // Track GPS Location
                             holder.btnTrack.setOnClickListener((view) -> {
@@ -216,24 +216,6 @@ public class TrackDelivery extends AppCompatActivity {
                                 }
                                 else
                                     Toast.makeText(TrackDelivery.this, "GPS is Required, Please Turn On", Toast.LENGTH_SHORT).show();
-                                /*if (holder.btnTrack.isEnabled()) {
-                                    // check Phone GPS state
-                                    LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE );
-                                    boolean statusOfGPS = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-
-                                    if (statusOfGPS) {
-                                        //Intent intent = new Intent(TrackDelivery.this, TrackMapsActivity.class);
-                                        Intent intent = new Intent(TrackDelivery.this, TrackGPSMapActivity.class);
-                                        intent.putExtra("orderID", currentOrdersFilter.get(position).getOrderID());
-                                        startActivity(intent);
-                                    }
-                                    else
-                                        Toast.makeText(TrackDelivery.this, "GPS is Required, Please Turn On", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(TrackDelivery.this, "The order is still preparing. Please wait for awhile.",
-                                            Toast.LENGTH_SHORT).show();
-                                }*/
-
                             });
 
                         } catch (ParseException e) {
@@ -305,10 +287,10 @@ public class TrackDelivery extends AppCompatActivity {
                 Collections.sort(pastOrdersFilter, (o1, o2) -> {
                     try {
                         // String to Date
-                        Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(o1.getDate());
-                        Date time1 = new SimpleDateFormat("HH:mm:ss").parse(o1.getTime());
-                        Date date2 = new SimpleDateFormat("dd/MM/yyyy").parse(o2.getDate());
-                        Date time2 = new SimpleDateFormat("HH:mm:ss").parse(o2.getTime());
+                        Date date1 = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse(o1.getDate());
+                        Date time1 = new SimpleDateFormat("HH:mm:ss", Locale.ENGLISH).parse(o1.getTime());
+                        Date date2 = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse(o2.getDate());
+                        Date time2 = new SimpleDateFormat("HH:mm:ss", Locale.ENGLISH).parse(o2.getTime());
 
                         //Combine Date and Time to DateTime
                         Date dt1 = combineDateTime(date1, time1);
@@ -335,8 +317,8 @@ public class TrackDelivery extends AppCompatActivity {
 
                         try {
                             // String time only HOUR, MINUTE
-                            Date hourMinute = new SimpleDateFormat("HH:mm:ss").parse(pastOrdersFilter.get(position).getTime());
-                            SimpleDateFormat formatter_to = new SimpleDateFormat("HH:mm");
+                            Date hourMinute = new SimpleDateFormat("HH:mm:ss", Locale.ENGLISH).parse(pastOrdersFilter.get(position).getTime());
+                            SimpleDateFormat formatter_to = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
 
                             String strOrderID = "Order No : " + pastOrdersFilter.get(position).getOrderID();
                             String strTime = "Order Date : " + pastOrdersFilter.get(position).getDate() + ", " + formatter_to.format(hourMinute);

@@ -53,6 +53,25 @@
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/food_popular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:paddingStart="6dp"
+                android:paddingEnd="6dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_food_popular"
+                android:gravity="center_vertical"
+                android:text="Popular"
+                android:textColor="@color/AllButton"
+                android:textSize="15sp"
+                android:visibility="gone"
+                app:drawableLeftCompat="@drawable/ic_popular" />
+
 
             // food price
 

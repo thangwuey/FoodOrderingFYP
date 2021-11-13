@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,7 +23,7 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 public class AdminDeleteFoodItem extends AppCompatActivity {
-    private TextView tvName, tvPrice, tvDesc;
+    private TextView tvName, tvPrice, tvDesc, tvPopular;
     private ImageView ivFoodImage;
     private String downloadImageUrl;
     private DatabaseReference FoodsRef;
@@ -34,15 +35,15 @@ public class AdminDeleteFoodItem extends AppCompatActivity {
         setContentView(R.layout.activity_admin_delete_food_item);
 
 
-        Button btnDelete = (Button) findViewById((R.id.delete_food));
-        tvName = (TextView) findViewById(R.id.food_name);
-        tvPrice = (TextView) findViewById(R.id.food_price);
-        tvDesc = (TextView) findViewById(R.id.food_description);
-        ivFoodImage = (ImageView) findViewById(R.id.food_image);
-        ImageView ivDeleteFoodBack = (ImageView) findViewById(R.id.di_back);
+        Button btnDelete = findViewById((R.id.delete_food));
+        tvName = findViewById(R.id.food_name);
+        tvPrice = findViewById(R.id.food_price);
+        tvDesc = findViewById(R.id.food_description);
+        tvPopular = findViewById(R.id.food_popular);
+        ivFoodImage = findViewById(R.id.food_image);
+        ImageView ivDeleteFoodBack = findViewById(R.id.di_back);
 
         // Firebase Storage image save location
-        //foodImageRef = FirebaseStorage.getInstance().getReference().child("Food Images");
         foodImageStorage = FirebaseStorage.getInstance();
 
         String foodID = getIntent().getStringExtra("foodName");
@@ -83,6 +84,7 @@ public class AdminDeleteFoodItem extends AppCompatActivity {
                     String fdesc = snapshot.child("foodDescription").getValue().toString();
                     String fprice = snapshot.child("foodPrice").getValue().toString();
                     String fimage = snapshot.child("foodImage").getValue().toString();
+                    String fpopular = snapshot.child("foodPopular").getValue().toString();
 
                     downloadImageUrl = snapshot.child("foodImage").getValue().toString(); //new
                     String priceInCompleteSentence = "RM " + fprice + ".00";
@@ -92,6 +94,8 @@ public class AdminDeleteFoodItem extends AppCompatActivity {
                     tvPrice.setText(priceInCompleteSentence);
                     Picasso.get().load(fimage).into(ivFoodImage);
 
+                    if (fpopular.equals("Y"))
+                        tvPopular.setVisibility(View.VISIBLE);
                 }
             }
 

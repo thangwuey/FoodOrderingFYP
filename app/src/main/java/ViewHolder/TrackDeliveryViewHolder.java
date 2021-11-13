@@ -20,7 +20,7 @@ import Interface.foodItemClickListener;
 public class TrackDeliveryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     public TextView txtTrackOrderID, txtTrackOrderTime, txtTrackOrderAmount;
-    public Button btnArrow, btnTrack;
+    public Button btnArrow, btnTrack, btnCannotTrack;
     public RelativeLayout rlExpandableLayout;
     public CardView cvCardView;
     private foodItemClickListener itemClickListener;
@@ -33,7 +33,8 @@ public class TrackDeliveryViewHolder extends RecyclerView.ViewHolder implements 
         txtTrackOrderTime = itemView.findViewById(R.id.td_order_time);
         txtTrackOrderAmount = itemView.findViewById(R.id.td_order_amount);
         btnArrow = itemView.findViewById(R.id.td_arrow_button);
-        btnTrack = itemView.findViewById(R.id.td_order_button);
+        btnTrack = itemView.findViewById(R.id.td_track_order_button);
+        btnCannotTrack = itemView.findViewById(R.id.td_cannot_track_order_button);
         rlExpandableLayout = itemView.findViewById(R.id.td_expandable_layout);
         cvCardView = itemView.findViewById(R.id.td_card_view);
 
