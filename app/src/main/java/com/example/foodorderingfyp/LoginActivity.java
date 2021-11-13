@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -39,7 +40,7 @@ public class LoginActivity extends AppCompat {
     private EditText InputPhoneNumber,InputPassword;
     private Button LoginButton;
     private ProgressDialog loadingBar;
-    private TextView AdminLink,NotAdminLink;
+    private TextView AdminLink,NotAdminLink,contactus;
     private String parentDbName = "Users";
     boolean shouldExit = false; // press back button to exit
     Snackbar snackbar;
@@ -70,6 +71,20 @@ public class LoginActivity extends AppCompat {
         AdminLink = (TextView) findViewById(R.id.loginadmin);
         NotAdminLink = (TextView) findViewById(R.id.notLoginadmin);
         loadingBar = new ProgressDialog(this);
+        contactus = (TextView) findViewById(R.id.contactus);
+
+        contactus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:"));
+                String[] to={"wujiak@gmail.com"};
+                intent.putExtra(Intent.EXTRA_EMAIL,to);
+                intent.putExtra(Intent.EXTRA_SUBJECT,"Customer Enquiry");
+                startActivity(intent);
+            }
+        });
 
         LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override

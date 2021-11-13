@@ -167,6 +167,14 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/contactus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contact Us"
+            android:layout_gravity="center"
+            android:textAlignment="center"/>
+
     </LinearLayout>
 
     // FIRST time design
