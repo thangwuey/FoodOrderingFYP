@@ -27,7 +27,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintVertical_bias=".1"
-        android:src="@drawable/logo_final" />
+        android:src="@drawable/ic_launcher_foreground" />
 
     <ImageView
         android:id="@+id/intro_app_name"
