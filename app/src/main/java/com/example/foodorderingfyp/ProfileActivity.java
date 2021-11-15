@@ -30,7 +30,7 @@ import java.util.Locale;
 public class ProfileActivity extends AppCompat {
 
     private Button logoutBtn;
-    private Button trackDeliveryBtn;
+    private Button trackDeliveryBtn,securityquestionsBtn;
     boolean shouldExit = false; // press back button to EXIT
     Snackbar snackbar;
     RelativeLayout relativeLayout; // Snack Bar purpose
@@ -49,12 +49,24 @@ public class ProfileActivity extends AppCompat {
         logoutBtn = (Button) findViewById(R.id.logout);
         trackDeliveryBtn = (Button) findViewById(R.id.trackDelivery) ;
         language1 = (Button) findViewById(R.id.languagechanger);
+        securityquestionsBtn = (Button) findViewById(R.id.security_questions_btn);
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
         //activity default
         bottomNav.setSelectedItemId(R.id.profile);
+
+        securityquestionsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(ProfileActivity.this, ResetPasswordActivity.class);
+                intent.putExtra("check","profile");
+                startActivity(intent);
+
+            }
+        });
 
         language1.setOnClickListener(new View.OnClickListener() {
             @Override

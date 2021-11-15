@@ -28,7 +28,7 @@
         android:layout_centerVertical="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="60dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="25dp"
         android:layout_marginRight="60dp"
         android:backgroundTint="@color/AllButton"
         android:text="@string/trackDelivery"
@@ -42,13 +42,27 @@
         android:layout_below="@id/trackDelivery"
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="60dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="25dp"
         android:layout_marginRight="60dp"
         android:backgroundTint="@color/AllButton"
         android:text="@string/logoutButton"
         android:textColor="@color/white"
         android:textSize="20sp" />
 
+    <Button
+        android:id="@+id/security_questions_btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/logout"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/AllButton"
+        android:text="set security question"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

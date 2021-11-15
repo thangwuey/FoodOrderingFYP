@@ -124,13 +124,22 @@
                 android:maxLength="30"/>
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:id="@+id/forgotpasswordlink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password?"
+            android:layout_marginEnd="30dp"
+            android:textSize="16sp"
+            android:textAlignment="viewEnd" />
+
         <Button
             android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="60dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             android:layout_marginRight="60dp"
             android:backgroundTint="@color/AllButton"
             android:textColor="@color/white"

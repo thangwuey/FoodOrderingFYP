@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompat {
     private EditText InputPhoneNumber,InputPassword;
     private Button LoginButton;
     private ProgressDialog loadingBar;
-    private TextView AdminLink,NotAdminLink,contactus;
+    private TextView AdminLink,NotAdminLink,contactus,ForgetPasswordLink;
     private String parentDbName = "Users";
     boolean shouldExit = false; // press back button to exit
     Snackbar snackbar;
@@ -70,6 +70,7 @@ public class LoginActivity extends AppCompat {
         InputPassword = (EditText) findViewById(R.id.loginPassword);
         AdminLink = (TextView) findViewById(R.id.loginadmin);
         NotAdminLink = (TextView) findViewById(R.id.notLoginadmin);
+        ForgetPasswordLink = (TextView) findViewById(R.id.forgotpasswordlink);
         loadingBar = new ProgressDialog(this);
         contactus = (TextView) findViewById(R.id.contactus);
 
@@ -82,6 +83,16 @@ public class LoginActivity extends AppCompat {
                 String[] to={"wujiak@gmail.com"};
                 intent.putExtra(Intent.EXTRA_EMAIL,to);
                 intent.putExtra(Intent.EXTRA_SUBJECT,"Customer Enquiry");
+                startActivity(intent);
+            }
+        });
+
+        ForgetPasswordLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
+                intent.putExtra("check","login");
                 startActivity(intent);
             }
         });
