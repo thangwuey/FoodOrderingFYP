@@ -20,12 +20,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.foodorderingfyp.Admin.AdminHome;
+import com.example.foodorderingfyp.ModelClass.Admins;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import Prevalent.PrevalentAdmin;
 
 import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Text;
@@ -183,6 +185,7 @@ public class LoginActivity extends AppCompat {
 
                                 //HERE MUST CHANGE THE ADMIN TO THE ADD PRODUCT PAGE (MainActivity2 change to add adminHome page)
                                 Intent intent = new Intent(LoginActivity.this, AdminHome.class);
+                                PrevalentAdmin.currentOnlineAdmin = snapshot.child(parentDbName).child(phone).getValue(Admins.class);
                                 startActivity(intent);
                             }
                             else if (parentDbName.equals("Users"))

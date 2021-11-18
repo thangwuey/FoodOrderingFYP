@@ -7,11 +7,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.foodorderingfyp.Driver.DriverHistory;
+import com.example.foodorderingfyp.Driver.DriverOrder;
+import com.example.foodorderingfyp.Driver.DriverProfile;
 import com.example.foodorderingfyp.LoginActivity;
 import com.example.foodorderingfyp.MainActivity;
 import com.example.foodorderingfyp.R;
 import com.google.android.material.snackbar.Snackbar;
+
+import Prevalent.PrevalentAdmin;
 
 public class AdminHome extends AppCompatActivity {
 
@@ -19,7 +26,7 @@ public class AdminHome extends AppCompatActivity {
     Snackbar snackbar;
     RelativeLayout relativeLayout;
 
-    CardView cvFoodMenu, cvOrder,cvHistory , cvLogout;
+    CardView cvFoodMenu, cvOrder,cvHistory,cvDriver,cvLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +36,12 @@ public class AdminHome extends AppCompatActivity {
         cvFoodMenu = findViewById(R.id.cv_food_menu);
         cvOrder = findViewById(R.id.cv_order);
         cvHistory = findViewById(R.id.cv_history);
+        cvDriver = findViewById(R.id.cv_driver);
         cvLogout = findViewById(R.id.cv_logout);
         relativeLayout = findViewById(R.id.admin_home_layout);
+        TextView tvName = findViewById(R.id.admin_home_name);
+        String strName = "Welcome, " + PrevalentAdmin.currentOnlineAdmin.getName();
+        tvName.setText(strName);
 
         cvFoodMenu.setOnClickListener(v -> {
             Intent intent = new Intent(AdminHome.this, AdminDeleteFoodMenu.class);
@@ -38,12 +49,32 @@ public class AdminHome extends AppCompatActivity {
         });
 
         cvOrder.setOnClickListener(v -> {
-            Intent intent = new Intent(AdminHome.this, AdminSendOrder.class);
+            Intent intent;
+            if (PrevalentAdmin.currentOnlineAdmin.getIsAdmin().equals("y")) {
+                intent = new Intent(AdminHome.this, AdminSendOrder.class);
+            } else {
+                intent = new Intent(AdminHome.this, DriverOrder.class);
+            }
             startActivity(intent);
         });
 
         cvHistory.setOnClickListener(v -> {
-            Intent intent = new Intent(AdminHome.this, AdminHistory.class);
+            Intent intent;
+            if (PrevalentAdmin.currentOnlineAdmin.getIsAdmin().equals("y")) {
+                intent = new Intent(AdminHome.this, AdminHistory.class);
+            } else {
+                intent = new Intent(AdminHome.this, DriverHistory.class);
+            }
+            startActivity(intent);
+        });
+
+        cvDriver.setOnClickListener(v -> {
+            Intent intent;
+            if (PrevalentAdmin.currentOnlineAdmin.getIsAdmin().equals("y")) {
+                intent = new Intent(AdminHome.this, AdminManageDriver.class);
+            } else {
+                intent = new Intent(AdminHome.this, DriverProfile.class);
+            }
             startActivity(intent);
         });
 

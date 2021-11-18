@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin.AdminSelectAddress">
+
+    <RelativeLayout
+        android:id="@+id/admin_select_address_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/frameColor">
+
+        <!--// BACK icon-->
+        <ImageView
+            android:id="@+id/admin_select_address_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            app:tint="@color/AllButton"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/asa_tvSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:singleLine="true"
+            android:text="Search Address..."
+            android:elevation="5dp"
+            android:textSize="20sp"
+            android:background="@drawable/bg_search_view"
+            android:layout_toEndOf="@+id/admin_select_address_back"
+            app:drawableStartCompat="@drawable/ic_search" />
+    </RelativeLayout>
+
+    <fragment
+        android:id="@+id/admin_select_address_map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/admin_select_address_rl"
+        android:name="com.google.android.gms.maps.SupportMapFragment" />
+
+
+
+    <!--// Fixed in Bottom-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/frameColor">
+
+        <!--// Select Address Button-->
+        <Button
+            android:id="@+id/admin_select_address_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/bg_button_admin_send_order"
+            android:foreground="?attr/selectableItemBackground"
+            android:padding="17dp"
+            android:text="Select Address"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+</RelativeLayout>

@@ -148,6 +148,8 @@
         android:focusable="true"
         app:rippleColor="#5071BD"
         android:src="@drawable/ic_add_food"
+        android:visibility="gone"
+        android:enabled="false"
         android:background="@drawable/ripple_fab" />
 
 

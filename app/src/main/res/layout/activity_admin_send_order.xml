@@ -7,7 +7,7 @@
     tools:context=".Admin.AdminSendOrder"
     android:background="@color/admin_dominant">
 
-    // BACK icon
+    <!--BACK icon-->
     <ImageView
         android:id="@+id/aso_back"
         android:layout_width="48dp"
@@ -28,6 +28,71 @@
         android:textSize="30sp"
         android:textStyle="bold" />
 
+    <HorizontalScrollView
+        android:id="@+id/aso_hsv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/aso_back">
+
+        <RadioGroup
+            android:id="@+id/aso_radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/aso_radio_prepare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:checked="true"
+                android:button="@android:color/transparent"
+                android:background="@drawable/bg_radio_jt_selector"
+                android:textColor="@drawable/bg_radio_jt_text_color"
+                android:elevation="4dp"
+                android:text="Preparing"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/aso_radio_ready"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:button="@android:color/transparent"
+                android:background="@drawable/bg_radio_jt_selector"
+                android:textColor="@drawable/bg_radio_jt_text_color"
+                android:elevation="4dp"
+                android:text="Ready"
+                android:textSize="20sp" />
+
+
+            <RadioButton
+                android:id="@+id/aso_radio_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:button="@android:color/transparent"
+                android:background="@drawable/bg_radio_jt_selector"
+                android:textColor="@drawable/bg_radio_jt_text_color"
+                android:elevation="4dp"
+                android:text="Send"
+                android:textSize="20sp" />
+        </RadioGroup>
+    </HorizontalScrollView>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -35,18 +100,74 @@
         android:layout_marginTop="10dp"
         android:paddingTop="25dp"
         android:background="@drawable/bg_admin_food_menu"
-        android:layout_below="@id/aso_back">
+        android:layout_below="@id/aso_hsv">
 
-        // recycler view
+        <!--Orders Preparing Header-->
+        <TextView
+            android:id="@+id/aso_prepare_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="20dp"
+            android:text="Order Preparing"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <!--recycler view prepare-->
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_aso"
+            android:id="@+id/rv_aso_prepare"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
-            android:scrollbars="vertical"/>
+            android:scrollbars="vertical"
+            android:layout_below="@id/aso_prepare_order"/>
+
+        <!--Orders Ready Header-->
+        <TextView
+            android:id="@+id/aso_ready_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="20dp"
+            android:text="Ready to Send"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <!--recycler view READY-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_aso_ready"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:scrollbars="vertical"
+            android:layout_below="@id/aso_ready_order"
+            android:visibility="gone"/>
+
+        <!--Orders Sending Header-->
+        <TextView
+            android:id="@+id/aso_sending_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="20dp"
+            android:text="Order Sending"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <!--recycler view SENDING-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_aso_sending"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:scrollbars="vertical"
+            android:layout_below="@id/aso_sending_order"
+            android:visibility="gone"/>
+
     </RelativeLayout>
-
-
-
-
 </RelativeLayout>

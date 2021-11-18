@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin.AdminAddDriver">
+
+    <ImageView
+        android:id="@+id/aad_back"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_back"
+        app:tint="@color/admin_dominant" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Driver"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginEnd="45dp"
+        android:textAlignment="center"
+        android:textColor="@color/admin_dominant"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/aad_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/aad_back">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_admin_dd_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="30dp"
+                android:textColorHint="@color/til_color"
+                app:startIconDrawable="@drawable/ic_username"
+                app:startIconTint="@color/til_color"
+                app:boxStrokeColor="@color/til_color"
+                app:endIconMode="clear_text"
+                app:hintTextColor="@color/til_color">
+
+
+                <EditText
+                    android:id="@+id/add_driver_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:hint="Driver Name"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:maxLength="35"
+                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                    android:singleLine="true"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_admin_dd_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="30dp"
+                android:padding="15dp"
+                android:textColorHint="@color/til_color"
+                app:boxStrokeColor="@color/til_color"
+                app:startIconDrawable="@drawable/ic_phone"
+                app:startIconTint="@color/til_color"
+                app:endIconMode="clear_text"
+                app:hintTextColor="@color/til_color">
+
+
+                <EditText
+                    android:id="@+id/add_driver_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:ems="10"
+                    android:hint="Driver Phone"
+                    android:inputType="phone"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:maxLength="11"
+                    android:digits="0123456789"
+                    android:singleLine="true"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_driver_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="30dp"
+                android:padding="15dp"
+                android:textColorHint="@color/til_color"
+                app:boxStrokeColor="@color/til_color"
+                app:startIconDrawable="@drawable/ic_password"
+                app:startIconTint="@color/til_color"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/til_color"
+                app:hintTextColor="@color/til_color">
+
+
+                <EditText
+                    android:id="@+id/add_driver_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:ems="10"
+                    android:hint="Password"
+                    android:inputType="textPersonName"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:maxLength="30"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_driver_confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="30dp"
+                android:padding="15dp"
+                android:textColorHint="@color/til_color"
+                app:boxStrokeColor="@color/til_color"
+                app:startIconDrawable="@drawable/ic_password"
+                app:startIconTint="@color/til_color"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/til_color"
+                app:hintTextColor="@color/til_color">
+
+
+                <EditText
+                    android:id="@+id/add_driver_confirm_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:ems="10"
+                    android:hint="Confirm Password"
+                    android:inputType="textPersonName"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:maxLength="30"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_driver_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="30dp"
+                android:padding="15dp"
+                android:textColorHint="@color/til_color"
+                app:boxStrokeColor="@color/til_color"
+                app:startIconDrawable="@drawable/ic_home_address"
+                app:startIconTint="@color/til_color"
+                app:endIconMode="clear_text"
+                app:hintTextColor="@color/til_color">
+
+                <EditText
+                    android:id="@+id/add_driver_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="0dp"
+                    android:hint="Home Address"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_alignParentBottom="true">
+
+
+        <Button
+            android:id="@+id/add_driver_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:padding="17dp"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/AllButton"
+            android:textAllCaps="false"
+            android:text="Add Driver" />
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Driver.DriverOrder"
+    android:background="@color/admin_dominant">
+
+    <ImageView
+        android:id="@+id/do_back"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        app:tint="@color/frameColor"
+        android:src="@drawable/ic_back" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Today Order"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:textAlignment="center"
+        android:textColor="@color/frameColor"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <RadioGroup
+        android:id="@+id/do_radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:layout_below="@+id/do_back">
+
+        <RadioButton
+            android:id="@+id/do_radio_sending"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:checked="true"
+            android:button="@android:color/transparent"
+            android:background="@drawable/bg_radio_jt_selector"
+            android:textColor="@drawable/bg_radio_jt_text_color"
+            android:textAlignment="center"
+            android:elevation="4dp"
+            android:text="Sending"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/do_radio_ready"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:button="@android:color/transparent"
+            android:background="@drawable/bg_radio_jt_selector"
+            android:textColor="@drawable/bg_radio_jt_text_color"
+            android:elevation="4dp"
+            android:textAlignment="center"
+            android:text="Ready"
+            android:textSize="20sp" />
+    </RadioGroup>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingTop="25dp"
+        android:background="@drawable/bg_admin_food_menu"
+        android:layout_below="@id/do_radio_group">
+
+
+        <!--Send-->
+        <TextView
+            android:id="@+id/do_sending_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="20dp"
+            android:text="Order Sending"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_do_send"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:scrollbars="vertical"
+            android:layout_below="@+id/do_sending_order"/>
+
+        <!--Ready-->
+        <TextView
+            android:id="@+id/do_ready_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="20dp"
+            android:text="Ready to Send"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:visibility="gone"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_do_ready"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:scrollbars="vertical"
+            android:visibility="gone"
+            android:layout_below="@+id/do_ready_order"/>
+    </RelativeLayout>
+</RelativeLayout>

@@ -23,6 +23,33 @@
         android:theme="@style/Theme.FoodOrderingFYP"
         tools:replace="android:theme">
         <activity
+            android:name=".Driver.DriverProfile"
+            android:exported="true" />
+        <activity
+            android:name=".Driver.DriverOrderDetails"
+            android:exported="true" />
+        <activity
+            android:name=".Driver.DriverOrder"
+            android:exported="true" />
+        <activity
+            android:name=".Driver.DriverHistory"
+            android:exported="true" />
+        <activity
+            android:name=".Admin.AdminSelectAddress"
+            android:exported="true" />
+        <activity
+            android:name=".Admin.AdminDeleteDriver"
+            android:exported="true" />
+        <activity
+            android:name=".Admin.AdminAddDriver"
+            android:exported="true" />
+        <activity
+            android:name=".Admin.AdminManageDriver"
+            android:exported="true" />
+        <activity
+            android:name=".AdminManageDriver"
+            android:exported="true" />
+        <activity
             android:name=".QrGenerateActivity"
             android:exported="true" />
         <activity

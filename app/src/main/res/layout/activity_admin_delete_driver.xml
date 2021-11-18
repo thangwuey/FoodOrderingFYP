@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin.AdminDeleteDriver">
+
+    <ImageView
+        android:id="@+id/admin_dd_back"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        app:tint="@color/admin_dominant"
+        android:src="@drawable/ic_back" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Driver Details"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:textAlignment="center"
+        android:textColor="@color/admin_dominant"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:text="Profile Info"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_below="@id/admin_dd_back" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/admin_dd_cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="5dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        app:cardBackgroundColor="@color/frameColor"
+        android:layout_below="@+id/admin_dd_back">
+
+        <RelativeLayout
+            android:id="@+id/admin_dd_rl_wrapper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/admin_dd_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:drawablePadding="10dp"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
+                android:text="Driver Name"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:drawableStartCompat="@drawable/ic_username"
+                app:drawableTint="@color/admin_dominant" />
+
+            <TextView
+                android:id="@+id/admin_dd_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:drawablePadding="10dp"
+                android:layout_below="@+id/admin_dd_name"
+                android:gravity="center_vertical"
+                android:text="Phone"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:drawableStartCompat="@drawable/ic_phone"
+                app:drawableTint="@color/admin_dominant" />
+
+            <ImageView
+                android:id="@+id/admin_dd_iv_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_home_address"
+                android:layout_below="@+id/admin_dd_phone"
+                app:tint="@color/admin_dominant" />
+
+            <TextView
+                android:id="@+id/admin_dd_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:drawablePadding="10dp"
+                android:layout_below="@+id/admin_dd_phone"
+                android:layout_toEndOf="@+id/admin_dd_iv_address"
+                android:gravity="center_vertical"
+                android:text="Address"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <View
+                android:id="@+id/admin_dd_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="10dp"
+                android:layout_below="@id/admin_dd_address"
+                android:background="#808080" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/admin_dd_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:text="Account Info"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:layout_below="@+id/admin_dd_cardView"
+        android:textStyle="bold" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/admin_dd_cardView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="5dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        app:cardBackgroundColor="@color/frameColor"
+        android:layout_below="@+id/admin_dd_header">
+
+        <RelativeLayout
+            android:id="@+id/admin_dd_rl_wrapper2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/admin_dd_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:text="Username"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:drawableStartCompat="@drawable/ic_username"
+                app:drawableTint="@color/admin_dominant" />
+
+            <TextView
+                android:id="@+id/admin_dd_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:drawablePadding="10dp"
+                android:layout_below="@+id/admin_dd_username"
+                android:gravity="center_vertical"
+                android:text="Password"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:drawableStartCompat="@drawable/ic_password"
+                app:drawableTint="@color/admin_dominant" />
+
+            <View
+                android:id="@+id/admin_dd_line2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="10dp"
+                android:layout_below="@id/admin_dd_password"
+                android:background="#808080" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:gravity="center"
+        android:layout_alignParentBottom="true">
+
+
+        <Button
+            android:id="@+id/admin_dd_delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:padding="17dp"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/AllButton"
+            android:textAllCaps="false"
+            android:text="Delete Driver" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

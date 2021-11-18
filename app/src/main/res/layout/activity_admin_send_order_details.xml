@@ -7,7 +7,7 @@
     tools:context=".Admin.AdminSendOrderDetails"
     android:background="@drawable/bg_admin">
 
-    // BACK icon
+    <!--// BACK icon-->
     <ImageView
         android:id="@+id/asod_back"
         android:layout_width="48dp"
@@ -16,7 +16,7 @@
         app:tint="@color/admin_dominant"
         android:src="@drawable/ic_back" />
 
-    // scroll function
+    <!--// scroll function-->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
             android:paddingBottom="120dp"
             android:orientation="vertical">
 
-            // Order ID
+            <!--// Order ID-->
             <TextView
                 android:id="@+id/send_order_id"
                 android:layout_width="wrap_content"
@@ -43,7 +43,7 @@
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
-            // Order State
+            <!--// Order State-->
             <TextView
                 android:id="@+id/send_order_state"
                 android:layout_width="wrap_content"
@@ -58,66 +58,6 @@
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"/>
 
-            <!--// Time
-            <TextView
-                android:id="@+id/send_order_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Time"
-                android:textColor="@color/black"
-                android:textSize="25sp" />
-
-            // Total Amount
-            <TextView
-                android:id="@+id/send_order_total"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Total Amount : RM 0.00"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-
-            // Customer Name
-            <TextView
-                android:id="@+id/send_order_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Name : XXX"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-
-            // Customer Phone
-            <TextView
-                android:id="@+id/send_order_phone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Phone : XXXXXXXXXX"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-
-            // Customer Address
-            <TextView
-                android:id="@+id/send_order_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Address : XXX"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-
-            // Customer City
-            <TextView
-                android:id="@+id/send_order_city"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="City : XXXX"
-                android:textColor="@color/black"
-                android:textSize="20sp" />-->
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -126,8 +66,8 @@
                 android:paddingBottom="10dp"
                 android:background="@color/AllButton">
 
-                // Order Details Section
-                // Order Food Header
+                <!--// Order Details Section
+                // Order Food Header-->
                 <TextView
                     android:id="@+id/send_order_details_header"
                     android:layout_width="wrap_content"
@@ -138,7 +78,7 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
-                // break line
+                <!--// break line-->
                 <View
                     android:id="@+id/break_line3"
                     android:layout_width="100dp"
@@ -147,7 +87,7 @@
                     android:layout_below="@id/send_order_details_header"
                     android:background="@color/white" />
 
-                // Order No Header
+                <!--// Order No Header-->
                 <TextView
                     android:id="@+id/send_order_no_header"
                     android:layout_width="wrap_content"
@@ -158,39 +98,19 @@
                     android:textSize="15sp"
                     android:layout_below="@id/break_line3" />
 
-                // Order No
+                <!--// Order No-->
                 <TextView
                     android:id="@+id/send_order_no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
-                    android:text="XXXXXXXXXXXXXXX"
                     android:textColor="@color/white"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     android:layout_below="@id/break_line3"
                     android:layout_alignParentEnd="true" />
 
-                // different design
-                <!--// Order No
-                <TextView
-                    android:id="@+id/send_order_no"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="15dp"
-                    android:background="@drawable/bg_order_no"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    android:paddingTop="2dp"
-                    android:paddingBottom="2dp"
-                    android:text="XXXXXXXXXXXXXXX"
-                    android:textColor="@color/white"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:layout_below="@id/break_line3"
-                    android:layout_alignParentEnd="true" />-->
-
-                // Order Time Header
+                <!--// Order Time Header-->
                 <TextView
                     android:id="@+id/send_order_time_header"
                     android:layout_width="wrap_content"
@@ -201,25 +121,23 @@
                     android:textSize="15sp"
                     android:layout_below="@id/send_order_no_header" />
 
-                // Order Date
+                <!--// Order Date-->
                 <TextView
                     android:id="@+id/send_order_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
-                    android:text="21/10/21"
                     android:textColor="@color/white"
                     android:textSize="15sp"
                     android:layout_below="@id/send_order_no"
                     android:layout_toStartOf="@id/send_order_time" />
 
-                // Order Time
+                <!--// Order Time-->
                 <TextView
                     android:id="@+id/send_order_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
-                    android:text="00:00:00"
                     android:textColor="@color/white"
                     android:textSize="15sp"
                     android:layout_below="@id/send_order_no"
@@ -227,8 +145,35 @@
 
 
 
-                // Customer Info Section
-                // Customer Info Header
+                <!--// Driver Name Header-->
+                <TextView
+                    android:id="@+id/send_order_driver_name_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Driver Sending:"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:visibility="gone"
+                    android:layout_below="@id/send_order_time_header" />
+
+                <!--// Driver Name-->
+                <TextView
+                    android:id="@+id/send_order_driver_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    android:layout_below="@id/send_order_time"
+                    android:layout_alignParentEnd="true" />
+
+
+
+                <!-- // Customer Info Section
+                 // Customer Info Header-->
                 <TextView
                     android:id="@+id/send_order_customer_info_header"
                     android:layout_width="wrap_content"
@@ -239,9 +184,9 @@
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:layout_below="@id/send_order_time_header" />
+                    android:layout_below="@id/send_order_driver_name_header" />
 
-                // break line
+                <!--// break line-->
                 <View
                     android:id="@+id/break_line4"
                     android:layout_width="100dp"
@@ -250,7 +195,7 @@
                     android:layout_below="@id/send_order_customer_info_header"
                     android:background="@color/white" />
 
-                // Customer Name Header
+                <!--// Customer Name Header-->
                 <TextView
                     android:id="@+id/send_order_customer_name_header"
                     android:layout_width="wrap_content"
@@ -261,19 +206,18 @@
                     android:textSize="15sp"
                     android:layout_below="@id/break_line4" />
 
-                // Customer Name
+                <!--// Customer Name-->
                 <TextView
                     android:id="@+id/send_order_customer_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
-                    android:text="XXX"
                     android:textColor="@color/white"
                     android:textSize="15sp"
                     android:layout_below="@id/break_line4"
                     android:layout_alignParentEnd="true" />
 
-                // Customer Phone Header
+                <!--// Customer Phone Header-->
                 <TextView
                     android:id="@+id/send_order_customer_phone_header"
                     android:layout_width="wrap_content"
@@ -284,19 +228,18 @@
                     android:textSize="15sp"
                     android:layout_below="@id/send_order_customer_name_header" />
 
-                // Customer Phone
+                <!--// Customer Phone-->
                 <TextView
                     android:id="@+id/send_order_customer_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
-                    android:text="0123456789"
                     android:textColor="@color/white"
                     android:textSize="15sp"
                     android:layout_below="@id/send_order_customer_name"
                     android:layout_alignParentEnd="true" />
 
-                // Customer Address Header
+                <!--// Customer Address Header-->
                 <TextView
                     android:id="@+id/send_order_customer_address_header"
                     android:layout_width="wrap_content"
@@ -307,19 +250,18 @@
                     android:textSize="15sp"
                     android:layout_below="@id/send_order_customer_phone_header" />
 
-                // Customer Address
+                <!--// Customer Address-->
                 <TextView
                     android:id="@+id/send_order_customer_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
-                    android:text="XX-XX-XX, XXXXX"
                     android:textColor="@color/white"
                     android:textSize="15sp"
                     android:layout_below="@id/send_order_customer_phone"
                     android:layout_alignParentEnd="true" />
 
-                // Customer City Header
+                <!--// Customer City Header-->
                 <TextView
                     android:id="@+id/send_order_customer_city_header"
                     android:layout_width="wrap_content"
@@ -330,13 +272,12 @@
                     android:textSize="15sp"
                     android:layout_below="@id/send_order_customer_address" />
 
-                // Customer Phone
+                <!--// Customer Phone-->
                 <TextView
                     android:id="@+id/send_order_customer_city"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
-                    android:text="Penang"
                     android:textColor="@color/white"
                     android:textSize="15sp"
                     android:layout_below="@id/send_order_customer_address"
@@ -344,8 +285,8 @@
 
 
 
-                // Order Foods Section
-                // Order Foods Header
+                <!--// Order Foods Section
+                // Order Foods Header-->
                 <TextView
                     android:id="@+id/send_order_foods_header"
                     android:layout_width="wrap_content"
@@ -358,7 +299,7 @@
                     android:textStyle="bold"
                     android:layout_below="@id/send_order_customer_city_header" />
 
-                // break line
+                <!--// break line-->
                 <View
                     android:id="@+id/break_line"
                     android:layout_width="wrap_content"
@@ -367,7 +308,7 @@
                     android:layout_below="@id/send_order_foods_header"
                     android:background="@color/white" />
 
-                // recycler view
+                <!--// recycler view-->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_asod"
                     android:layout_width="match_parent"
@@ -375,7 +316,7 @@
                     android:scrollbars="vertical"
                     android:layout_below="@id/break_line"/>
 
-                // break line
+                <!--// break line-->
                 <View
                     android:id="@+id/break_line2"
                     android:layout_width="wrap_content"
@@ -384,7 +325,7 @@
                     android:layout_below="@id/rv_asod"
                     android:background="@color/white" />
 
-                // Order Amount Header
+                <!--// Order Amount Header-->
                 <TextView
                     android:id="@+id/send_order_food_amount_header"
                     android:layout_width="wrap_content"
@@ -396,13 +337,12 @@
                     android:textStyle="bold"
                     android:layout_below="@id/break_line2" />
 
-                // Order Amount
+                <!--// Order Amount-->
                 <TextView
                     android:id="@+id/send_order_food_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
-                    android:text="RM 0.00"
                     android:textColor="@color/white"
                     android:textSize="15sp"
                     android:layout_below="@id/break_line2"
@@ -411,16 +351,16 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    // Fixed in Bottom
+    <!--// Fixed in Bottom-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:layout_alignParentBottom="true">
 
-        // Send Order Button / Done Order Button
+        <!--// Food Ready Button-->
         <Button
-            android:id="@+id/send_order_button"
+            android:id="@+id/food_ready_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -428,10 +368,11 @@
             android:background="@drawable/bg_button_admin_send_order"
             android:foreground="?attr/selectableItemBackground"
             android:padding="17dp"
-            android:text="Send Order"
+            android:text="Food Ready"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:visibility="gone" />
 
     </RelativeLayout>
 </RelativeLayout>

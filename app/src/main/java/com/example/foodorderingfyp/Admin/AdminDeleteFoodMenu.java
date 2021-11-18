@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.example.foodorderingfyp.ModelClass.Foods;
 import com.example.foodorderingfyp.R;
@@ -30,6 +31,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import Prevalent.PrevalentAdmin;
 import ViewHolder.AdminFoodViewHolder;
 
 public class AdminDeleteFoodMenu extends AppCompatActivity {
@@ -82,6 +84,11 @@ public class AdminDeleteFoodMenu extends AppCompatActivity {
         radioDrink = findViewById(R.id.adfm_radio_drink);
         radioPopular = findViewById(R.id.adfm_radio_recommend);
 
+        if (PrevalentAdmin.currentOnlineAdmin.getIsAdmin().equals("y")) {
+            fabAddFood.setVisibility(View.VISIBLE);
+            fabAddFood.setEnabled(true);
+        }
+
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -105,9 +112,11 @@ public class AdminDeleteFoodMenu extends AppCompatActivity {
 
         // Add Food Button
         fabAddFood.setOnClickListener(v -> {
-
-            Intent intent = new Intent(AdminDeleteFoodMenu.this, AdminAddFood.class);
-            startActivity(intent);
+            if (PrevalentAdmin.currentOnlineAdmin.getIsAdmin().equals("y")) {
+                Intent intent = new Intent(AdminDeleteFoodMenu.this, AdminAddFood.class);
+                startActivity(intent);
+            } else
+                Toast.makeText(AdminDeleteFoodMenu.this, "Only Admin can access this feature", Toast.LENGTH_SHORT).show();
         });
 
         // Back Button
@@ -118,51 +127,6 @@ public class AdminDeleteFoodMenu extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-        /*// to configure adapter
-        FirebaseRecyclerOptions<Foods> options =
-                new FirebaseRecyclerOptions.Builder<Foods>()
-                        .setQuery(FoodsRef, Foods.class)
-                        .build();
-
-        // <T, ViewHolder>
-        FirebaseRecyclerAdapter<Foods, AdminFoodViewHolder> adapter =
-                new FirebaseRecyclerAdapter<Foods, AdminFoodViewHolder>(options) {
-                    @Override
-                    protected void onBindViewHolder(@NonNull AdminFoodViewHolder holder, int position, @NonNull Foods model)
-                    {
-                        // holder from FoodViewHolder.java
-                        // First letter of each word to UPPERCASE in FOOD NAME
-                        String str = model.getFoodName();
-                        String[] strArray = str.split(" ");
-                        StringBuilder builder = new StringBuilder();
-                        for (String s : strArray) {
-                            String cap = s.substring(0, 1).toUpperCase() + s.substring(1);
-                            builder.append(cap).append(" ");
-                        }
-                        holder.txtAdminFoodName.setText(builder.toString());
-
-                        // easy way to get Image from database
-                        Picasso.get().load(model.getFoodImage()).into(holder.adminImageView);
-
-                        // get Food ID
-                        holder.itemView.setOnClickListener((view) -> {
-                            Intent intent = new Intent(AdminDeleteFoodMenu.this,AdminDeleteFoodItem.class);
-                            intent.putExtra("foodName", model.getFoodName());
-                            startActivity(intent);
-                        });
-                    }
-
-                    @NonNull
-                    @Override   // copy and create view into recyclerView from food_items_layout.xml
-                    public AdminFoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
-                    {
-                        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.admin_food_item_layout, parent, false);
-                        return new AdminFoodViewHolder(view);
-                    }
-                };
-        recyclerView.setAdapter(adapter);
-        adapter.startListening();*/
 
         // use LIST instead of Firebase
         List<Foods> foodsFilter = new ArrayList<>();

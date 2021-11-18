@@ -3,7 +3,9 @@ package com.example.foodorderingfyp.Admin;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -21,6 +23,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
+
+import Prevalent.PrevalentAdmin;
 
 public class AdminDeleteFoodItem extends AppCompatActivity {
     private TextView tvName, tvPrice, tvDesc, tvPopular;
@@ -53,6 +57,11 @@ public class AdminDeleteFoodItem extends AppCompatActivity {
         // progressing bar to let user know it is processing
         loadingBar = new ProgressDialog(this);
 
+        if (PrevalentAdmin.currentOnlineAdmin.getIsAdmin().equals("y")) {
+            btnDelete.setVisibility(View.VISIBLE);
+            btnDelete.setEnabled(true);
+        }
+
         // display food info
         displaySpecificFoodInfo();
 
@@ -61,7 +70,12 @@ public class AdminDeleteFoodItem extends AppCompatActivity {
         ivDeleteFoodBack.setOnClickListener(v -> onBackPressed());
 
         // delete food
-        btnDelete.setOnClickListener(v -> deleteThisFood());
+        btnDelete.setOnClickListener(v -> {
+            if (PrevalentAdmin.currentOnlineAdmin.getIsAdmin().equals("y")) {
+                confirmBeforeDelete();
+            } else
+                Toast.makeText(AdminDeleteFoodItem.this, "Only Admin can access this feature", Toast.LENGTH_SHORT).show();
+        });
     }
 
 
@@ -104,6 +118,36 @@ public class AdminDeleteFoodItem extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void confirmBeforeDelete() {
+        AlertDialog.Builder alertBuilder;
+        alertBuilder = new AlertDialog.Builder(AdminDeleteFoodItem.this);
+        alertBuilder.setTitle("Confirm before delete");
+        alertBuilder.setMessage("Please double check before delete.");
+        alertBuilder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+
+                // loading when processing to DELETE food in database
+                loadingBar.setTitle("Delete Food");
+                loadingBar.setMessage("Dear Admins, please wait while we are deleting this food.");
+                loadingBar.setCanceledOnTouchOutside(false);
+                loadingBar.show();
+
+                deleteThisFood();
+            }
+
+        });
+        alertBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        AlertDialog alertDialog = alertBuilder.create();
+        alertDialog.show();
     }
 
 

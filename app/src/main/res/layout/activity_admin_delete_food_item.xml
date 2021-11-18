@@ -130,6 +130,8 @@
             android:text="Delete This Food"
             android:textAllCaps="false"
             android:textColor="@color/white"
+            android:visibility="gone"
+            android:enabled="false"
             android:textSize="20sp" />
 
     </RelativeLayout>

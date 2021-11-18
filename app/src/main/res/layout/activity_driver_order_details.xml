@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_admin"
+    tools:context=".Driver.DriverOrderDetails">
+
+    <!--Driver Send Order-->
+    <RelativeLayout
+        android:id="@+id/dod_send_rl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--BACK icon-->
+        <ImageView
+            android:id="@+id/dod_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_back"
+            app:tint="@color/admin_dominant" />
+
+        <!--scroll function-->
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll_dod"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/dod_back">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingStart="15dp"
+                android:paddingTop="15dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="120dp">
+
+                <!--Order ID-->
+                <TextView
+                    android:id="@+id/dod_send_order_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Order ID"
+                    android:textColor="@color/AllButton"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <!--Order State-->
+                <TextView
+                    android:id="@+id/dod_send_order_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/bg_order_state_ready"
+                    android:paddingStart="6dp"
+                    android:paddingTop="2dp"
+                    android:paddingEnd="6dp"
+                    android:paddingBottom="2dp"
+                    android:text="State"
+                    android:textColor="#007c33"
+                    android:textSize="20sp" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/AllButton"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+
+                    <!--Order Details Section
+                    Order Food Header-->
+                    <TextView
+                        android:id="@+id/dod_send_order_details_header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="Order Details"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <!--break line-->
+                    <View
+                        android:id="@+id/dod_break_line3"
+                        android:layout_width="100dp"
+                        android:layout_height="1dp"
+                        android:layout_below="@id/dod_send_order_details_header"
+                        android:layout_margin="10dp"
+                        android:background="@color/white" />
+
+                    <!--Order No Header-->
+                    <TextView
+                        android:id="@+id/dod_send_order_no_header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/dod_break_line3"
+                        android:layout_marginStart="10dp"
+                        android:text="Order No:"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+
+                    <!--Order No-->
+                    <TextView
+                        android:id="@+id/dod_send_order_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/dod_break_line3"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="15dp"
+                        android:text="XXXXXXXXXXXXXXX"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+
+                    <!--// Order Time Header-->
+                    <TextView
+                        android:id="@+id/dod_send_order_time_header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/dod_send_order_no_header"
+                        android:layout_marginStart="10dp"
+                        android:text="Order Time:"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+
+                    <!--// Order Date-->
+                    <TextView
+                        android:id="@+id/dod_send_order_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/dod_send_order_no"
+                        android:layout_marginEnd="15dp"
+                        android:layout_toStartOf="@id/dod_send_order_time"
+                        android:text="21/10/21"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+
+                    <!--// Order Time-->
+                    <TextView
+                        android:id="@+id/dod_send_order_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/dod_send_order_no"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="15dp"
+                        android:text="00:00:00"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+
+
+                    <!--// Customer Info Section
+                    // Customer Info Header-->
+                    <TextView
+                        android:id="@+id/dod_send_order_customer_info_header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/dod_send_order_time_header"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="40dp"
+                        android:text="Customer Info"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <!--// break line-->
+                    <View
+                        android:id="@+id/dod_break_line4"
+                        android:layout_width="100dp"
+                        android:layout_height="1dp"
+                        android:layout_below="@id/dod_send_order_customer_info_header"
+                        android:layout_margin="10dp"
+                        android:background="@color/white" />
+
+                    <!--// Customer Name Header-->
+                    <TextView
+                        android:id="@+id/dod_send_order_customer_name_header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/dod_break_line4"
+                        android:layout_marginStart="10dp"
+                        android:text="Customer Name:"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+
+                    <!--// Customer Name-->
+                    <TextView
+                        android:id="@+id/dod_send_order_customer_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/dod_break_line4"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="15dp"
+                        android:text="XXX"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+
+                    <!--// Customer Phone Header-->
+                    <TextView
+                        android:id="@+id/dod_send_order_customer_phone_header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/dod_send_order_customer_name_header"
+                        android:layout_marginStart="10dp"
+                        android:text="Phone No:"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+
+                    <!--// Customer Phone-->
+                    <TextView
+                        android:id="@+id/dod_send_order_customer_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/dod_send_order_customer_name"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="15dp"
+                        android:text="0123456789"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+
+                    <!--// Customer Address Header-->
+                    <TextView
+                        android:id="@+id/dod_send_order_customer_address_header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/dod_send_order_customer_phone_header"
+                        android:layout_marginStart="10dp"
+                        android:text="Address:"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+
+                    <!--// Customer Address-->
+                    <TextView
+                        android:id="@+id/dod_send_order_customer_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/dod_send_order_customer_phone"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="15dp"
+                        android:text="XX-XX-XX, XXXXX"
+                        android:textColor="@color/white"
+                        android:textIsSelectable="true"
+                        android:textSize="15sp" />
+
+                    <!--// Customer City Header-->
+                    <TextView
+                        android:id="@+id/dod_send_order_customer_city_header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/dod_send_order_customer_address"
+                        android:layout_marginStart="10dp"
+                        android:text="City:"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+
+                    <!--// Customer Phone-->
+                    <TextView
+                        android:id="@+id/dod_send_order_customer_city"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/dod_send_order_customer_address"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="15dp"
+                        android:text="Penang"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+
+
+                    <!--// Order Foods Section
+                    // Order Foods Header-->
+                    <TextView
+                        android:id="@+id/dod_send_order_foods_header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/dod_send_order_customer_city_header"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="40dp"
+                        android:text="Order Foods"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <!--// break line-->
+                    <View
+                        android:id="@+id/dod_break_line"
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_below="@id/dod_send_order_foods_header"
+                        android:layout_margin="10dp"
+                        android:background="@color/white" />
+
+                    <!--// recycler view-->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_dod"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/dod_break_line"
+                        android:scrollbars="vertical" />
+
+                    <!--// break line-->
+                    <View
+                        android:id="@+id/dod_break_line2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_below="@id/rv_dod"
+                        android:layout_margin="10dp"
+                        android:background="@color/white" />
+
+                    <!--// Order Amount Header-->
+                    <TextView
+                        android:id="@+id/dod_send_order_food_amount_header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/dod_break_line2"
+                        android:layout_marginStart="10dp"
+                        android:text="Total"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <!--// Order Amount-->
+                    <TextView
+                        android:id="@+id/dod_send_order_food_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/dod_break_line2"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="15dp"
+                        android:text="RM 0.00"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+                </RelativeLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <!--// Fixed in Bottom-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:padding="15dp">
+
+            <!--// Send Order Button-->
+            <Button
+                android:id="@+id/dod_send_order_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/bg_button_admin_send_order"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="17dp"
+                android:text="Send Order"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <!--// View Map Button-->
+            <Button
+                android:id="@+id/dod_view_button"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/bg_button_admin_send_order"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="17dp"
+                android:text="View Map"
+                android:textAllCaps="false"
+                android:visibility="gone"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <!--Done Order Button-->
+            <Button
+                android:id="@+id/dod_done_order_button"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/bg_button_admin_send_order"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="17dp"
+                android:text="Done Order"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:visibility="gone"
+                android:layout_toEndOf="@+id/dod_view_button" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <!--Driver View Map-->
+    <RelativeLayout
+        android:id="@+id/dod_map_rl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:id="@+id/dod_map_header_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/frameColor">
+
+            <ImageView
+                android:id="@+id/dod_map_back"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_back"
+                app:tint="@color/admin_dominant" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="25dp"
+                android:text="View Map"
+                android:textAlignment="center"
+                android:textColor="@color/admin_dominant"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <fragment
+            android:id="@+id/dod_gps_map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/dod_map_header_rl"
+            android:layout_marginBottom="220dp" />
+
+        <!--Fixed in Bottom-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/frameColor"
+            android:padding="15dp">
+
+            <TextView
+                android:id="@+id/dod_map_address_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delivery Address"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/dod_map_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dod_map_address_header"
+                android:layout_marginTop="15dp"
+                android:text="XXXXXXXXXXXXXXX"
+                android:textColor="@color/black"
+                android:textIsSelectable="true"
+                android:textSize="15sp" />
+
+            <!--// Back Button-->
+            <Button
+                android:id="@+id/dod_back_to_order_button"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/bg_button_admin_send_order"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="17dp"
+                android:text="Back to Order"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:layout_below="@+id/dod_map_address"
+                android:textSize="20sp" />
+
+            <!--Done Order Button-->
+            <Button
+                android:id="@+id/dod_map_done_order_button"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/bg_button_admin_send_order"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="17dp"
+                android:text="Done Order"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:layout_below="@+id/dod_map_address"
+                android:layout_toEndOf="@+id/dod_back_to_order_button"
+                android:textSize="20sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

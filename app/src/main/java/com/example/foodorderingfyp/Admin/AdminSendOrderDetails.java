@@ -52,15 +52,16 @@ import java.util.HashMap;
 import ViewHolder.AdminOrderFoodItemViewHolder;
 
 public class AdminSendOrderDetails extends AppCompatActivity {
-
     private Button btnSendOrder;
     private TextView tvOrderID, tvOrderState, tvOrderAmount, tvOrderNo, tvOrderTime, tvOrderDate;
     private TextView tvCustomerName, tvCustomerPhone, tvCustomerAddress, tvCustomerCity;
-    private DatabaseReference OrdersRef, CartsRef, UserRef;
+    private TextView tvDriverNameHeader, tvDriverName;
+    private DatabaseReference OrdersRef, CartsRef, UserRef, DelRef;
     private String orderID = "";
     private final String strPrepare="Preparing";
     private final String strSend="Sending";
     private final String strDone="Done Order";
+    private final String strReady="Ready";
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     private ProgressDialog loadingBar;
@@ -74,7 +75,7 @@ public class AdminSendOrderDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_send_order_details);
 
-        btnSendOrder = findViewById((R.id.send_order_button));
+        btnSendOrder = findViewById((R.id.food_ready_button));
         tvOrderID = findViewById(R.id.send_order_id);
         tvOrderState = findViewById(R.id.send_order_state);
         tvOrderAmount = findViewById(R.id.send_order_food_amount);
@@ -85,6 +86,8 @@ public class AdminSendOrderDetails extends AppCompatActivity {
         tvCustomerPhone = findViewById(R.id.send_order_customer_phone);
         tvCustomerAddress = findViewById(R.id.send_order_customer_address);
         tvCustomerCity = findViewById(R.id.send_order_customer_city);
+        tvDriverNameHeader = findViewById(R.id.send_order_driver_name_header);
+        tvDriverName = findViewById(R.id.send_order_driver_name);
         ImageView ivSendOrderDetailsBack = findViewById(R.id.asod_back);
         recyclerView = findViewById(R.id.rv_asod);
         recyclerView.setHasFixedSize(true);
@@ -98,6 +101,7 @@ public class AdminSendOrderDetails extends AppCompatActivity {
         UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
         OrdersRef = FirebaseDatabase.getInstance().getReference().child("Orders");
         CartsRef = FirebaseDatabase.getInstance().getReference().child("Cart List").child("Admin View");
+        DelRef = FirebaseDatabase.getInstance().getReference().child("Delivery");
 
         // progressing bar to let user know it is processing
         loadingBar = new ProgressDialog(this);
@@ -117,154 +121,16 @@ public class AdminSendOrderDetails extends AppCompatActivity {
         ivSendOrderDetailsBack.setOnClickListener(v -> onBackPressed());
 
         btnSendOrder.setOnClickListener(v -> {
-            // Check GPS ON/OFF STATE
-            checkGPSState();
+            // change order state
+            changeState();
         });
-    }
-
-    LocationCallback locationCallback = new LocationCallback() {
-        @Override
-        public void onLocationResult(@NonNull LocationResult locationResult) {
-            super.onLocationResult(locationResult);
-
-            // Reference for Delivery
-            DatabaseReference DelRef = FirebaseDatabase.getInstance().getReference().child("Delivery");
-            HashMap<String, Object> deliveryMap = new HashMap<>();
-
-            if (locationResult == null)
-                return;
-
-            for (Location location: locationResult.getLocations()) {
-                Log.d("Location123", location.toString());
-
-                // Location UPDATES to Firebase
-                deliveryMap.put("deliveryID", getIntent().getStringExtra("orderID"));
-                deliveryMap.put("latitude", location.getLatitude());
-                deliveryMap.put("longitude", location.getLongitude());
-
-                DelRef.child(getIntent().getStringExtra("orderID")).updateChildren(deliveryMap).addOnCompleteListener(task -> {
-                    if (task.isSuccessful())
-                    {
-                        Log.d("Location123", "Update to Firebase. " + location.toString());
-                    }
-                });
-            }
-        }
-    };
-
-    private void checkGPSState() {
-
-        // check Phone GPS state
-        LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE );
-        boolean statusOfGPS = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-
-        if (statusOfGPS)
-        {
-            // Request Location Permissions
-            requestLocationPermission();
-        }
-        else
-            Toast.makeText(this, "GPS is Required, Please Turn On", Toast.LENGTH_SHORT).show();
-
-    }
-
-    private void requestLocationPermission() {
-        if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
-
-            new AlertDialog.Builder(this)
-                    .setTitle("Permission Required")
-                    .setMessage("This app needs access to your GPS")
-                    .setPositiveButton("ok", (dialog, which) ->
-                            ActivityCompat.requestPermissions(AdminSendOrderDetails.this,
-                                    new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
-                                    LOCATION_PERMISSION_CODE))
-                    .setNegativeButton("cancel", (dialog, which) -> dialog.dismiss())
-                    .create().show();
-        } else { // first time ask permission
-            ActivityCompat.requestPermissions(this, new
-                    String[] {Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_CODE);
-        }
-    }
-
-    // handle result of runtime permission
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if (requestCode == LOCATION_PERMISSION_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // permission was GRANTED
-                // Location KEEP UPDATES
-                checkSettingAndStartLocationUpdates();
-
-                // change order state
-                changeState();
-            } else if (deniedCount > 1) { // If denied permanently
-                new AlertDialog.Builder(this)
-                        .setTitle("Permission Required")
-                        .setMessage("This app may not work correctly without the requested permissions. " +
-                                "Open the app settings screen to modify app permissions.")
-                        .setPositiveButton("ok", (dialog, which) -> dialog.dismiss())
-                        .create().show();
-            } else {
-                // permission was DENIED
-                Toast.makeText(this, "Permission DENIED", Toast.LENGTH_SHORT).show();
-                deniedCount++;
-            }
-        }
-    }
-
-    // Check whether the setting has fulfilled
-    private void checkSettingAndStartLocationUpdates() {
-        LocationSettingsRequest request = new LocationSettingsRequest.Builder()
-                .addLocationRequest(locationRequest).build();
-        SettingsClient client = LocationServices.getSettingsClient(this);
-
-        Task<LocationSettingsResponse> locationSettingsResponseTask = client.checkLocationSettings(request);
-        locationSettingsResponseTask.addOnSuccessListener(locationSettingsResponse -> {
-            // Settings of device are satisfied and we can START LOCATION UPDATES
-            startLocationUpdates();
-        }).addOnFailureListener(e -> {
-            if (e instanceof ResolvableApiException) {
-                ResolvableApiException apiException = (ResolvableApiException) e;
-                try {
-                    apiException.startResolutionForResult(AdminSendOrderDetails.this, 1001);
-                } catch (IntentSender.SendIntentException ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
-    }
-
-    // START UPDATING
-    private void startLocationUpdates() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
-                PackageManager.PERMISSION_GRANTED) {
-            fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
-        }
-    }
-
-    // STOP UPDATING
-    private void stopLocationUpdates() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
-                PackageManager.PERMISSION_GRANTED) {
-            fusedLocationProviderClient.removeLocationUpdates(locationCallback);
-            Log.d("Location123", "Stop Updating Location");
-        }
     }
 
     // Change Order State
     private void changeState() {
         // loading bar declaration
-        if (tvOrderState.getText().equals("Preparing")) {
-            // loading when processing to SEND ORDER
-            loadingBar.setTitle("Send Order");
-            loadingBar.setMessage("Dear Admin, please wait while we are sending order.");
-        } else {
-            // loading when processing to DONE ORDER
-            loadingBar.setTitle("Done Order");
-            loadingBar.setMessage("Dear Admin, please wait while we have delivered the order.");
-        }
+        loadingBar.setTitle("Order Ready to Send");
+        loadingBar.setMessage("Dear Admin, please wait while we are changing order state.");
         loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.show();
 
@@ -292,34 +158,15 @@ public class AdminSendOrderDetails extends AppCompatActivity {
 
                                             if (postSnapshot.child("state").getValue().equals("P")) {
 
-                                                new AlertDialog.Builder(AdminSendOrderDetails.this)
-                                                        .setTitle("Sending Order")
-                                                        .setMessage("The order is sending. " +
-                                                                "This app will keep track your current location.")
-                                                        .setPositiveButton("ok", (dialog, which) -> dialog.dismiss())
-                                                        .create().show();
-
-                                                OrdersRef.child(snapshot.getKey()).child(orderID).child("state").setValue("S");
+                                                OrdersRef.child(snapshot.getKey()).child(orderID).child("state").setValue("R");
                                                 //Toast.makeText(AdminSendOrderDetails.this, "Order Sent", Toast.LENGTH_SHORT).show();
-                                                btnSendOrder.setText(strDone);
+                                                btnSendOrder.setVisibility(View.GONE);
 
-                                                tvOrderState.setText(strSend);
+                                                tvOrderState.setText(strReady);
                                                 tvOrderState.setBackgroundResource(R.drawable.bg_order_state_sending);
-                                                tvOrderState.setTextColor(Color.parseColor("#007c33"));
+                                                tvOrderState.setTextColor(Color.parseColor("#9b870c"));
                                                 // CLOSE loading bar
                                                 loadingBar.dismiss();
-                                            } else {
-
-                                                stopLocationUpdates();
-
-                                                OrdersRef.child(snapshot.getKey()).child(orderID).child("state").setValue("D");
-                                                Toast.makeText(AdminSendOrderDetails.this, "Order Done", Toast.LENGTH_SHORT).show();
-                                                // CLOSE loading bar
-                                                loadingBar.dismiss();
-
-                                                Intent intent = new Intent(AdminSendOrderDetails.this, AdminSendOrder.class);
-                                                startActivity(intent);
-                                                overridePendingTransition(R.anim.slide_in_left_back, R.anim.slide_out_right_back);
                                                 finish();
                                             }
                                         }
@@ -402,16 +249,53 @@ public class AdminSendOrderDetails extends AppCompatActivity {
                                             tvCustomerPhone.setText(tempCustomerPhone);
                                             tvCustomerAddress.setText(builder.toString());
                                             tvCustomerCity.setText(tempCustomerCity);
-                                            if (tempOrderState.equals("P")) // Preparing State
+                                            if (tempOrderState.equals("P")){// Preparing State
                                                 tvOrderState.setText(strPrepare);
-                                            else if (tempOrderState.equals("S")) { // Sending State
+                                                btnSendOrder.setVisibility(View.VISIBLE);
+                                            } else if (tempOrderState.equals("S")) { // Sending State
                                                 tvOrderState.setText(strSend);
                                                 tvOrderState.setBackgroundResource(R.drawable.bg_order_state_sending);
-                                                tvOrderState.setTextColor(Color.parseColor("#007c33"));
-                                                btnSendOrder.setText(strDone);
+                                                tvOrderState.setTextColor(Color.parseColor("#9b870c"));
+                                                /*btnSendOrder.setText(strDone);*/
+                                                btnSendOrder.setVisibility(View.GONE);
+
+                                                // Driver Name
+                                                tvDriverNameHeader.setVisibility(View.VISIBLE);
+                                                tvDriverName.setVisibility(View.VISIBLE);
+                                                DelRef.child(orderID).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                        if (snapshot.hasChild("driverName")) {
+                                                            tvDriverName.setText(snapshot.child("driverName").getValue().toString());
+                                                        }
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                                    }
+                                                });
                                             } else { // Done State
                                                 tvOrderState.setVisibility(View.INVISIBLE);
                                                 btnSendOrder.setVisibility(View.GONE);
+
+                                                // Driver Name
+                                                tvDriverNameHeader.setVisibility(View.VISIBLE);
+                                                tvDriverName.setVisibility(View.VISIBLE);
+                                                DelRef.child(orderID).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                        if (snapshot.hasChild("driverName")) {
+                                                            String strDriverName = snapshot.child("driverName").getValue().toString();
+                                                            tvDriverName.setText(strDriverName);
+                                                        }
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                                    }
+                                                });
                                             }
 
                                         }
@@ -426,7 +310,7 @@ public class AdminSendOrderDetails extends AppCompatActivity {
                             }
                         });
 
-                        // Cart List -> Admin View -> Phone -> Order ID -> GET Food Details
+                        // Cart List -> Admins View -> Phone -> Order ID -> GET Food Details
                         ArrayList<Cart> orderFoodList = new ArrayList<>();
 
                         CartsRef.child(userPhone).addListenerForSingleValueEvent(new ValueEventListener() {
