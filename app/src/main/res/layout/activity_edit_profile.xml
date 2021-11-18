@@ -182,25 +182,25 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
+            android:background="@drawable/bg_button_user"
             android:padding="17dp"
-            android:textSize="20sp"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/AllButton"
+            android:text="Edit Name"
             android:textAllCaps="false"
-            android:text="Edit Name" />
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/edit_password_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_toEndOf="@id/edit_profile_btn"
             android:layout_marginTop="20dp"
+            android:layout_toEndOf="@id/edit_profile_btn"
+            android:background="@drawable/bg_button_user"
             android:padding="17dp"
-            android:textSize="20sp"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/AllButton"
+            android:text="Edit Password"
             android:textAllCaps="false"
-            android:text="Edit Password" />
+            android:textColor="@color/white"
+            android:textSize="20sp" />
     </RelativeLayout>
 </RelativeLayout>

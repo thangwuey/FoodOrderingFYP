@@ -18,8 +18,8 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginTop="10dp"
-            app:tint="@color/AllButton"
-            android:src="@drawable/ic_back" />
+            android:src="@drawable/ic_back"
+            app:tint="@color/AllButton" />
 
         <TextView
             android:id="@+id/asa_tvSearch"

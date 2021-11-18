@@ -104,13 +104,13 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_below="@id/reload20MYR"
-        android:text="50.00 MYR"
-        android:textStyle="bold"
-        android:textSize="20dp"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
         android:background="@drawable/bg_button_user"
-        android:layout_marginTop="20dp"/>
+        android:text="50.00 MYR"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/reload100MYR"

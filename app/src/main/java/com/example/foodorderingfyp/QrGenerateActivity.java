@@ -24,11 +24,10 @@ public class QrGenerateActivity extends AppCompatActivity {
 
     private Button generateQrCodeNow;
     private TextView qrCodeText;
-    private ImageView qrCodeIV;
+    private ImageView qrCodeIV,qrgenerateBackBtn;
     private TextInputEditText dataEdit;
     private QRGEncoder qrgEncoder;
     private Bitmap bitmap;
-    private Button GoBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,16 +38,8 @@ public class QrGenerateActivity extends AppCompatActivity {
         qrCodeText = (TextView) findViewById(R.id.textQrHeader);
         qrCodeIV = (ImageView) findViewById(R.id.QrCodeImage);
         dataEdit = (TextInputEditText) findViewById(R.id.idEditData);
-        GoBack = (Button) findViewById(R.id.generateQrCodeBack);
-
-        GoBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(QrGenerateActivity.this, WalletActivity.class);
-                finish();
-                startActivity(intent);
-            }
-        });
+        qrgenerateBackBtn = findViewById(R.id.qrgenerate_back);
+        qrgenerateBackBtn.setOnClickListener(v -> onBackPressed());
 
 
         generateQrCodeNow.setOnClickListener(new View.OnClickListener() {

@@ -6,12 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class LanguageActivity extends AppCompat {
 
     private Button english1,chinese1;
-    private Button backBtn;
+    private ImageView languagebackBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +21,8 @@ public class LanguageActivity extends AppCompat {
 
         english1 = findViewById(R.id.englishword);
         chinese1 = findViewById(R.id.chineseword);
-        backBtn = findViewById(R.id.backbutton);
+
+        languagebackBtn = findViewById(R.id.language_backBtn);
 
         LanguageManager lang = new LanguageManager(this);
 
@@ -33,6 +35,8 @@ public class LanguageActivity extends AppCompat {
             }
         });
 
+        languagebackBtn.setOnClickListener(v -> onBackPressed());
+
         chinese1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,13 +46,6 @@ public class LanguageActivity extends AppCompat {
             }
         });
 
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LanguageActivity.this,ProfileActivity.class);
-                startActivity(intent);
-            }
-        });
 
     }
 }

@@ -6,13 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".LanguageActivity">
 
+
+    <ImageView
+        android:id="@+id/language_backBtn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_back"
+        app:tint="@color/AllButton" />
+
     <TextView
         android:id="@+id/applicationLanguage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="60dp"
         android:text="@string/selectlanguageheader"
+        android:textStyle="bold"
         android:textAlignment="center"
         android:textSize="30sp" />
 
@@ -26,7 +36,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginTop="80dp"
         android:layout_marginRight="30dp"
-        android:backgroundTint="@color/AllButton"
+        android:background="@drawable/bg_button_user"
         android:text="@string/englishword"
         android:textColor="@color/white"
         android:textSize="25sp" />
@@ -41,24 +51,10 @@
         android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="30dp"
-        android:backgroundTint="@color/AllButton"
+        android:background="@drawable/bg_button_user"
         android:text="@string/chineseword"
         android:textColor="@color/white"
         android:textSize="25sp" />
 
-    <Button
-        android:id="@+id/backbutton"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_below="@id/chineseword"
-        android:layout_centerVertical="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="250dp"
-        android:layout_marginRight="60dp"
-        android:backgroundTint="@color/AllButton"
-        android:text="@string/back"
-        android:textColor="@color/white"
-        android:textSize="25sp" />
 
 </RelativeLayout>
