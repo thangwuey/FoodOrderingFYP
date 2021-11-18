@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserOrderDetails">
+
+    <!--BACK icon-->
+    <ImageView
+        android:id="@+id/uod_back"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        app:tint="@color/AllButton"
+        android:src="@drawable/ic_back" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Order Details"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:textAlignment="center"
+        android:textColor="@color/AllButton"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <!--scroll function-->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_dod"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/uod_back">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="20dp"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:id="@+id/uod_order_details_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Order Details"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <!--Order Details-->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/uod_order_details_cardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="5dp"
+                    app:cardBackgroundColor="@color/frameColor"
+                    android:layout_below="@+id/uod_order_details_header">
+
+                    <RelativeLayout
+                        android:id="@+id/uod_order_details_rl_wrapper"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/uod_order_details_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="10dp"
+                            android:drawablePadding="10dp"
+                            android:gravity="center_vertical"
+                            android:text="Order No"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            app:drawableStartCompat="@drawable/ic_order_no"
+                            app:drawableTint="@color/AllButton" />
+
+                        <TextView
+                            android:id="@+id/uod_order_details_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:drawablePadding="10dp"
+                            android:layout_below="@+id/uod_order_details_no"
+                            android:gravity="center_vertical"
+                            android:text="Date"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            app:drawableStartCompat="@drawable/ic_time"
+                            app:drawableTint="@color/AllButton" />
+
+                        <TextView
+                            android:id="@+id/uod_order_details_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:drawablePadding="10dp"
+                            android:layout_below="@+id/uod_order_details_date"
+                            android:gravity="center_vertical"
+                            android:text="Time"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            app:drawableStartCompat="@drawable/ic_time"
+                            app:drawableTint="@color/AllButton" />
+
+                        <View
+                            android:id="@+id/uod_order_details_line"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_margin="10dp"
+                            android:layout_below="@id/uod_order_details_time"
+                            android:background="#808080" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!--Customer Info-->
+                <TextView
+                    android:id="@+id/uod_customer_info_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="10dp"
+                    android:text="Customer Info"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    android:layout_below="@+id/uod_order_details_cardView"
+                    android:textStyle="bold" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/uod_customer_info_cardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="5dp"
+                    app:cardBackgroundColor="@color/frameColor"
+                    android:layout_below="@+id/uod_customer_info_header">
+
+                    <RelativeLayout
+                        android:id="@+id/uod_customer_info_rl_wrapper"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/uod_customer_info_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="10dp"
+                            android:drawablePadding="10dp"
+                            android:gravity="center_vertical"
+                            android:text="Name"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            app:drawableStartCompat="@drawable/ic_username"
+                            app:drawableTint="@color/AllButton" />
+
+                        <TextView
+                            android:id="@+id/uod_customer_info_phone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:drawablePadding="10dp"
+                            android:layout_below="@+id/uod_customer_info_name"
+                            android:gravity="center_vertical"
+                            android:text="Phone"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            app:drawableStartCompat="@drawable/ic_phone"
+                            app:drawableTint="@color/AllButton" />
+
+                        <ImageView
+                            android:id="@+id/uod_customer_info_iv_address"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:src="@drawable/ic_home_address"
+                            android:layout_below="@+id/uod_customer_info_phone"
+                            app:tint="@color/AllButton" />
+
+                        <TextView
+                            android:id="@+id/uod_customer_info_address"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_toEndOf="@+id/uod_customer_info_iv_address"
+                            android:layout_below="@+id/uod_customer_info_phone"
+                            android:gravity="center_vertical"
+                            android:text="Address"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/uod_customer_info_city"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:drawablePadding="10dp"
+                            android:layout_below="@+id/uod_customer_info_address"
+                            android:gravity="center_vertical"
+                            android:text="City"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            app:drawableStartCompat="@drawable/ic_city"
+                            app:drawableTint="@color/AllButton" />
+
+                        <View
+                            android:id="@+id/uod_customer_info_line"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_margin="10dp"
+                            android:layout_below="@id/uod_customer_info_city"
+                            android:background="#808080" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+
+                <!--Food Orders-->
+                <TextView
+                    android:id="@+id/uod_food_orders_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="10dp"
+                    android:text="Food Orders"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    android:layout_below="@+id/uod_customer_info_cardView"
+                    android:textStyle="bold" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/uod_food_orders_cardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="5dp"
+                    app:cardBackgroundColor="@color/frameColor"
+                    android:layout_below="@+id/uod_food_orders_header">
+
+                    <RelativeLayout
+                        android:id="@+id/uod_food_orders_rl_wrapper"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/uod_food_orders_details_header"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="10dp"
+                            android:drawablePadding="10dp"
+                            android:gravity="center_vertical"
+                            android:text="Food Details"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                        <View
+                            android:id="@+id/uod_food_orders_details_line"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_margin="10dp"
+                            android:layout_below="@id/uod_food_orders_details_header"
+                            android:background="#808080" />
+
+                        <!--// recycler view-->
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_uod"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollbars="vertical"
+                            android:layout_below="@id/uod_food_orders_details_line"/>
+
+                        <View
+                            android:id="@+id/uod_food_orders_details_line2"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_margin="10dp"
+                            android:layout_below="@id/rv_uod"
+                            android:background="#808080" />
+
+                        <TextView
+                            android:id="@+id/uod_total_header"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_below="@+id/uod_food_orders_details_line2"
+                            android:text="Total Amount"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/uod_total"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_below="@+id/uod_food_orders_details_line2"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+
+            </RelativeLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

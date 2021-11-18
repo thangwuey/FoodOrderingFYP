@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditProfile">
+
+    <ImageView
+        android:id="@+id/edit_profile_back"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        app:tint="@color/AllButton"
+        android:src="@drawable/ic_back" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="User Profile"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:textAlignment="center"
+        android:textColor="@color/AllButton"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/edit_profile_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:text="Account Info"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:layout_below="@+id/edit_profile_back"
+        android:textStyle="bold" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/edit_profile_cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="5dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        app:cardBackgroundColor="@color/frameColor"
+        android:layout_below="@+id/edit_profile_header">
+
+        <RelativeLayout
+            android:id="@+id/edit_profile_rl_wrapper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/user_profile_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:text="Username"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:drawableStartCompat="@drawable/ic_username"
+                app:drawableTint="@color/AllButton" />
+
+            <TextView
+                android:id="@+id/user_profile_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:drawablePadding="10dp"
+                android:layout_below="@+id/user_profile_username"
+                android:gravity="center_vertical"
+                android:text="Password"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:drawableStartCompat="@drawable/ic_password"
+                app:drawableTint="@color/AllButton" />
+
+            <View
+                android:id="@+id/edit_profile_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="10dp"
+                android:layout_below="@id/user_profile_password"
+                android:background="#808080" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/edit_profile_field_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        android:text="Edit Field"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:layout_below="@+id/edit_profile_cardView"
+        android:textStyle="bold" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_edit_profile_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:textColorHint="@color/til_color"
+        app:startIconDrawable="@drawable/ic_username"
+        app:startIconTint="@color/til_color"
+        app:boxStrokeColor="@color/til_color"
+        app:endIconMode="clear_text"
+        app:hintTextColor="@color/til_color"
+        android:layout_below="@+id/edit_profile_field_header">
+
+
+        <EditText
+            android:id="@+id/edit_profile_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="Profile Name"
+            android:inputType="textPersonName"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:maxLength="35"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+            android:singleLine="true"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_edit_profile_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="30dp"
+        android:padding="15dp"
+        android:textColorHint="@color/til_color"
+        app:boxStrokeColor="@color/til_color"
+        app:startIconDrawable="@drawable/ic_password"
+        app:startIconTint="@color/til_color"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/til_color"
+        app:hintTextColor="@color/til_color"
+        android:layout_below="@+id/til_edit_profile_name">
+
+
+        <EditText
+            android:id="@+id/edit_profile_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:ems="10"
+            android:hint="New Password"
+            android:inputType="textVisiblePassword"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:maxLength="30"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <RelativeLayout
+        android:id="@+id/rp_rl2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:gravity="center"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/edit_profile_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:padding="17dp"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/AllButton"
+            android:textAllCaps="false"
+            android:text="Edit Name" />
+
+        <Button
+            android:id="@+id/edit_password_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_toEndOf="@id/edit_profile_btn"
+            android:layout_marginTop="20dp"
+            android:padding="17dp"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/AllButton"
+            android:textAllCaps="false"
+            android:text="Edit Password" />
+    </RelativeLayout>
+</RelativeLayout>

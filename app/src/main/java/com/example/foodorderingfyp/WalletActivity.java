@@ -31,7 +31,7 @@ import Prevalent.Prevalent;
 
 public class WalletActivity extends AppCompat {
 
-    private Button reload10,reload20,reload50,reload100;
+    private Button reload10,reload20,reload50,reload100,qrGenerator,qrScanner;
     private TextView showBalance;
     boolean shouldExit = false; // press back button to EXIT
     Snackbar snackbar;
@@ -57,6 +57,8 @@ public class WalletActivity extends AppCompat {
         reload50 = (Button) findViewById(R.id.reload50MYR);
         reload100 = (Button) findViewById(R.id.reload100MYR);
         showBalance = (TextView) findViewById(R.id.textViewMoney);
+        qrGenerator = (Button) findViewById(R.id.QrGenerator);
+        qrScanner = (Button) findViewById(R.id.QrScanner);
 
         final DatabaseReference WalletRef;
         WalletRef = FirebaseDatabase.getInstance().getReference();
@@ -79,6 +81,23 @@ public class WalletActivity extends AppCompat {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+        qrScanner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WalletActivity.this, QrScannerActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        qrGenerator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(WalletActivity.this, QrGenerateActivity.class);
+                startActivity(intent);
             }
         });
 

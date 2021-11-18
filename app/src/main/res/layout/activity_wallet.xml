@@ -11,11 +11,11 @@
         android:id="@+id/textViewBalance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="BALANCE"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:text="@string/balance"
         android:textSize="40sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/textViewMoney"
@@ -32,29 +32,52 @@
         android:id="@+id/textViewMYR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MYR"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/textViewMoney"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
+        android:text="MYR"
         android:textSize="25sp"
-        android:textStyle="bold"/>
-
-    <TextView
-        android:id="@+id/textViewMethod"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewMYR"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="30dp"
-        android:text="@string/selectreloadamount"
-        android:textSize="20sp"
         android:textStyle="bold" />
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewMYR">
+
+        <TextView
+            android:id="@+id/textViewMethod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:text="Select Reload Amount:"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/QrGenerator"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="250dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/ic_baseline_qr_code_24" />
+
+        <Button
+            android:id="@+id/QrScanner"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="310dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/ic_baseline_qr_code_scanner_24"/>
+
+    </RelativeLayout>
 
     <Button
         android:id="@+id/reload10MYR"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_below="@id/textViewMethod"
+        android:layout_below="@id/header"
         android:text="10.00 MYR"
         android:textStyle="bold"
         android:textSize="20dp"

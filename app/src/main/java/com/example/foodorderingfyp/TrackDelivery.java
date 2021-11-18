@@ -2,7 +2,6 @@ package com.example.foodorderingfyp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,7 +39,6 @@ import ViewHolder.TrackDeliveryViewHolder;
 
 public class TrackDelivery extends AppCompatActivity {
 
-    private ImageView ivTrackDeliveryBack;
     private DatabaseReference OrdersRef;
     private RecyclerView currentRecyclerView, pastRecyclerView;
     RecyclerView.LayoutManager layoutManager;
@@ -51,7 +49,8 @@ public class TrackDelivery extends AppCompatActivity {
         setContentView(R.layout.activity_track_delivery);
 
         // Database Reference Orders
-        OrdersRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(Prevalent.currentOnlineUser.getPhone());
+        OrdersRef = FirebaseDatabase.getInstance().getReference().child("Orders")
+                .child(Prevalent.currentOnlineUser.getPhone());
 
         // current order
         currentRecyclerView = findViewById(R.id.td_current_rv);
@@ -70,20 +69,9 @@ public class TrackDelivery extends AppCompatActivity {
         pastRecyclerView.setLayoutManager(layoutManager);
 
 
-        ivTrackDeliveryBack = findViewById(R.id.td_back);
+        ImageView ivTrackDeliveryBack = findViewById(R.id.td_back);
 
-        ivTrackDeliveryBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // Got Bug, it can GO BACK if user click PHONE BACK BUTTON
-                /*Intent intent = new Intent(TrackDelivery.this, ProfileActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_left_back, R.anim.slide_out_right_back);*/
-
-                onBackPressed();
-            }
-        });
+        ivTrackDeliveryBack.setOnClickListener(v -> onBackPressed());
     }
 
     // combine Date and Time
@@ -99,8 +87,7 @@ public class TrackDelivery extends AppCompatActivity {
         calendarA.set(Calendar.SECOND, calendarB.get(Calendar.SECOND));
         calendarA.set(Calendar.MILLISECOND, calendarB.get(Calendar.MILLISECOND));
 
-        Date result = calendarA.getTime();
-        return result;
+        return calendarA.getTime();
     }
 
     @Override
@@ -115,17 +102,16 @@ public class TrackDelivery extends AppCompatActivity {
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot)
             {
                 if(snapshot.exists()) {
-
                     // for loop, store specific Orders to currentOrdersFilter
                     for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                         Log.d("OrderID",postSnapshot.getKey());
                         Orders ordersData = postSnapshot.getValue(Orders.class);
                         Log.d("orderstate123",ordersData.getState());
 
-                        // Add to list, if State is P or S
-                        if (ordersData.getState().equals("P") || ordersData.getState().equals("S"))
+                        // Add to list, if State is P or S or R
+                        if (ordersData.getState().equals("P") || ordersData.getState().equals("S") ||
+                                ordersData.getState().equals("R"))
                             currentOrdersFilter.add(ordersData);
-
                     }
 
                 }
@@ -135,10 +121,14 @@ public class TrackDelivery extends AppCompatActivity {
                 Collections.sort(currentOrdersFilter, (o1, o2) -> {
                     try {
                         // String to Date
-                        Date date1 = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse(o1.getDate());
-                        Date time1 = new SimpleDateFormat("HH:mm:ss", Locale.ENGLISH).parse(o1.getTime());
-                        Date date2 = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse(o2.getDate());
-                        Date time2 = new SimpleDateFormat("HH:mm:ss", Locale.ENGLISH).parse(o2.getTime());
+                        Date date1 = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+                                .parse(o1.getDate());
+                        Date time1 = new SimpleDateFormat("HH:mm:ss", Locale.ENGLISH)
+                                .parse(o1.getTime());
+                        Date date2 = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+                                .parse(o2.getDate());
+                        Date time2 = new SimpleDateFormat("HH:mm:ss", Locale.ENGLISH)
+                                .parse(o2.getTime());
 
                         //Combine Date and Time to DateTime
                         Date dt1 = combineDateTime(date1, time1);
@@ -151,103 +141,88 @@ public class TrackDelivery extends AppCompatActivity {
                 });
 
                 // Adapter instead of Firebase Adapter (different declaration)
-                RecyclerView.Adapter<TrackDeliveryViewHolder> mAdapter = new RecyclerView.Adapter<TrackDeliveryViewHolder>() {
-                    @NonNull
-                    @Override
-                    public TrackDeliveryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                        View view = LayoutInflater.from(parent.getContext())
-                                .inflate(R.layout.track_delivery_item_layout, parent, false);
-                        return new TrackDeliveryViewHolder(view);
-                    }
-
-                    @Override
-                    public void onBindViewHolder(@NonNull TrackDeliveryViewHolder holder, int position) {
-
-                        try {
-                            // String time only HOUR, MINUTE
-                            Date hourMinute = new SimpleDateFormat("HH:mm:ss", Locale.ENGLISH).parse(currentOrdersFilter.get(position).getTime());
-                            SimpleDateFormat formatter_to = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
-
-                            String strOrderID = "Order No : " + currentOrdersFilter.get(position).getOrderID();
-                            String strTime = "Time : " + currentOrdersFilter.get(position).getDate() + ", " + formatter_to.format(hourMinute);
-                            String strAmount = "Amount : " + currentOrdersFilter.get(position).getTotalAmount() + ".00 MYR";
-
-                            // holder from TrackDeliveryViewHolder.java
-                            holder.txtTrackOrderID.setText(strOrderID);
-                            holder.txtTrackOrderTime.setText(strTime);
-                            holder.txtTrackOrderAmount.setText(strAmount);
-
-                            if (currentOrdersFilter.get(position).getState().equals("P")) {
-                                /*holder.btnTrack.setText("Cannot Track");
-                                holder.btnTrack.setBackgroundColor(Color.parseColor("#B6B7B5"));
-                                //ContextCompat.getColor(TrackDelivery.this, R.color.gray);
-                                //holder.btnTrack.setBackgroundColor(ContextCompat.getColor(TrackDelivery.this, R.color.gray));
-                                //holder.btnTrack.setBackgroundResource(R.drawable.bg_order_state_prepare);
-                                holder.btnTrack.setTextColor(Color.parseColor("#FFFFFF"));
-                                holder.btnTrack.setEnabled(false);*/
-
-                                holder.btnTrack.setVisibility(View.GONE);
-                                holder.btnCannotTrack.setVisibility(View.VISIBLE);
-                            } else {
-                                //holder.btnTrack.setBackgroundColor(Color.parseColor("#00AD6B"));
-                                holder.btnTrack.setVisibility(View.VISIBLE);
-                                holder.btnCannotTrack.setVisibility(View.GONE);
+                RecyclerView.Adapter<TrackDeliveryViewHolder> mAdapter = new
+                        RecyclerView.Adapter<TrackDeliveryViewHolder>() {
+                            @NonNull
+                            @Override
+                            public TrackDeliveryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                                View view = LayoutInflater.from(parent.getContext())
+                                        .inflate(R.layout.track_delivery_item_layout, parent, false);
+                                return new TrackDeliveryViewHolder(view);
                             }
 
-                            // Track GPS Location
-                            holder.btnCannotTrack.setOnClickListener((view) -> {
-                                Toast.makeText(TrackDelivery.this, "Order is preparing. Please wait for awhile", Toast.LENGTH_SHORT).show();
-                            });
+                            @Override
+                            public void onBindViewHolder(@NonNull TrackDeliveryViewHolder holder, int position) {
 
-                            // Track GPS Location
-                            holder.btnTrack.setOnClickListener((view) -> {
-                                // check Phone GPS state
-                                LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE );
-                                boolean statusOfGPS = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+                                try {
+                                    // String time only HOUR, MINUTE
+                                    Date hourMinute = new SimpleDateFormat("HH:mm:ss", Locale.ENGLISH)
+                                            .parse(currentOrdersFilter.get(position).getTime());
+                                    SimpleDateFormat formatter_to = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
 
-                                if (statusOfGPS) {
-                                    //Intent intent = new Intent(TrackDelivery.this, TrackMapsActivity.class);
-                                    Intent intent = new Intent(TrackDelivery.this, TrackGPSMapActivity.class);
-                                    intent.putExtra("orderID", currentOrdersFilter.get(position).getOrderID());
-                                    intent.putExtra("latitude", currentOrdersFilter.get(position).getLatitude());
-                                    intent.putExtra("longitude", currentOrdersFilter.get(position).getLongitude());
-                                    intent.putExtra("address", currentOrdersFilter.get(position).getAddress());
-                                    startActivity(intent);
+                                    String strOrderID = "Order No : " + currentOrdersFilter.get(position).getOrderID();
+                                    String strTime = "Time : " + currentOrdersFilter.get(position).getDate() +
+                                            ", " + formatter_to.format(hourMinute);
+                                    String strAmount = "Amount : " + currentOrdersFilter.get(position).getTotalAmount() + ".00 MYR";
+
+                                    // holder from TrackDeliveryViewHolder.java
+                                    holder.txtTrackOrderID.setText(strOrderID);
+                                    holder.txtTrackOrderTime.setText(strTime);
+                                    holder.txtTrackOrderAmount.setText(strAmount);
+
+                                    if (currentOrdersFilter.get(position).getState().equals("P") ||
+                                            currentOrdersFilter.get(position).getState().equals("R")) {
+                                        holder.btnTrack.setVisibility(View.GONE);
+                                        holder.btnCannotTrack.setVisibility(View.VISIBLE);
+                                    } else {
+                                        holder.btnTrack.setVisibility(View.VISIBLE);
+                                        holder.btnCannotTrack.setVisibility(View.GONE);
+                                    }
+                                    holder.btnViewDetails.setVisibility(View.VISIBLE);
+
+                                    // Cannot Track
+                                    holder.btnCannotTrack.setOnClickListener((view) ->
+                                            Toast.makeText(TrackDelivery.this,
+                                                    "Order is preparing. Please wait for awhile",
+                                                    Toast.LENGTH_SHORT).show());
+
+                                    // View Details
+                                    holder.btnViewDetails.setOnClickListener((view) -> {
+                                        Intent intent = new Intent(TrackDelivery.this, UserOrderDetails.class);
+                                        intent.putExtra("orderID", currentOrdersFilter.get(position).getOrderID());
+                                        startActivity(intent);
+                                    });
+
+                                    // Track GPS Location
+                                    holder.btnTrack.setOnClickListener((view) -> {
+                                        // check Phone GPS state
+                                        LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE );
+                                        boolean statusOfGPS = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+                                        if (statusOfGPS) {
+                                            //Intent intent = new Intent(TrackDelivery.this, TrackMapsActivity.class);
+                                            Intent intent = new Intent(TrackDelivery.this, TrackGPSMapActivity.class);
+                                            intent.putExtra("orderID", currentOrdersFilter.get(position).getOrderID());
+                                            intent.putExtra("latitude", currentOrdersFilter.get(position).getLatitude());
+                                            intent.putExtra("longitude", currentOrdersFilter.get(position).getLongitude());
+                                            intent.putExtra("address", currentOrdersFilter.get(position).getAddress());
+                                            startActivity(intent);
+                                        }
+                                        else
+                                            Toast.makeText(TrackDelivery.this,
+                                                    "GPS is Required, Please Turn On", Toast.LENGTH_SHORT).show();
+                                    });
+
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
                                 }
-                                else
-                                    Toast.makeText(TrackDelivery.this, "GPS is Required, Please Turn On", Toast.LENGTH_SHORT).show();
-                            });
+                            }
 
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-
-                        /*String strOrderID = "Order No : " + currentOrdersFilter.get(position).getOrderID();
-                        String strTime = "Time : " + currentOrdersFilter.get(position).getDate() + ", " + currentOrdersFilter.get(position).getTime();
-                        String strAmount = "Amount : " + currentOrdersFilter.get(position).getTotalAmount() + ".00 MYR";
-
-                        // holder from TrackDeliveryViewHolder.java
-                        holder.txtTrackOrderID.setText(strOrderID);
-                        holder.txtTrackOrderTime.setText(strTime);
-                        holder.txtTrackOrderAmount.setText(strAmount);
-
-                        if (currentOrdersFilter.get(position).getState().equals("P")) {
-                            holder.btnTrack.setText("Cannot Track");
-                            holder.btnTrack.setBackgroundColor(Color.parseColor("#B6B7B5"));
-                            //ContextCompat.getColor(TrackDelivery.this, R.color.gray);
-                            //holder.btnTrack.setBackgroundColor(ContextCompat.getColor(TrackDelivery.this, R.color.gray));
-                            //holder.btnTrack.setBackgroundResource(R.drawable.bg_order_state_prepare);
-                            holder.btnTrack.setTextColor(Color.parseColor("#FFFFFF"));
-                        } else {
-                            holder.btnTrack.setBackgroundColor(Color.parseColor("#00AD6B"));
-                        }*/
-                    }
-
-                    @Override
-                    public int getItemCount() {
-                        return currentOrdersFilter.size();
-                    }
-                };
+                            @Override
+                            public int getItemCount() {
+                                return currentOrdersFilter.size();
+                            }
+                        };
 
                 currentRecyclerView.setAdapter(mAdapter);
                 mAdapter.notifyDataSetChanged();
@@ -275,7 +250,7 @@ public class TrackDelivery extends AppCompatActivity {
                         Orders ordersData = postSnapshot.getValue(Orders.class);
                         Log.d("orderstate123",ordersData.getState());
 
-                        // Add to list, if State is P
+                        // Add to list, if State is D
                         if (ordersData.getState().equals("D"))
                             pastOrdersFilter.add(ordersData);
                     }
@@ -317,11 +292,13 @@ public class TrackDelivery extends AppCompatActivity {
 
                         try {
                             // String time only HOUR, MINUTE
-                            Date hourMinute = new SimpleDateFormat("HH:mm:ss", Locale.ENGLISH).parse(pastOrdersFilter.get(position).getTime());
+                            Date hourMinute = new SimpleDateFormat("HH:mm:ss", Locale.ENGLISH)
+                                    .parse(pastOrdersFilter.get(position).getTime());
                             SimpleDateFormat formatter_to = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
 
                             String strOrderID = "Order No : " + pastOrdersFilter.get(position).getOrderID();
-                            String strTime = "Order Date : " + pastOrdersFilter.get(position).getDate() + ", " + formatter_to.format(hourMinute);
+                            String strTime = "Order Date : " + pastOrdersFilter.get(position).getDate() +
+                                    ", " + formatter_to.format(hourMinute);
                             String strAmount = "Amount : " + pastOrdersFilter.get(position).getTotalAmount() + ".00 MYR";
 
                             // holder from TrackDeliveryViewHolder.java
@@ -330,23 +307,19 @@ public class TrackDelivery extends AppCompatActivity {
                             holder.txtTrackOrderAmount.setText(strAmount);
 
                             holder.btnTrack.setVisibility(View.GONE);
+                            holder.btnCannotTrack.setVisibility(View.GONE);
+                            holder.btnViewDetails.setVisibility(View.VISIBLE);
 
+                            holder.btnViewDetails.setOnClickListener((view) -> {
+                                Intent intent = new Intent(TrackDelivery.this, UserOrderDetails.class);
+                                intent.putExtra("orderID", pastOrdersFilter.get(position).getOrderID());
+                                startActivity(intent);
+                            });
 
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
 
-                        // NOT GOOD, No need SECOND
-                        /*String strOrderID = "Order No : " + pastOrdersFilter.get(position).getOrderID();
-                        String strTime = "Order Date : " + pastOrdersFilter.get(position).getDate() + ", " + pastOrdersFilter.get(position).getTime();
-                        String strAmount = "Amount : " + pastOrdersFilter.get(position).getTotalAmount() + ".00 MYR";
-
-                        // holder from TrackDeliveryViewHolder.java
-                        holder.txtTrackOrderID.setText(strOrderID);
-                        holder.txtTrackOrderTime.setText(strTime);
-                        holder.txtTrackOrderAmount.setText(strAmount);
-
-                        holder.btnTrack.setVisibility(View.GONE);*/
                     }
 
                     @Override
@@ -365,60 +338,5 @@ public class TrackDelivery extends AppCompatActivity {
 
             }
         });
-
-        /*// to configure adapter
-        FirebaseRecyclerOptions<Orders> options =
-                new FirebaseRecyclerOptions.Builder<Orders>()
-                        .setQuery(OrdersRef, Orders.class)
-                        .build();
-        Log.d("userphone", Prevalent.currentOnlineUser.getPhone());
-
-
-        // <T, ViewHolder>
-        FirebaseRecyclerAdapter<Orders, TrackDeliveryViewHolder> adapter =
-                new FirebaseRecyclerAdapter<Orders, TrackDeliveryViewHolder>(options) {
-                    @Override
-                    protected void onBindViewHolder(@NonNull TrackDeliveryViewHolder holder, int position, @NonNull Orders model)
-                    {
-                        if (model.getState().equals("S")) {
-                            String strAmount = model.getTotalAmount() + ".00 MYR";
-
-                            // holder from TrackDeliveryViewHolder.java
-                            holder.txtTrackOrderID.setText(model.getOrderID());
-                            holder.txtTrackOrderTime.setText(model.getTime());
-                            holder.txtTrackOrderAmount.setText(strAmount);
-                        }
-
-                        //holder.btnArrow.setBackgroundResource(R.drawable.ic_show_more);
-
-                        // get Order ID
-                        holder.cvCardView.setOnClickListener((view) -> {
-                            Intent intent = new Intent(AdminSendOrder.this,AdminDeleteFoodItem.class);
-                            intent.putExtra("orderID", model.getOrderID());
-                            startActivity(intent);
-                            if (holder.rlExpandableLayout.getVisibility()==View.GONE) {
-                                TransitionManager.beginDelayedTransition(holder.cvCardView, new AutoTransition());
-                                holder.rlExpandableLayout.setVisibility(View.VISIBLE);
-                                holder.btnArrow.setBackgroundResource(R.drawable.ic_show_less);
-                            } else {
-                                TransitionManager.beginDelayedTransition(holder.cvCardView, new AutoTransition());
-                                holder.rlExpandableLayout.setVisibility(View.GONE);
-                                holder.btnArrow.setBackgroundResource(R.drawable.ic_show_more);
-                            }
-
-                        });
-                    }
-
-                    @NonNull
-                    @Override   // copy and create view into recyclerView from track_delivery_item_layout.xml
-                    public TrackDeliveryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
-                    {
-                        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.track_delivery_item_layout, parent, false);
-                        TrackDeliveryViewHolder holder = new TrackDeliveryViewHolder(view);
-                        return holder;
-                    }
-                };
-        recyclerView.setAdapter(adapter);
-        adapter.startListening();*/
     }
 }

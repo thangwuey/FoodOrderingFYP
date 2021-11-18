@@ -2,6 +2,7 @@ package com.example.foodorderingfyp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.app.Activity;
 import android.content.Context;
@@ -29,13 +30,15 @@ import java.util.Locale;
 
 public class ProfileActivity extends AppCompat {
 
-    private Button logoutBtn;
-    private Button trackDeliveryBtn,securityquestionsBtn;
+    //private Button logoutBtn;
+    //private Button securityquestionsBtn;
     boolean shouldExit = false; // press back button to EXIT
     Snackbar snackbar;
     RelativeLayout relativeLayout; // Snack Bar purpose
     public static final String[] languages = {"English","Malay","Chinese"};
-    private Button language1;
+    //private Button language1;
+
+    CardView cvProfile, cvOrder,cvLanguage,cvLogout,securityquestionsBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +49,11 @@ public class ProfileActivity extends AppCompat {
         // for Snack Bar
         relativeLayout = findViewById(R.id.user_profile_layout); //new
 
-        logoutBtn = (Button) findViewById(R.id.logout);
-        trackDeliveryBtn = (Button) findViewById(R.id.trackDelivery) ;
-        language1 = (Button) findViewById(R.id.languagechanger);
-        securityquestionsBtn = (Button) findViewById(R.id.security_questions_btn);
+        cvLogout = findViewById(R.id.cv_user_logout);
+        cvOrder = findViewById(R.id.cv_track_order) ;
+        cvLanguage = findViewById(R.id.cv_language);
+        cvProfile = findViewById(R.id.cv_edit_profile);
+        securityquestionsBtn = findViewById(R.id.security_questions_btn);
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
@@ -68,7 +72,15 @@ public class ProfileActivity extends AppCompat {
             }
         });
 
-        language1.setOnClickListener(new View.OnClickListener() {
+        cvProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, EditProfile.class);
+                startActivity(intent);
+            }
+        });
+
+        cvLanguage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProfileActivity.this, LanguageActivity.class);
@@ -76,7 +88,7 @@ public class ProfileActivity extends AppCompat {
             }
         });
 
-        trackDeliveryBtn.setOnClickListener(new View.OnClickListener() {
+        cvOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProfileActivity.this, TrackDelivery.class);
@@ -84,7 +96,7 @@ public class ProfileActivity extends AppCompat {
             }
         });
 
-        logoutBtn.setOnClickListener(new View.OnClickListener() {
+        cvLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(ProfileActivity.this,"Thanks For Using WuJiak See You Again !:)",Toast.LENGTH_SHORT).show();
