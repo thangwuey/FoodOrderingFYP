@@ -38,7 +38,7 @@ public class ProfileActivity extends AppCompat {
     public static final String[] languages = {"English","Malay","Chinese"};
     //private Button language1;
 
-    CardView cvProfile, cvOrder,cvLanguage,cvLogout,securityquestionsBtn;
+    CardView cvProfile, cvOrder,cvLanguage,cvLogout,securityquestionsBtn,translatorBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +54,21 @@ public class ProfileActivity extends AppCompat {
         cvLanguage = findViewById(R.id.cv_language);
         cvProfile = findViewById(R.id.cv_edit_profile);
         securityquestionsBtn = findViewById(R.id.security_questions_btn);
+        translatorBtn = findViewById(R.id.translatorBtn);
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
         //activity default
         bottomNav.setSelectedItemId(R.id.profile);
+
+        translatorBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, TranslatorActivity.class);
+                startActivity(intent);
+            }
+        });
 
         securityquestionsBtn.setOnClickListener(new View.OnClickListener() {
             @Override

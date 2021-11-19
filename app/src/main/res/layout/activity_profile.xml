@@ -194,6 +194,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/translatorBtn"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_row="2"
@@ -201,10 +202,9 @@
             android:layout_column="0"
             android:layout_columnWeight="1"
             android:layout_gravity="fill"
-            android:clickable="false"
+            android:clickable="true"
             android:focusable="false"
             android:foreground="?attr/selectableItemBackground"
-            android:visibility="gone"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
             app:cardUseCompatPadding="true">
@@ -219,19 +219,20 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_logout"
-                    app:tint="@color/admin_dominant" />
+                    android:src="@drawable/ic_baseline_translate_24"
+                    app:tint="@color/AllButton" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Logout"
+                    android:text="@string/translatorCard"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/security_questions_btn"
@@ -257,8 +258,8 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:tint="@color/AllButton"
-                    android:src="@drawable/ic_baseline_question_answer_24" />
+                    android:src="@drawable/ic_baseline_question_answer_24"
+                    app:tint="@color/AllButton" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -280,8 +281,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/AllButton"
-        app:itemTextColor="@color/white"
         app:itemIconTint="@color/white"
-        app:menu="@menu/bottom_navigation"/>
+        app:itemTextColor="@color/white"
+        app:menu="@menu/bottom_navigation" />
 
 </RelativeLayout>

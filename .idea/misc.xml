@@ -20,7 +20,10 @@
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/drawable/bg_radio_jt_text_color.xml" value="0.20416666666666666" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/drawable/bg_spinner.xml" value="0.1" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/drawable/ic_baseline_image_24.xml" value="0.12314814814814815" />
+        <entry key="..\:/FoodOrderingFYP/app/src/main/res/drawable/ic_baseline_mic_24.xml" value="0.1953125" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/drawable/ic_baseline_qr_code_24.xml" value="0.1" />
+        <entry key="..\:/FoodOrderingFYP/app/src/main/res/drawable/ic_baseline_question_answer_24.xml" value="0.2546875" />
+        <entry key="..\:/FoodOrderingFYP/app/src/main/res/drawable/ic_baseline_translate_24.xml" value="0.2546875" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/drawable/ic_driver.xml" value="0.1" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/drawable/ic_history.xml" value="0.1" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/drawable/ic_language.xml" value="0.1" />
@@ -67,7 +70,7 @@
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_select_address.xml" value="0.176" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_track_delivery.xml" value="0.264" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_track_gps_map.xml" value="0.2" />
-        <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_translator.xml" value="0.13106796116504854" />
+        <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_translator.xml" value="0.2" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_user_order_details.xml" value="0.2" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/activity_wallet.xml" value="0.2" />
         <entry key="..\:/FoodOrderingFYP/app/src/main/res/layout/admin_food_item_layout.xml" value="0.16" />

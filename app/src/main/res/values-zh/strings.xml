@@ -84,6 +84,8 @@
     <string name="chineseLanguage">华文</string>
     <string name="translateBtn">翻译</string>
     <string name="to">换</string>
-    <string name="translator">翻译</string>
+    <string name="translator">翻译语言</string>
+    <string name="translatorCard">翻译</string>
+    <string name="saySomething">请说话</string>
 
 </resources>

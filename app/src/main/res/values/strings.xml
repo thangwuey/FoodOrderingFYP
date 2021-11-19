@@ -84,4 +84,6 @@
     <string name="translateBtn">Translate</string>
     <string name="to">To</string>
     <string name="translator">Translator</string>
+    <string name="translatorCard">Translator</string>
+    <string name="saySomething"> Say Something</string>
 </resources>
