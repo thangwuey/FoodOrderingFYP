@@ -18,10 +18,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Order Details"
-        android:layout_marginTop="10dp"
         android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="25dp"
+        android:text="@string/orderDetails"
         android:textAlignment="center"
         android:textColor="@color/AllButton"
         android:textSize="30sp"
@@ -57,7 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="Order Details"
+                    android:text="@string/orderDetails1"
                     android:textColor="@color/black"
                     android:textSize="25sp"
                     android:textStyle="bold" />
@@ -136,12 +136,12 @@
                     android:id="@+id/uod_customer_info_header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_below="@+id/uod_order_details_cardView"
                     android:layout_marginStart="10dp"
-                    android:text="Customer Info"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/customerInfo"
                     android:textColor="@color/black"
                     android:textSize="25sp"
-                    android:layout_below="@+id/uod_order_details_cardView"
                     android:textStyle="bold" />
 
                 <androidx.cardview.widget.CardView
@@ -239,12 +239,12 @@
                     android:id="@+id/uod_food_orders_header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_below="@+id/uod_customer_info_cardView"
                     android:layout_marginStart="10dp"
-                    android:text="Food Orders"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/foodOrders"
                     android:textColor="@color/black"
                     android:textSize="25sp"
-                    android:layout_below="@+id/uod_customer_info_cardView"
                     android:textStyle="bold" />
 
                 <androidx.cardview.widget.CardView
@@ -267,8 +267,8 @@
                             android:id="@+id/uod_food_orders_details_header"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
                             android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
                             android:drawablePadding="10dp"
                             android:gravity="center_vertical"
                             android:text="Food Details"

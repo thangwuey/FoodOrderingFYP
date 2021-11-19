@@ -17,10 +17,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="User Profile"
-        android:layout_marginTop="10dp"
         android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="25dp"
+        android:text="@string/userProfile"
         android:textAlignment="center"
         android:textColor="@color/AllButton"
         android:textSize="30sp"
@@ -30,12 +30,12 @@
         android:id="@+id/edit_profile_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_profile_back"
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
-        android:text="Account Info"
+        android:text="@string/accountInfo"
         android:textColor="@color/black"
         android:textSize="25sp"
-        android:layout_below="@+id/edit_profile_back"
         android:textStyle="bold" />
 
     <androidx.cardview.widget.CardView
@@ -98,12 +98,12 @@
         android:id="@+id/edit_profile_field_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_profile_cardView"
         android:layout_marginStart="30dp"
         android:layout_marginTop="50dp"
-        android:text="Edit Field"
+        android:text="@string/editField"
         android:textColor="@color/black"
         android:textSize="25sp"
-        android:layout_below="@+id/edit_profile_cardView"
         android:textStyle="bold" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -184,7 +184,7 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/bg_button_user"
             android:padding="17dp"
-            android:text="Edit Name"
+            android:text="@string/editName"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="20sp" />
@@ -198,7 +198,7 @@
             android:layout_toEndOf="@id/edit_profile_btn"
             android:background="@drawable/bg_button_user"
             android:padding="17dp"
-            android:text="Edit Password"
+            android:text="@string/editPassword"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="20sp" />

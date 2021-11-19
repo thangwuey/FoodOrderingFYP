@@ -11,12 +11,12 @@
         android:id="@+id/profile_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="12dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="12dp"
-        android:layout_centerHorizontal="true"
-        android:text="Profile"
+        android:text="@string/profile"
         android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold" />
@@ -65,7 +65,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Profile"
+                    android:text="@string/profileCard"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -105,7 +105,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Order"
+                    android:text="@string/orderCard"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -145,7 +145,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Language"
+                    android:text="@string/languageCard"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -185,7 +185,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Logout"
+                    android:text="@string/logoutCard"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -263,7 +263,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Set Questions Answer"
+                    android:text="@string/questionsAnswer"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 

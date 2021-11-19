@@ -25,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import Prevalent.Prevalent;
 
-public class EditProfile extends AppCompatActivity {
+public class EditProfile extends AppCompat {
     private EditText etName, etPass;
     private TextView tvName, tvPassword;
     DatabaseReference usersRef;

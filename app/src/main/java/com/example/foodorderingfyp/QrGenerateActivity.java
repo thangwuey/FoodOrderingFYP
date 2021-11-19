@@ -20,7 +20,7 @@ import com.google.zxing.WriterException;
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
 
-public class QrGenerateActivity extends AppCompatActivity {
+public class QrGenerateActivity extends AppCompat {
 
     private Button generateQrCodeNow;
     private TextView qrCodeText;

@@ -37,7 +37,7 @@ import java.util.Locale;
 import Prevalent.Prevalent;
 import ViewHolder.TrackDeliveryViewHolder;
 
-public class TrackDelivery extends AppCompatActivity {
+public class TrackDelivery extends AppCompat {
 
     private DatabaseReference OrdersRef;
     private RecyclerView currentRecyclerView, pastRecyclerView;

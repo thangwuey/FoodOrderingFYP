@@ -128,10 +128,10 @@
             android:id="@+id/forgotpasswordlink"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Forgot Password?"
             android:layout_marginEnd="30dp"
-            android:textSize="16sp"
-            android:textAlignment="viewEnd" />
+            android:text="@string/forgotPassword"
+            android:textAlignment="viewEnd"
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/login"
@@ -180,9 +180,9 @@
             android:id="@+id/contactus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Contact Us"
             android:layout_gravity="center"
-            android:textAlignment="center"/>
+            android:text="@string/contactUs"
+            android:textAlignment="center" />
 
     </LinearLayout>
 

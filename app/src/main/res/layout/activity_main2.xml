@@ -61,7 +61,7 @@
                 android:paddingTop="10dp"
                 android:paddingEnd="16dp"
                 android:paddingBottom="10dp"
-                android:text="Popular F/B"
+                android:text="@string/popularfood"
                 android:textColor="@drawable/bg_radio_jt_text_color"
                 android:textSize="20sp" />
 
@@ -77,7 +77,7 @@
                 android:paddingTop="10dp"
                 android:paddingEnd="16dp"
                 android:paddingBottom="10dp"
-                android:text="Food"
+                android:text="@string/foodMenu"
                 android:textColor="@drawable/bg_radio_jt_text_color"
                 android:textSize="20sp" />
 
@@ -94,7 +94,7 @@
                 android:paddingTop="10dp"
                 android:paddingEnd="16dp"
                 android:paddingBottom="10dp"
-                android:text="Drink"
+                android:text="@string/drinkMenu"
                 android:textColor="@drawable/bg_radio_jt_text_color"
                 android:textSize="20sp" />
 

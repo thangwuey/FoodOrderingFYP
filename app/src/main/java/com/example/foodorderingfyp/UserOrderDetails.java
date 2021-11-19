@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import Prevalent.Prevalent;
 import ViewHolder.UserOrderFoodItemViewHolder;
 
-public class UserOrderDetails extends AppCompatActivity {
+public class UserOrderDetails extends AppCompat {
     private TextView tvOrderNo, tvOrderTime, tvOrderDate, tvOrderAmount;
     private TextView tvCustomerName, tvCustomerPhone, tvCustomerAddress, tvCustomerCity;
     private DatabaseReference OrdersRef, CartsRef;

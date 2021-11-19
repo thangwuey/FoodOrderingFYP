@@ -28,7 +28,7 @@ import java.util.HashMap;
 
 import Prevalent.Prevalent;
 
-public class ResetPasswordActivity extends AppCompatActivity {
+public class ResetPasswordActivity extends AppCompat {
 
     private String check = "";
     private TextView pageTitle,titleQuestions;
