@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslateLanguage;
+
 public class LanguageActivity extends AppCompat {
 
     private Button english1,chinese1;
@@ -46,6 +48,23 @@ public class LanguageActivity extends AppCompat {
             }
         });
 
+    }
 
+    public int getLanguageCode(String language){
+
+        int languageCode = 0;
+
+        switch (language){
+            case "English":
+                languageCode = FirebaseTranslateLanguage.EN;
+                break;
+            case "Chinese":
+                languageCode = FirebaseTranslateLanguage.ZH;
+                break;
+            default:
+                languageCode = 0;
+
+        }
+        return languageCode;
     }
 }

@@ -438,12 +438,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/dod_map_header_rl"
-            android:layout_marginBottom="220dp" />
+            android:layout_marginBottom="270dp" />
 
         <!--Fixed in Bottom-->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="270dp"
             android:layout_alignParentBottom="true"
             android:background="@color/frameColor"
             android:padding="15dp">

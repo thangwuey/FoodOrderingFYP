@@ -355,6 +355,10 @@ public class DriverProfile extends AppCompatActivity {
         // CLOSE loading bar
         loadingBar.dismiss();
 
+        etCurrentPass.setText("");
+        etPass.setText("");
+        etConPass.setText("");
+
         rlDpp.setVisibility(View.VISIBLE);
         rlDpp2.setVisibility(View.VISIBLE);
         rlEP.setVisibility(View.GONE);

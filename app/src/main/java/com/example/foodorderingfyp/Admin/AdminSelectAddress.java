@@ -85,27 +85,35 @@ public class AdminSelectAddress extends FragmentActivity implements OnMapReadyCa
     }
 
     private void confirmAddress() {
-        LatLng latLng = marker.getPosition();
+        LatLng latLng;
+        List<Address> addresses;
         try {
-            List<Address> addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude,1);
-            if (addresses.size() > 0) {
-                Address address = addresses.get(0);
-                String streetAddress = address.getAddressLine(0);
-                double latitude = address.getLatitude();
-                double longitude = address.getLongitude();
-                String locality = address.getLocality();
-                Log.d("Location123latConfirm",String.valueOf(latitude));
-                Log.d("Location123longConfirm", String.valueOf(longitude));
-                Log.d("Location123addConfirm",  streetAddress);
-                Log.d("Location123localConfirm",  locality);
+            if (marker!=null) {
+                latLng = marker.getPosition();
+                addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude,1);
 
-                Intent returnIntent = new Intent();
-                returnIntent.putExtra("address", streetAddress);
-                returnIntent.putExtra("latitude", latitude);
-                returnIntent.putExtra("longitude", longitude);
-                returnIntent.putExtra("locality", locality);
-                setResult(Activity.RESULT_OK,returnIntent);
-                finish();
+                if (addresses.size() > 0) {
+                    Address address = addresses.get(0);
+                    String streetAddress = address.getAddressLine(0);
+                    double latitude = address.getLatitude();
+                    double longitude = address.getLongitude();
+                    String locality = address.getLocality();
+                    Log.d("Location123latConfirm",String.valueOf(latitude));
+                    Log.d("Location123longConfirm", String.valueOf(longitude));
+                    Log.d("Location123addConfirm",  streetAddress);
+                    Log.d("Location123localConfirm",  locality);
+
+                    Intent returnIntent = new Intent();
+                    returnIntent.putExtra("address", streetAddress);
+                    returnIntent.putExtra("latitude", latitude);
+                    returnIntent.putExtra("longitude", longitude);
+                    returnIntent.putExtra("locality", locality);
+                    setResult(Activity.RESULT_OK,returnIntent);
+                    finish();
+                } else {
+                    Log.d("Location123marker", "Location was null...");
+                }
+
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -193,11 +201,11 @@ public class AdminSelectAddress extends FragmentActivity implements OnMapReadyCa
                             .position(latLng)
                             .title(location));
                     map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,17));
-                    Log.d("Location123lat", String.valueOf(address.getLatitude()));
+                   /* Log.d("Location123lat", String.valueOf(address.getLatitude()));
                     Log.d("Location123long", String.valueOf(address.getLongitude()));
                     Log.d("Location123country", address.getCountryName());
                     Log.d("Location123locality", address.getLocality());
-                    Log.d("Location123addressLine", address.getAddressLine(0));
+                    Log.d("Location123addressLine", address.getAddressLine(0));*/
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

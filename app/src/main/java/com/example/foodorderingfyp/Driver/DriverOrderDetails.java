@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -38,6 +39,8 @@ import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
 import com.example.foodorderingfyp.ModelClass.Cart;
 import com.example.foodorderingfyp.R;
+import com.example.foodorderingfyp.TrackDelivery;
+import com.example.foodorderingfyp.TrackGPSMapActivity;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResolvableApiException;
@@ -182,6 +185,18 @@ public class DriverOrderDetails extends FragmentActivity implements OnMapReadyCa
             relativeLayoutOrder.setVisibility(View.GONE);
         });
         btnBack.setOnClickListener(v -> {
+            // check Phone GPS state
+            LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE );
+            boolean statusOfGPS = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+            if (!statusOfGPS) {
+                new AlertDialog.Builder(DriverOrderDetails.this)
+                        .setTitle("Turn On GPS")
+                        .setMessage("Please turn on GPS " + "\n" +
+                                "The map will not working if GPS state is off.")
+                        .setPositiveButton("ok", (dialog, which) -> dialog.dismiss())
+                        .create().show();
+            }
             relativeLayoutMap.setVisibility(View.GONE);
             relativeLayoutOrder.setVisibility(View.VISIBLE);
         });
