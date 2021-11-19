@@ -71,7 +71,7 @@ public class CreditCardActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
                             Toast.makeText(CreditCardActivity.this, "Thank you for reload", Toast.LENGTH_LONG).show();
-
+                            finish();
                             //Integer walletAmount = 10;
                             //Integer price = 0;
                             //final DatabaseReference WalletRef = FirebaseDatabase.getInstance().getReference().child("E-Wallet").child(Prevalent.currentOnlineUser.getPhone());
