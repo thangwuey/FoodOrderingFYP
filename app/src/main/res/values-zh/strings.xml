@@ -80,4 +80,10 @@
     <string name="generateQrCode">生产QR码</string>
     <string name="enterAmountForPayment">输入付钱总数</string>
     <string name="qrCodeWillAppearHere">QR码会显示这里</string>
+    <string name="englishTranslator">英文</string>
+    <string name="chineseLanguage">华文</string>
+    <string name="translateBtn">翻译</string>
+    <string name="to">换</string>
+    <string name="translator">翻译</string>
+
 </resources>

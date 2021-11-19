@@ -79,4 +79,9 @@
     <string name="generateQrCode">Generate QR Code</string>
     <string name="enterAmountForPayment">Enter Amount for Payment</string>
     <string name="qrCodeWillAppearHere">Code will Appear Here</string>
+    <string name="englishTranslator">English Languages</string>
+    <string name="chineseLanguage">Chinese Language</string>
+    <string name="translateBtn">Translate</string>
+    <string name="to">To</string>
+    <string name="translator">Translator</string>
 </resources>

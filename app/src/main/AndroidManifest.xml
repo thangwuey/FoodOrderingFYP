@@ -23,6 +23,9 @@
         android:theme="@style/Theme.FoodOrderingFYP"
         tools:replace="android:theme">
         <activity
+            android:name=".TranslatorActivity"
+            android:exported="true" />
+        <activity
             android:name=".Driver.DriverProfile"
             android:exported="true" />
         <activity
