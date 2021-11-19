@@ -26,12 +26,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Your Code Will Appear here"
-            android:textAllCaps="false"
-            android:textAlignment="center"
             android:elevation="1dp"
             android:padding="4dp"
-            android:textSize="18sp"/>
+            android:text="@string/qrCodeWillAppearHere"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textSize="18sp" />
 
         <ImageView
             android:id="@+id/QrCodeImage"
@@ -59,11 +59,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Please Enter Amount For Payment"
+            android:hint="@string/enterAmountForPayment"
             android:importantForAutofill="no"
             android:inputType="numberDecimal"
             android:textColor="@color/black"
-            android:textSize="15sp"/>
+            android:textSize="15sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -77,21 +77,9 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
         android:background="@color/AllButton"
-        android:text="Generate QR Code"
+        android:text="@string/generateQrCode"
         android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/generateQrCodeBack"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/generateQrCodeNow"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginBottom="10dp"
-        android:background="@color/AllButton"
-        android:textSize="18sp"
-        android:text="Go Back"/>
 
 
 

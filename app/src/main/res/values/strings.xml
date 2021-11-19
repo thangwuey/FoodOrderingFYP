@@ -76,4 +76,7 @@
     <string name="balance">Balance</string>
     <string name="selectReloadAmount">Select Reload Amount</string>
     <string name="driverPhone">Driver Phone</string>
+    <string name="generateQrCode">Generate QR Code</string>
+    <string name="enterAmountForPayment">Enter Amount for Payment</string>
+    <string name="qrCodeWillAppearHere">Code will Appear Here</string>
 </resources>

@@ -77,4 +77,7 @@
     <string name="balance">结余</string>
     <string name="selectReloadAmount">选择充值:</string>
     <string name="driverPhone">外送员电话</string>
+    <string name="generateQrCode">生产QR码</string>
+    <string name="enterAmountForPayment">输入付钱总数</string>
+    <string name="qrCodeWillAppearHere">QR码会显示这里</string>
 </resources>
