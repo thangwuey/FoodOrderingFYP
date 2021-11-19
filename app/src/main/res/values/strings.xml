@@ -75,4 +75,5 @@
     <string name="profileCard">Profile</string>
     <string name="balance">Balance</string>
     <string name="selectReloadAmount">Select Reload Amount</string>
+    <string name="driverPhone">Driver Phone</string>
 </resources>

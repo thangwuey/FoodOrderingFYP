@@ -76,4 +76,5 @@
     <string name="profileCard">用户资料</string>
     <string name="balance">结余</string>
     <string name="selectReloadAmount">选择充值:</string>
+    <string name="driverPhone">外送员电话</string>
 </resources>

@@ -41,6 +41,7 @@
         android:id="@+id/track_gps_map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="150dp"
         android:layout_below="@+id/track_gps_rl"
         android:name="com.google.android.gms.maps.SupportMapFragment" />
 
@@ -72,7 +73,32 @@
             android:text="XXXXXXXXXXXXXXX"
             android:textColor="@color/black"
             android:textSize="15sp"
+            android:textIsSelectable="true"
             android:layout_below="@id/track_gps_address_header" />
+
+        <TextView
+            android:id="@+id/track_gps_phone_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/track_gps_address"
+            android:layout_marginTop="15dp"
+            android:text="@string/driverPhone"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        // Driver Phone
+        <TextView
+            android:id="@+id/track_gps_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:text="XXXXXXXXXXXXXXX"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_below="@id/track_gps_address"
+            android:layout_toEndOf="@id/track_gps_phone_header" />
 
     </RelativeLayout>
 </RelativeLayout>

@@ -1,18 +1,26 @@
 package com.example.foodorderingfyp;
 
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import com.directions.route.AbstractRouting;
+import com.directions.route.Route;
+import com.directions.route.RouteException;
+import com.directions.route.Routing;
+import com.directions.route.RoutingListener;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -25,6 +33,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,15 +45,19 @@ import java.util.List;
 
 import Prevalent.Prevalent;
 
-public class TrackGPSMapActivity extends FragmentActivity implements OnMapReadyCallback {
+public class TrackGPSMapActivity extends FragmentActivity implements OnMapReadyCallback,
+        GoogleApiClient.OnConnectionFailedListener, RoutingListener {
 
+    TextView tvPhone;
     private GoogleMap map;
     SupportMapFragment mapFragment;
     private Marker pickUpMarker, deliveryManMarker;
     Handler handler = new Handler();
-    private PolylineOptions polylineOptions;
     private Polyline polyline;
     Bitmap BitMapMarker;
+    protected LatLng start = null;
+    protected LatLng end = null;
+    private List<Polyline> polylines=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +65,13 @@ public class TrackGPSMapActivity extends FragmentActivity implements OnMapReadyC
         setContentView(R.layout.activity_track_gps_map);
 
         TextView tvPickUpAddress = findViewById(R.id.track_gps_address);
+        tvPhone = findViewById(R.id.track_gps_phone);
         ImageView ivTrackGPSBack = findViewById(R.id.track_gps_back);
         // Back Button
         ivTrackGPSBack.setOnClickListener(v -> onBackPressed());
         String strAddress = getIntent().getStringExtra("address");
         tvPickUpAddress.setText(strAddress);
+        getDriverPhone();
 
         // CHANGE delivery man marker
         BitmapDrawable bitmapDraw = (BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.motor);
@@ -67,6 +82,25 @@ public class TrackGPSMapActivity extends FragmentActivity implements OnMapReadyC
                 .findFragmentById(R.id.track_gps_map);
 
         mapFragment.getMapAsync(this);
+    }
+
+    private void getDriverPhone() {
+        String deliveryID = getIntent().getStringExtra("orderID");
+        DatabaseReference DelRef = FirebaseDatabase.getInstance().getReference().child("Delivery");
+
+        DelRef.child(deliveryID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists() && snapshot.hasChild("driverPhone")) {
+                    tvPhone.setText(snapshot.child("driverPhone").getValue(String.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override
@@ -144,14 +178,18 @@ public class TrackGPSMapActivity extends FragmentActivity implements OnMapReadyC
 
                                         Log.d("Location123delman", deliveryManMarker.getPosition().toString());
                                         Log.d("Location123pickUp", pickUpLocation.toString());
+
+                                        start=pickUpLocation;
+                                        findRoutes(pickUpLocation,deliveryManMarker.getPosition());
+
                                         // ROUTE LINE between markers
-                                        polylineOptions = new PolylineOptions()
+                                        /*polylineOptions = new PolylineOptions()
                                                 .add(pickUpLocation)
                                                 .add(deliveryManMarker.getPosition())
                                                 .width(10)
                                                 .color(Color.BLUE)
                                                 .geodesic(true);
-                                        polyline = map.addPolyline(polylineOptions);
+                                        polyline = map.addPolyline(polylineOptions);*/
 
                                         // LOOPING with 7s delay
                                         startRunnable.run();
@@ -193,9 +231,11 @@ public class TrackGPSMapActivity extends FragmentActivity implements OnMapReadyC
                     if(snapshot.exists()) {
                         if (snapshot.child("state").getValue().toString().equals("D")) {
                             // If the order is DONE
-                            //stopRunnable.run(); //this will cause looping bug
-
+                            Toast.makeText(TrackGPSMapActivity.this,"Order Reached. GPS Tracking Close",
+                                    Toast.LENGTH_LONG).show();
+                            Log.d("findRoute", "Runnable Stop");
                             finish();
+                            handler.removeCallbacks(startRunnable);
                         }
                     }
                 }
@@ -212,8 +252,9 @@ public class TrackGPSMapActivity extends FragmentActivity implements OnMapReadyC
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.exists()) {
                         try {
+                            Log.d("findRoute", "Runnable continue");
                             // REMOVE OLD route line
-                            polyline.remove();
+                            //polyline.remove();
                             double latitude = (double) snapshot.child("latitude").getValue();
                             double longitude = (double) snapshot.child("longitude").getValue();
 
@@ -223,14 +264,17 @@ public class TrackGPSMapActivity extends FragmentActivity implements OnMapReadyC
                             double longPickUp = getIntent().getDoubleExtra("longitude",0.00);
                             LatLng pickUpLocation = new LatLng(latPickUp, longPickUp);
 
+                            // Draw route polyline
+                            findRoutes(pickUpLocation,deliveryManMarker.getPosition());
+
                             // ADD NEW route line
-                            polylineOptions = new PolylineOptions()
+                            /*polylineOptions = new PolylineOptions()
                                     .add(pickUpLocation)
                                     .add(deliveryManMarker.getPosition())
                                     .width(10)
                                     .color(Color.BLUE)
                                     .geodesic(true);
-                            polyline = map.addPolyline(polylineOptions);
+                            polyline = map.addPolyline(polylineOptions);*/
 
                             // ANIMATE camera zoom according to distance between 2 markers
                             // Markers LIST
@@ -274,4 +318,82 @@ public class TrackGPSMapActivity extends FragmentActivity implements OnMapReadyC
             handler.postDelayed(this, 7000);
         }
     };
+
+    public void findRoutes(LatLng Start, LatLng End)
+    {
+        if(Start==null || End==null) {
+            Toast.makeText(TrackGPSMapActivity.this,"Unable to get location",Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+
+            Routing routing = new Routing.Builder()
+                    .travelMode(AbstractRouting.TravelMode.DRIVING)
+                    .withListener(this)
+                    .alternativeRoutes(true)
+                    .waypoints(Start, End)
+                    .key("AIzaSyBu1nHtDBEA1fUu6iKzkSbLG7DBJ0s7uuc")  //also define your api key here.
+                    .build();
+            routing.execute();
+        }
+    }
+
+    //Routing call back functions.
+    @Override
+    public void onRoutingFailure(RouteException e) {
+        View parentLayout = findViewById(android.R.id.content);
+        Snackbar snackbar= Snackbar.make(parentLayout, e.toString(), Snackbar.LENGTH_LONG);
+        snackbar.show();
+        Log.d("findRoute", e.toString());
+    }
+
+    @Override
+    public void onRoutingStart() {
+        Log.d("findRoute", "Finding Route...");
+    }
+
+    //If Route finding success..
+    @Override
+    public void onRoutingSuccess(ArrayList<Route> route, int shortestRouteIndex) {
+
+        Log.d("findRoute", "routeFind");
+
+        if(polylines!=null) {
+            polylines.clear();
+        }
+        if (polyline!=null)
+            polyline.remove();
+        PolylineOptions polyOptions = new PolylineOptions();
+        LatLng polylineStartLatLng=null;
+        LatLng polylineEndLatLng=null;
+
+
+        polylines = new ArrayList<>();
+        //add route(s) to the map using polyline
+        for (int i = 0; i <route.size(); i++) {
+
+            if (i == shortestRouteIndex) {
+                polyOptions.color(getResources().getColor(R.color.colorPrimary));
+                polyOptions.width(7);
+                polyOptions.addAll(route.get(shortestRouteIndex).getPoints());
+                polyline = map.addPolyline(polyOptions);
+                polylineStartLatLng = polyline.getPoints().get(0);
+                int k = polyline.getPoints().size();
+                polylineEndLatLng = polyline.getPoints().get(k - 1);
+                polylines.add(polyline);
+
+            }
+        }
+    }
+
+    @Override
+    public void onRoutingCancelled() {
+        findRoutes(start,end);
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        findRoutes(start,end);
+
+    }
 }
