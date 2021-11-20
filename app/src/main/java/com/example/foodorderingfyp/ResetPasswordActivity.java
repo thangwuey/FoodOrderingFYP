@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ public class ResetPasswordActivity extends AppCompat {
     private TextView pageTitle,titleQuestions;
     private EditText phoneNumber,question1,question2;
     private Button verifyButton;
+    private ImageView resetPasswordBackBtn;
 
 
     @Override
@@ -49,6 +51,9 @@ public class ResetPasswordActivity extends AppCompat {
         question1 = findViewById(R.id.question_1);
         question2 = findViewById(R.id.question_2);
         verifyButton = findViewById(R.id.verify_btn);
+        resetPasswordBackBtn = findViewById(R.id.resetPassword_backBtn);
+
+        resetPasswordBackBtn.setOnClickListener(v -> onBackPressed());
     }
 
 
